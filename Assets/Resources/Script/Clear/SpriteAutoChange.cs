@@ -27,6 +27,7 @@ public class SpriteAutoChange : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        
         if (spriteNumber <= sp.Count)
         {
             timeMargin = timeMargin - Time.deltaTime;
@@ -35,7 +36,6 @@ public class SpriteAutoChange : MonoBehaviour {
                 spriteNumber++;
                 if (spriteNumber >= sp.Count)
                 {
-                    Debug.Log("OK");
                     FadeManager.Instance.LoadLevel(SceneManage.SceneName.TITLE, 1.0f, false);
                     return;
                 }
@@ -44,4 +44,6 @@ public class SpriteAutoChange : MonoBehaviour {
             }
         }
     }
+
+
 }
