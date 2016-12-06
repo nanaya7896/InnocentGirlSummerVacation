@@ -48,6 +48,7 @@
      <Compile Include="Assets\Resources\Script\Common\CreateMasterScript.cs" />
      <Compile Include="Assets\Resources\Script\Common\EnumExtensions.cs" />
      <Compile Include="Assets\Resources\Script\Common\EnumFlagsAttribute.cs" />
+     <Compile Include="Assets\Resources\Script\Common\EnumUtil.cs" />
      <Compile Include="Assets\Resources\Script\Common\IListExtensions.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />

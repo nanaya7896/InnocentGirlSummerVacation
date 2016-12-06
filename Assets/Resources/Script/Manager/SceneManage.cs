@@ -131,7 +131,16 @@ public class SceneManage : SingletonMonoBehaviour<SceneManage>
     }
 
 
+    public SceneName GetCurrentSceneName(string name)
+    {
+        switch(name)
+        {
+            case "Title":
+                break;
 
+        }
+        return SceneName.NULL;
+    }
 
     /// <summary>
     /// 現在のシーン名を取得
