@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{06A31D8F-89B5-1851-17E6-B4B4663C4B6F}</ProjectGuid>
+    <ProjectGuid>{D1544316-BCD4-0F70-2CBD-F19FA3D3CCA5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -51,6 +51,7 @@
      <Compile Include="Assets\Resources\Script\Common\IListExtensions.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
+     <Compile Include="Assets\Resources\Script\GameOver\SceneChange.cs" />
      <Compile Include="Assets\Resources\Script\Manager\AudioManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\FadeManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\SceneManage.cs" />
