@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class aspectControll : MonoBehaviour {
 
 	//アスペクト比
-	public Vector2 aspect=new Vector2(4,3);
+	public Vector2 aspect=new Vector2(16,9);
 	//背景の色を黒にする
 	public Color32 backGroundColor=Color.black;
 	//アスペクト比率
