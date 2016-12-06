@@ -57,7 +57,7 @@
      <Compile Include="Assets\Resources\Script\Manager\SceneManage.cs" />
      <Compile Include="Assets\Resources\Script\Manager\ScoreManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\SingletonMonoBehaviour.cs" />
-     <Compile Include="Assets\Resources\Script\Title\TitleBGM.cs" />
+     <Compile Include="Assets\Resources\Script\Title\BGMPlayTool.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

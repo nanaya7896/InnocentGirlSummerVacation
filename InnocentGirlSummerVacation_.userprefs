@@ -1,7 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/Common/aspectControll.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/Title/BGMPlayTool.cs">
     <Files>
       <File FileName="Assets/Resources/Script/Common/aspectControll.cs" Line="10" Column="40" />
+      <File FileName="Assets/Resources/Script/Manager/AudioManager.cs" Line="130" Column="1" />
+      <File FileName="Assets/Resources/Script/Manager/SceneManage.cs" Line="140" Column="19" />
+      <File FileName="Assets/Resources/Script/Title/BGMPlayTool.cs" Line="61" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
