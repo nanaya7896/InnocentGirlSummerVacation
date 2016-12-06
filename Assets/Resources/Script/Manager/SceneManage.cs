@@ -17,7 +17,6 @@ public class SceneManage : SingletonMonoBehaviour<SceneManage>
         GAME,
         GAMEOVER,
         CLEAR,
-        RESULT,
         LOAD,
         NULL
     }
