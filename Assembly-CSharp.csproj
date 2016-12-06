@@ -53,6 +53,7 @@
      <Compile Include="Assets\Resources\Script\Common\IListExtensions.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
+     <Compile Include="Assets\Resources\Script\Game\TimeChangeScript.cs" />
      <Compile Include="Assets\Resources\Script\GameOver\SceneChange.cs" />
      <Compile Include="Assets\Resources\Script\Manager\AudioManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\FadeManager.cs" />

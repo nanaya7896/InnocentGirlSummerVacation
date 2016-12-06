@@ -10,7 +10,8 @@ public class SpriteAutoChange : MonoBehaviour {
     public int spriteNumber = 0;
     void Awake()
     {
-        foreach (Sprite spr in Resources.LoadAll<Sprite>("Image/I_Result"))
+        //リソースからファイルの読み込み
+        foreach (Sprite spr in Resources.LoadAll<Sprite>("Image/I_Clear"))
         {
             sp.Add(spr);
         }
