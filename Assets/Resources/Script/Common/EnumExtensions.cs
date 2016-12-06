@@ -24,6 +24,4 @@ public static class EnumExtensions{
 
         return (selfValue & flagValue) == flagValue;
     }
-
-
 }
