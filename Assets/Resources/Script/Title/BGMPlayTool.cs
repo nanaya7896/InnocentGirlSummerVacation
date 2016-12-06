@@ -51,7 +51,7 @@ public class BGMPlayTool : SingletonMonoBehaviour<BGMPlayTool>
                 }
             case "Clear":
                 {
-                    AudioManager.Instance.PlayBGM("result");
+                    AudioManager.Instance.PlayBGM("risult");
                     break;
                 }
             case "GameOver":

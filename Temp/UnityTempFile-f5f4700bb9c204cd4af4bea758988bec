@@ -85,7 +85,6 @@
 -define:UNITY_EDITOR_64
 -define:UNITY_EDITOR_OSX
 -define:UNITY_TEAM_LICENSE
-'Assets/Resources/Script/Clear/SpriteAutoChange.cs'
 'Assets/Resources/Script/Common/CreateMasterScript.cs'
 'Assets/Resources/Script/Common/EnumExtensions.cs'
 'Assets/Resources/Script/Common/EnumFlagsAttribute.cs'
