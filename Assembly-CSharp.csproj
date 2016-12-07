@@ -54,6 +54,8 @@
      <Compile Include="Assets\Resources\Script\Common\SceneChanger.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
+     <Compile Include="Assets\Resources\Script\Game\Actor.cs" />
+     <Compile Include="Assets\Resources\Script\Game\GameManager.cs" />
      <Compile Include="Assets\Resources\Script\Game\TimeChangeScript.cs" />
      <Compile Include="Assets\Resources\Script\GameOver\SceneChange.cs" />
      <Compile Include="Assets\Resources\Script\Manager\AudioManager.cs" />

@@ -6,6 +6,7 @@ using System;
 public class TimeChangeScript : MonoBehaviour {
 
 
+	public bool isTimeStart;
     [SerializeField]
     private float LimitTime;
 
@@ -19,6 +20,7 @@ public class TimeChangeScript : MonoBehaviour {
 	
     void Start () {
         LimitTime = 90.0f;
+		isTimeStart = false;
         foreach(Sprite spr in Resources.LoadAll<Sprite>("Image/Number"))
         {
             sp.Add(spr);
@@ -30,11 +32,17 @@ public class TimeChangeScript : MonoBehaviour {
             one.Add(GameObject.Find("/UI/Canvas/" + i));
         }
 	}
+
+
 	
 	// Update is called once per frame
 	void Update () {
-        LimitTime -= Time.deltaTime;
-        changeTimeSprite(LimitTime);
+		if (isTimeStart) {
+			LimitTime -= Time.deltaTime;
+			changeTimeSprite (LimitTime);
+		} else {
+		
+		}
 	}
 
     /// <summary>
