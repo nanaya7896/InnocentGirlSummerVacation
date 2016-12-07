@@ -6,7 +6,7 @@ using System;
 public class TimeChangeScript : MonoBehaviour {
 
 
-	public bool isTimeStart;
+	public bool isTimeStart=false;
     [SerializeField]
     private float LimitTime;
 
@@ -20,7 +20,7 @@ public class TimeChangeScript : MonoBehaviour {
 	
     void Start () {
         LimitTime = 90.0f;
-		isTimeStart = false;
+
         foreach(Sprite spr in Resources.LoadAll<Sprite>("Image/Number"))
         {
             sp.Add(spr);

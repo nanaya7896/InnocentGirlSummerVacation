@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour {
     [SerializeField]
     private float speed;
 
+    public bool isMove = false;
 
 	// Use this for initialization
 	void Start () {
@@ -17,8 +18,11 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        PlayerMoving();
-        PlayerRotate();
+        if (isMove)
+        {
+            PlayerMoving();
+            PlayerRotate();
+        }
 	}
 
     void PlayerMoving()
