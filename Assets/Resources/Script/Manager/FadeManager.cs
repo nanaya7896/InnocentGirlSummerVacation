@@ -109,4 +109,49 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager> {
 	}
 
 
+	/// <summary>
+	/// 非同期シーン用のコルーチン
+	/// </summary>
+	/// <returns>The scene.</returns>
+	/// <param name="interval">Interval.</param>
+	/// <param name="async">Async.</param>
+	public IEnumerator FadeScene(float interval, AsyncOperation async,SceneManage.SceneName scene)
+    {
+        //暗転開始
+        this.isFade = true;
+        //暗転管理用のローカル変数
+        float time = 0;
+
+        //任意のintervalまで処理を続ける
+        while (time <= interval)
+        {
+            //グローバル変数の透明度の値を
+            //線形補完の計算式を使って変換する
+            //Leap(a1,a2,float b1);
+            //a1: 開始点 a2: 終了点 b1:比率分だけ進んだ値を返す
+            this.fadeAlpha = Mathf.Lerp(0f, 1f, time / interval);
+            //timeを加算
+            time += Time.deltaTime;
+            //一度処理を中断し、次フレームから再開
+            yield return 0;
+        }
+
+		async.allowSceneActivation = true;    // シーン遷移許可
+		SceneManage.Instance.SetSceneName(scene);
+        //タイムを初期化
+        time = 0;
+
+        //
+        while (time <= interval)
+        {
+            //1から０になるまで繰り返す
+            this.fadeAlpha = Mathf.Lerp(1f, 0f, time / interval);
+            time += Time.deltaTime;
+            yield return 0;
+        }
+        //暗転処理終了
+        this.isFade = false;
+
+    }
+
 }

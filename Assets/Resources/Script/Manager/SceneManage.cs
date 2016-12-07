@@ -107,6 +107,11 @@ public class SceneManage : SingletonMonoBehaviour<SceneManage>
         m_SceneNumber = name;
     }
 
+	public void SetSceneName(SceneName name)
+	{
+		m_SceneNumber = name;
+		prevSceneName = name;
+	}
 
     /// <summary>
     /// シーンのロードをする
@@ -128,19 +133,7 @@ public class SceneManage : SingletonMonoBehaviour<SceneManage>
         //シーンの情報が更新されたので前回のシーンも変更する
         prevSceneName = m_SceneNumber;
     }
-
-
-    public SceneName GetCurrentSceneName(string name)
-    {
-        switch(name)
-        {
-            case "Title":
-                break;
-
-        }
-        return SceneName.NULL;
-    }
-
+		
     /// <summary>
     /// 現在のシーン名を取得
     /// </summary>
@@ -199,7 +192,6 @@ public class SceneManage : SingletonMonoBehaviour<SceneManage>
     /// <returns></returns>
     public bool isSetActiveScene(SceneName name)
     {
-		
        return SceneManager.SetActiveScene(SceneManager.GetSceneAt((int)name));
     }
 
@@ -212,4 +204,20 @@ public class SceneManage : SingletonMonoBehaviour<SceneManage>
     {
        return SceneManager.UnloadScene((int)name);
     }
+
+	/// <summary>
+	/// 非同期処理用のロード
+	/// </summary>
+	/// <returns>The scene async.</returns>
+	/// <param name="scene">Scene.</param>
+    public AsyncOperation LoadSceneAsync(int scene)
+    {
+		return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
+    }
+
+	public void SceneChangeLoad(SceneName name)
+	{
+		SceneChange.scenes = name;
+		FadeManager.Instance.LoadLevel (SceneName.LOAD, 1.0f, false);
+	}
 }
