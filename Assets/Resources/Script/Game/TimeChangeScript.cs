@@ -9,7 +9,6 @@ public class TimeChangeScript : MonoBehaviour {
 	public bool isTimeStart=false;
     [SerializeField]
     private float LimitTime;
-
     //数字を保存するリスト
     [SerializeField]
     List<Sprite> sp = new List<Sprite>();
@@ -37,11 +36,10 @@ public class TimeChangeScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (isTimeStart) {
+		if (isTimeStart) 
+        {
 			LimitTime -= Time.deltaTime;
 			changeTimeSprite (LimitTime);
-		} else {
-		
 		}
 	}
 
@@ -55,7 +53,12 @@ public class TimeChangeScript : MonoBehaviour {
         for (int i = 0; i < GetCurrentLimitTime().ToString().Length;i++)
         {
             time /=Mathf.Pow(10, i);
-            one[i].GetComponent<Image>().sprite = sp[(int)time%10];
+            //現在の時間が10秒以下になったら
+            if (GetCurrentLimitTime() < 10.0f)
+            {
+                one[1].GetComponent<Image>().sprite = sp[0];
+            }
+                one[i].GetComponent<Image>().sprite = sp[(int)time%10];
         }
     }
 
@@ -66,5 +69,10 @@ public class TimeChangeScript : MonoBehaviour {
     public int GetCurrentLimitTime()
     {
         return (int)LimitTime;
+    }
+
+    public void Reset()
+    {
+        LimitTime = 90.0f;
     }
 }

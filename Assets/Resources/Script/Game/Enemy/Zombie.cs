@@ -58,10 +58,11 @@ public class Zombie : EnemyActor {
             //Layerを設定
             enemy[i].gameObject.layer = LayerMask.NameToLayer("Enemy");
             enemy[i].gameObject.tag = "Enemy";
-            //服装の切り替え
-            enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,2));
+            //服装の切り替え(ここは未完成部分です。また修正します)
+            enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,3));
+            enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
-            enemy[i].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+            enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 0.0f, Random.Range(-100f, 100.0f));
         }
     }
 }

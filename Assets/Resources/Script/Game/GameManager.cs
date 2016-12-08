@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     void Awake()
     {
-        stateMachine.Add(State.First, FirstInit, null, FirstEnd);
+        stateMachine.Add(State.First, FirstInit, FirstUpdate, FirstEnd);
         stateMachine.Add(State.Game,GameInit,GameUpdate,GameEnd);
         stateMachine.Add(State.End,EndInit,null,null);
         stateMachine.SetState(State.First);
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(stateMachine.GetCurrentStateName() =="Game")
+        if(stateMachine.GetCurrentStateName() !="End")
         {
             stateMachine.Update();
         }
@@ -83,26 +83,42 @@ public class GameManager : MonoBehaviour {
 
     void FirstInit()
     {
-        //スコア初期化
+        Debug.Log("FirstInit");
+        //初期化
         ScoreManager.Instance.Reset();
-		if (m_Time.GetComponent<TimeChangeScript> ().isTimeStart) {
-			stateMachine.SetState (State.Game);
-		}
+        m_Time.GetComponent<TimeChangeScript>().Reset();
+        m_PlayerTool.GetComponent<PlayerMove>().Reset();
+
+
+
+    }
+
+    void FirstUpdate()
+    {
+        Debug.Log("FirstUpdate");
+        if (m_Time.GetComponent<TimeChangeScript>().isTimeStart)
+        {
+            //ステートをGameに移行
+            stateMachine.SetState(State.Game);
+        }   
     }
 		
 
     void FirstEnd()
     {
-        
+        Debug.Log("FirstEnd");
     }
 
+    /*ここからGameステート*/
     void GameInit()
     {
+        Debug.Log("GameInit");
         m_PlayerTool.GetComponent<PlayerMove>().isMove =true;   
     }
 
     void GameUpdate()
     {
+        Debug.Log("GameUpdate");
         if (m_Time.GetComponent<TimeChangeScript>().GetCurrentLimitTime() <= 0.0f)
         {
             stateMachine.SetState(State.End);
@@ -111,12 +127,16 @@ public class GameManager : MonoBehaviour {
 
     void GameEnd()
     {
-        
+        Debug.Log("GameEnd");
     }
+    /*ここまで*/
 
     void EndInit()
     {
+        Debug.Log("EndInit");
         FadeManager.Instance.LoadLevel(SceneManage.SceneName.CLEAR, 1.0f, false);
     }
+
+
 
 }

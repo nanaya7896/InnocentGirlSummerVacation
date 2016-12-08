@@ -58,4 +58,15 @@ public class PlayerMove : MonoBehaviour {
         }
     }
 
+    public void Reset()
+    {
+        isMove = false;
+    }
+
+    //エネミーとヒットしたら呼び出す
+    void OnCollisionhit(Collider col)
+    {
+        Debug.Log(col.gameObject.tag);
+    }
+
 }
