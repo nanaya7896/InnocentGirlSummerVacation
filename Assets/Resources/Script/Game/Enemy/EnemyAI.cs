@@ -4,11 +4,37 @@ using System.Collections;
 /// <summary>
 /// enemyのAIを管理する静的関数
 /// </summary>
-public static class EnemyAI{
+public  class EnemyAI : MonoBehaviour{
 
 
-    public static Vector3 enemyPosition;
-    public static Vector3 enemyRotate;
+    public  Vector3 enemyPosition;
+    public  Vector3 enemyRotate;
+
+    [SerializeField]
+    Transform player;
+    Transform m_Player
+    {
+        get
+        {
+            if(player ==null)
+            {
+                player = GameObject.FindWithTag("Player").transform;
+            }
+            return player;
+        }
+    }
+
+
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+     Debug.Log(m_Player.GetComponent<PlayerMove>().transform.position);   
+    }
+
     //Zombieがする行動の一覧
     public enum ZombieAI
     {
@@ -24,14 +50,14 @@ public static class EnemyAI{
         SERACH
     }
 
-    public static void ZombieAIExcute(ZombieAI aiName,Vector3 enemyPosition,Vector3 enemyRotate,Vector3 playerPos,Vector3 playerRotate)
+    public void ZombieAIExcute(ZombieAI aiName,Vector3 enemyPosition,Vector3 enemyRotate)
     {
         switch(aiName)
         {
             case ZombieAI.IDEL:
                 break;
             case ZombieAI.WALK:
-                ZombieWalk(enemyPosition, enemyRotate, playerPos, playerRotate);
+                ZombieWalk(enemyPosition, enemyRotate);
                 break;
             case ZombieAI.SLIDER:
                 break;
@@ -45,17 +71,17 @@ public static class EnemyAI{
 
     }
 
-    public static Vector3 GetEnemyPosition()
+    public  Vector3 GetEnemyPosition()
     {
         return enemyPosition;
     }
 
-    public static Vector3 GetEnemyRotate()
+    public  Vector3 GetEnemyRotate()
     {
         return enemyRotate;
     }
 
-    private static void ZombieWalk(Vector3 ePos,Vector3 eRot,Vector3 pPos, Vector3 pRot)
+    private  void ZombieWalk(Vector3 ePos,Vector3 eRot)
     {
         
     }

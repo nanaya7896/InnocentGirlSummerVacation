@@ -26,4 +26,7 @@ public class EnemyActor : MonoBehaviour{
     /// 服の種類
     /// </summary>
     public Material clothnumber;
+
+
+    public Transform enemyAIObj;
 }

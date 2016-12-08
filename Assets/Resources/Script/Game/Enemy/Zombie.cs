@@ -36,6 +36,8 @@ public class Zombie : EnemyActor {
         //探す
         SERACH
     }
+
+
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
 
     void Awake()
@@ -53,10 +55,10 @@ public class Zombie : EnemyActor {
     {
         EnemyCreate();
     }
-	
+ 
 	// Update is called once per frame
     void Update () {
-           
+        
 	}
 
     /// <summary>
@@ -91,6 +93,8 @@ public class Zombie : EnemyActor {
             enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
             enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 0.5f, Random.Range(-100f, 100.0f));
+            //AIのスクリプトがついたオブジェクトを格納
+            enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
 
         }
     }
