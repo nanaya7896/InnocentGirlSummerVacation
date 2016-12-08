@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{87C65081-20D0-C32B-B3F5-597F240FE2B4}|単体テスト">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/GameOver/SelectArrowScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/Game/GameManager.cs">
     <Files>
       <File FileName="Assets/Resources/Script/Game/Enemy/Zombie.cs" Line="65" Column="89" />
       <File FileName="Assets/Resources/Script/Game/TimeChangeScript.cs" Line="41" Column="32" />
-      <File FileName="Assets/Resources/Script/Game/Player/PlayerMove.cs" Line="75" Column="26" />
-      <File FileName="Assets/Resources/Script/Game/gameManager.cs" Line="130" Column="51" />
+      <File FileName="Assets/Resources/Script/Game/Player/PlayerMove.cs" Line="71" Column="49" />
+      <File FileName="Assets/Resources/Script/Game/GameManager.cs" Line="163" Column="12" />
       <File FileName="Assets/Resources/Script/GameOver/SelectArrowScript.cs" Line="29" Column="14" />
       <File FileName="Assets/Resources/Script/Common/SceneChanger.cs" Line="16" Column="4" />
     </Files>

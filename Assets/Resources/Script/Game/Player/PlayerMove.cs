@@ -65,6 +65,12 @@ public class PlayerMove : MonoBehaviour {
         isHit = false;
     }
 
+    //=============================Get関数================================//
+    public string GetPlayerPosition()
+    {
+        return this.transform.position.ToString();
+    }
+
     //エネミーとヒットしたら呼び出す
     void OnCollisionEnter(Collision other)
     {
