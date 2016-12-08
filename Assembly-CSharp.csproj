@@ -61,6 +61,7 @@
      <Compile Include="Assets\Resources\Script\Game\TimeChangeScript.cs" />
      <Compile Include="Assets\Resources\Script\Game\gameManager.cs" />
      <Compile Include="Assets\Resources\Script\GameOver\SceneChange.cs" />
+     <Compile Include="Assets\Resources\Script\GameOver\SelectArrowScript.cs" />
      <Compile Include="Assets\Resources\Script\Manager\AudioManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\FadeManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\SceneManage.cs" />
