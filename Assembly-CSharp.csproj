@@ -56,11 +56,12 @@
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyActor.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\Zombie.cs" />
-     <Compile Include="Assets\Resources\Script\Game\GameManager.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\CameraMove.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\PlayerMove.cs" />
      <Compile Include="Assets\Resources\Script\Game\TimeChangeScript.cs" />
+     <Compile Include="Assets\Resources\Script\Game\gameManager.cs" />
      <Compile Include="Assets\Resources\Script\GameOver\SceneChange.cs" />
+     <Compile Include="Assets\Resources\Script\GameOver\SelectArrowScript.cs" />
      <Compile Include="Assets\Resources\Script\Manager\AudioManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\FadeManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\SceneManage.cs" />

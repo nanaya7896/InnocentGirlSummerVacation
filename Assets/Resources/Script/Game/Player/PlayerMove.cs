@@ -9,7 +9,9 @@ public class PlayerMove : MonoBehaviour {
     [SerializeField]
     private float speed;
 
+    public bool isMove = false;
 
+    public bool isHit = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,8 +19,11 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        PlayerMoving();
-        PlayerRotate();
+        if (isMove)
+        {
+            PlayerMoving();
+            PlayerRotate();
+        }
 	}
 
     void PlayerMoving()
@@ -52,6 +57,24 @@ public class PlayerMove : MonoBehaviour {
         {
             transform.Rotate(0, -10, 0);
         }
+    }
+
+    public void Reset()
+    {
+        isMove = false;
+        isHit = false;
+    }
+
+    //エネミーとヒットしたら呼び出す
+    void OnCollisionEnter(Collision other)
+    {
+
+        Debug.Log(other.gameObject.tag);
+        if(other.gameObject.tag =="Enemy")
+        {
+            isHit = true;   
+        }
+       
     }
 
 }
