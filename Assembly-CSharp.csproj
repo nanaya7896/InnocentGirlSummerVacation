@@ -54,6 +54,7 @@
      <Compile Include="Assets\Resources\Script\Common\SceneChanger.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
+     <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyAI.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyActor.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\Zombie.cs" />
      <Compile Include="Assets\Resources\Script\Game\GameManager.cs" />

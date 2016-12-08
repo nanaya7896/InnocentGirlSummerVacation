@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour {
     void GameInit()
     {
         Debug.Log("GameInit");
+        AudioManager.Instance.PlaySE("count");
         m_PlayerTool.GetComponent<PlayerMove>().isMove =true;   
     }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using System.Xml.Serialization;
 
 public class Zombie : EnemyActor {
 
@@ -22,6 +23,31 @@ public class Zombie : EnemyActor {
     /// </summary>
     List<EnemyActor> enemy = new List<EnemyActor>();
 
+    private enum State
+    {
+        //待機
+        IDEL,
+        //歩く
+        WALK,
+        //流れる
+        SLIDER,
+        //溺れる
+        DROWNED,
+        //探す
+        SERACH
+    }
+    private readonly StateMachine<State> stateMachine = new StateMachine<State>();
+
+    void Awake()
+    {
+        stateMachine.Add(State.IDEL, IdelEnd, IdelUpdate, IdelEnd);
+        stateMachine.Add(State.WALK, WalkInit, WalkUpdate, WalkEnd);
+        stateMachine.Add(State.SLIDER, SliderInit, SliderUpdate, SliderEnd);
+        stateMachine.Add(State.DROWNED, DrownedInit, DrownedUpdate, DrownedEnd);
+        stateMachine.Add(State.SERACH, SearchInit, SearchUpdate, SearchEnd);
+        stateMachine.SetState(State.IDEL);
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -30,10 +56,12 @@ public class Zombie : EnemyActor {
 	
 	// Update is called once per frame
     void Update () {
-	
+           
 	}
 
-
+    /// <summary>
+    /// Enemyを作成する
+    /// </summary>
     void EnemyCreate()
     {
         for (int i = 0; i < EnemyActor.Size; i++)
@@ -63,6 +91,85 @@ public class Zombie : EnemyActor {
             enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
             enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 0.5f, Random.Range(-100f, 100.0f));
+
         }
     }
+
+
+    //=======================ここからステートマシン==========================//
+    void IdelInit()
+    {
+        
+    }
+
+    void IdelUpdate()
+    {
+        
+    }
+
+    void IdelEnd()
+    {
+        
+    }
+
+    void WalkInit()
+    {
+        
+    }
+
+    void WalkUpdate()
+    {
+        
+    }
+
+    void WalkEnd()
+    {
+        
+    }
+
+    void SliderInit()
+    {
+        
+    }
+
+    void SliderUpdate()
+    {
+        
+    }
+
+    void SliderEnd()
+    {
+        
+    }
+
+    void DrownedInit()
+    {
+        
+    }
+
+    void DrownedUpdate()
+    {
+        
+    }
+
+    void DrownedEnd()
+    {
+        
+    }
+
+    void SearchInit()
+    {
+        
+    }
+
+    void SearchUpdate()
+    {
+        
+    }
+
+    void SearchEnd()
+    {
+        
+    }
 }
+
