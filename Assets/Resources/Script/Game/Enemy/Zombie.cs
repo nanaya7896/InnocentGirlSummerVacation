@@ -62,7 +62,7 @@ public class Zombie : EnemyActor {
             enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,3));
             enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
-            enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 0.0f, Random.Range(-100f, 100.0f));
+            enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 0.5f, Random.Range(-100f, 100.0f));
         }
     }
 }

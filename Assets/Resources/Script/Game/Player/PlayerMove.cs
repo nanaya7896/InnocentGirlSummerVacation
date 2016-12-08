@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour {
 
     public bool isMove = false;
 
+    public bool isHit = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -61,12 +62,19 @@ public class PlayerMove : MonoBehaviour {
     public void Reset()
     {
         isMove = false;
+        isHit = false;
     }
 
     //エネミーとヒットしたら呼び出す
-    void OnCollisionhit(Collider col)
+    void OnCollisionEnter(Collision other)
     {
-        Debug.Log(col.gameObject.tag);
+
+        Debug.Log(other.gameObject.tag);
+        if(other.gameObject.tag =="Enemy")
+        {
+            isHit = true;   
+        }
+       
     }
 
 }

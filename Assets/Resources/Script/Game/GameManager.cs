@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class gameManager : MonoBehaviour {
 
     //エネミーの管理
     Transform enemyTool = null;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
         {
             if(playerTool ==null)
             {
-				playerTool = transform.FindChild("PlayerTool/unitychan");
+				playerTool = transform.FindChild("unitychan");
             }
             return playerTool;
         }
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour {
         First,
         Game,
         End,
+        GameOver,
         NULL
     }
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour {
         stateMachine.Add(State.First, FirstInit, FirstUpdate, FirstEnd);
         stateMachine.Add(State.Game,GameInit,GameUpdate,GameEnd);
         stateMachine.Add(State.End,EndInit,null,null);
+        stateMachine.Add(State.GameOver, GameOverInit, null, null);
         stateMachine.SetState(State.First);
     }
 
@@ -123,6 +125,10 @@ public class GameManager : MonoBehaviour {
         {
             stateMachine.SetState(State.End);
         }
+        if(m_PlayerTool.GetComponent<PlayerMove>().isHit==true)
+        {
+            stateMachine.SetState(State.GameOver);
+        }
     }
 
     void GameEnd()
@@ -136,6 +142,14 @@ public class GameManager : MonoBehaviour {
         Debug.Log("EndInit");
         FadeManager.Instance.LoadLevel(SceneManage.SceneName.CLEAR, 1.0f, false);
     }
+
+    void GameOverInit()
+    {
+        Debug.Log("GameOverInit");
+        FadeManager.Instance.LoadLevel(SceneManage.SceneName.GAMEOVER, 1.0f, false);
+    }
+    //
+
 
 
 
