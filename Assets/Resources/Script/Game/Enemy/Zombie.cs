@@ -37,7 +37,7 @@ public class Zombie : EnemyActor {
         SERACH
     }
 
-
+    public bool isMove = false;
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
 
     void Awake()
@@ -80,7 +80,7 @@ public class Zombie : EnemyActor {
             //Enemyの生存フラグ
             enemy[i].isAlive = true;
             //Enemyの移動速度
-            enemy[i].speed = 0.01f;
+            enemy[i].speed = 1.0f;
             //Eenmyの名前
             enemy[i].name = "Zombie_" + i;
             //Enemyの親
@@ -92,7 +92,7 @@ public class Zombie : EnemyActor {
             enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,3));
             enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
-            enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 0.5f, Random.Range(-100f, 100.0f));
+            enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 1.0f, Random.Range(-100f, 100.0f));
             //AIのスクリプトがついたオブジェクトを格納
             enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
 
@@ -103,18 +103,16 @@ public class Zombie : EnemyActor {
     //=======================ここからステートマシン==========================//
     void IdelInit()
     {
-        Debug.Log("aaa");   
+        
     }
 
     void IdelUpdate()
     {
-        Debug.Log("aaa");
-        for (int i = 0; i < EnemyActor.Size;i++)
+        if(isMove)
         {
-            enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
-            enemy[i].transform.position = enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition();
-            Debug.Log(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition());
+            stateMachine.SetState(State.WALK);
         }
+
     }
 
     void IdelEnd()
@@ -129,7 +127,13 @@ public class Zombie : EnemyActor {
 
     void WalkUpdate()
     {
-        
+        for (int i = 0; i < EnemyActor.Size; i++)
+        {
+            enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
+            enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
+            enemy[i].transform.position = enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition();
+            //Debug.Log(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition());
+        }
     }
 
     void WalkEnd()

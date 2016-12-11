@@ -7,7 +7,19 @@ using System.Collections;
 public  class EnemyAI : MonoBehaviour{
 
 
+
     public  Vector3 enemyPosition;
+    Vector3 m_EnemyPosition
+    {
+        get
+        {
+            return enemyPosition;
+        }
+        set
+        {
+            enemyPosition = value;
+        }
+    }
     public  Vector3 enemyRotate;
 
     [SerializeField]
@@ -24,6 +36,7 @@ public  class EnemyAI : MonoBehaviour{
         }
     }
 
+  
 
     void Start()
     {
@@ -85,11 +98,11 @@ public  class EnemyAI : MonoBehaviour{
     {
         //プレイヤーの座標を代入
         Vector3 playerPos = m_Player.transform.position;
-        Vector3 direction = playerPos - ePos;
+        Vector3 direction = playerPos - m_EnemyPosition;
         //単位化(距離要素を取り除く)
         direction = direction.normalized;
-        ePos = (ePos + (direction * speed * Time.deltaTime));
-        enemyPosition = ePos;
+        m_EnemyPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
+        enemyPosition.y = 1.0f;
         enemy.transform.LookAt(m_Player);
     }
 

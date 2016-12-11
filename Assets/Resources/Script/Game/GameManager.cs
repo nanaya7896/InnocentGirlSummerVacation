@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
         {
             if(enemyTool ==null)
             {
-                enemyTool = transform.FindChild("EnemyTool");
+                enemyTool = transform.Find("/EnemyTool");
             }
             return enemyTool;
         }
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
         {
             if(playerTool ==null)
             {
-				playerTool = transform.FindChild("unitychan");
+				playerTool = transform.Find("/unitychan");
             }
             return playerTool;
         }
@@ -121,7 +121,8 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("GameInit");
         AudioManager.Instance.PlaySE("count");
-        m_PlayerTool.GetComponent<PlayerMove>().isMove =true;   
+        m_PlayerTool.GetComponent<PlayerMove>().isMove =true;
+        m_EnemyTool.GetComponent<Zombie>().isMove =true;
     }
 
     void GameUpdate()
