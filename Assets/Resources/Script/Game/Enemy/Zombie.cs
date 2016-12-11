@@ -58,7 +58,7 @@ public class Zombie : EnemyActor {
  
 	// Update is called once per frame
     void Update () {
-        
+        stateMachine.Update();
 	}
 
     /// <summary>
@@ -80,7 +80,7 @@ public class Zombie : EnemyActor {
             //Enemyの生存フラグ
             enemy[i].isAlive = true;
             //Enemyの移動速度
-            enemy[i].speed = 1.0f;
+            enemy[i].speed = 0.01f;
             //Eenmyの名前
             enemy[i].name = "Zombie_" + i;
             //Enemyの親
@@ -103,12 +103,18 @@ public class Zombie : EnemyActor {
     //=======================ここからステートマシン==========================//
     void IdelInit()
     {
-        
+        Debug.Log("aaa");   
     }
 
     void IdelUpdate()
     {
-        
+        Debug.Log("aaa");
+        for (int i = 0; i < EnemyActor.Size;i++)
+        {
+            enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
+            enemy[i].transform.position = enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition();
+            Debug.Log(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition());
+        }
     }
 
     void IdelEnd()
