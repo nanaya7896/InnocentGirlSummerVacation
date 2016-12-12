@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// enemyのAIを管理する静的関数
+/// enemyのAIを管理する
 /// </summary>
 public  class EnemyAI : MonoBehaviour{
 
@@ -70,11 +70,13 @@ public  class EnemyAI : MonoBehaviour{
             case ZombieAI.IDEL:
                 break;
             case ZombieAI.WALK:
-                ZombieWalk(enemyPosition, enemyRotate,speed,enemy);
+                ZombieWalk(speed,enemy);
                 break;
             case ZombieAI.SLIDER:
+                ZombieSlider();
                 break;
             case ZombieAI.DROWNED:
+                ZombieDrowned();
                 break;
             case ZombieAI.SERACH:
                 break;
@@ -94,7 +96,7 @@ public  class EnemyAI : MonoBehaviour{
         return enemyRotate;
     }
 
-    private  void ZombieWalk(Vector3 ePos, Vector3 eRot, float speed,GameObject enemy)
+    private  void ZombieWalk(float speed,GameObject enemy)
     {
         //プレイヤーの座標を代入
         Vector3 playerPos = m_Player.transform.position;
@@ -105,5 +107,16 @@ public  class EnemyAI : MonoBehaviour{
         enemyPosition.y = 1.0f;
         enemy.transform.LookAt(m_Player);
     }
+
+    private void ZombieSlider()
+    {
+        
+    }
+
+    private void ZombieDrowned()
+    {
+        
+    }
+
 
 }

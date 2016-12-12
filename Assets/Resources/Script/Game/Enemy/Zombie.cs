@@ -38,6 +38,8 @@ public class Zombie : EnemyActor {
     }
 
     public bool isMove = false;
+    [SerializeField]
+    private bool isSlider = false;
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
 
     void Awake()
@@ -49,13 +51,14 @@ public class Zombie : EnemyActor {
         stateMachine.Add(State.SERACH, SearchInit, SearchUpdate, SearchEnd);
         stateMachine.SetState(State.IDEL);
 
-        EnemyCreate();
+
+       
     }
 
     // Use this for initialization
     void Start()
     {
-        
+        EnemyCreate();
     }
  
 	// Update is called once per frame
@@ -101,6 +104,28 @@ public class Zombie : EnemyActor {
         }
     }
 
+    /// <summary>
+    /// ゲームリトライ時等に一度リセットしなければならないものを入れる
+    /// </summary>
+    public void Reset()
+    {
+        isMove = false;
+        isSlider = false;
+        stateMachine.SetState(State.IDEL);
+    }
+
+
+    /// <summary>
+    /// エネミーが生き返る処理
+    /// </summary>
+    public void Revive(int num)
+    {
+        enemy[num].isAlive = true;
+        //生成位置
+        enemy[num].transform.position = this.transform.position;
+        isMove = true;
+    }
+
 
     //=======================ここからステートマシン==========================//
     void IdelInit()
@@ -129,12 +154,18 @@ public class Zombie : EnemyActor {
 
     void WalkUpdate()
     {
+        
         for (int i = 0; i < EnemyActor.Size; i++)
         {
             enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
             enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
             enemy[i].transform.position = enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition();
-            //Debug.Log(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition());
+        }
+
+        //スライダーの中に入ったら
+        if(isSlider)
+        {
+            stateMachine.SetState(State.SLIDER);
         }
     }
 
@@ -145,17 +176,26 @@ public class Zombie : EnemyActor {
 
     void SliderInit()
     {
-        
+        isMove = false;
     }
 
     void SliderUpdate()
     {
-        
+        //
+        enemy[1].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[1].transform.position;
+        enemy[1].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.SLIDER, transform.position, transform.rotation.eulerAngles, enemy[1].speed, this.gameObject);
+        //スライダーが終了したら
+        if(true)
+        {
+            //沈む処理へ移行
+            stateMachine.SetState(State.DROWNED);
+        }
     }
 
     void SliderEnd()
     {
-        
+        //スライダー状態を切る
+        isSlider = false;   
     }
 
     void DrownedInit()
@@ -165,12 +205,17 @@ public class Zombie : EnemyActor {
 
     void DrownedUpdate()
     {
-        
+        if(true)
+        {
+            stateMachine.SetState(State.IDEL);
+        }
+            
     }
 
     void DrownedEnd()
     {
-        
+        //沈む処理が終了したら生き返る処理
+        Revive(1);
     }
 
     void SearchInit()
