@@ -48,12 +48,14 @@ public class Zombie : EnemyActor {
         stateMachine.Add(State.DROWNED, DrownedInit, DrownedUpdate, DrownedEnd);
         stateMachine.Add(State.SERACH, SearchInit, SearchUpdate, SearchEnd);
         stateMachine.SetState(State.IDEL);
+
+        EnemyCreate();
     }
 
     // Use this for initialization
     void Start()
     {
-        EnemyCreate();
+        
     }
  
 	// Update is called once per frame
@@ -84,7 +86,7 @@ public class Zombie : EnemyActor {
             //Eenmyの名前
             enemy[i].name = "Zombie_" + i;
             //Enemyの親
-            enemy[i].transform.parent = m_Parent;
+            //enemy[i].transform.parent = m_Parent;
             //Layerを設定
             enemy[i].gameObject.layer = LayerMask.NameToLayer("Enemy");
             enemy[i].gameObject.tag = "Enemy";

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
         {
             if(enemyTool ==null)
             {
-                enemyTool = transform.Find("/EnemyTool");
+                enemyTool = transform.FindChild("EnemyTool");
             }
             return enemyTool;
         }
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
         {
             if(playerTool ==null)
             {
-				playerTool = transform.Find("/unitychan");
+				playerTool = transform.FindChild("unitychan");
             }
             return playerTool;
         }

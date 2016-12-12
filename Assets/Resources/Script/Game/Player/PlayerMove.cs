@@ -4,11 +4,7 @@ using System.Collections;
 public class PlayerMove : MonoBehaviour {
 
 
-    /*
-    //移動速度
-    [SerializeField]
-    private float speed;
-    */
+
     public bool isMove = false;
 
     public bool isHit = false;
@@ -18,8 +14,7 @@ public class PlayerMove : MonoBehaviour {
     public float move_speed = 5f;
     //回転速度 
     public float rotate_speed = 180f;
-    //ジャンプ速度 
-    public float jump_speed = 5f;
+
     //重力 
     private float gravity = 20f;
     //アニメーターコンポーネント 
@@ -40,14 +35,23 @@ public class PlayerMove : MonoBehaviour {
         
        // if (isMove)
         {
-            if (chara.isGrounded)
+            PlayerMoving();
+        }
+
+
+	}
+
+    void PlayerMoving()
+    {
+        if (chara.isGrounded)
+        {
+            if (isMove)
             {
-                
                 // direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); 
                 direction = (cam_trans.transform.right * Input.GetAxis("Horizontal")) +
                      (cam_trans.transform.forward * Input.GetAxis("Vertical"));
 
-               // Debug.Log(direction.sqrMagnitude);
+                // Debug.Log(direction.sqrMagnitude);
 
                 if (direction.sqrMagnitude > 0.1f && Input.GetAxis("Vertical") == 0)
                 {
@@ -55,43 +59,15 @@ public class PlayerMove : MonoBehaviour {
                     transform.LookAt(transform.position + forward);
 
                 }
-
             }
 
-            direction.y -= gravity * Time.deltaTime;
-
-            chara.Move(direction * Time.deltaTime * move_speed);
-
-            anim.SetFloat("Speed", chara.velocity.magnitude);
-        }
-            /*
-            PlayerMoving();
-            PlayerRotate();
-            */
-
-	}
-
-    void PlayerMoving()
-    {
-        /*
-        if(Input.GetKey(KeyCode.W))
-        {
-            transform.position += transform.forward * speed;
-        }
-        if(Input.GetKey(KeyCode.S))
-        {
-            transform.position += transform.forward * (-speed);
         }
 
-        if(Input.GetKey(KeyCode.D))
-        {
-            transform.position += transform.right * speed;
-        }
-        if(Input.GetKey(KeyCode.A))
-        {
-            transform.position += transform.right * (-speed);
-        }
-        */
+        direction.y -= gravity * Time.deltaTime;
+
+        chara.Move(direction * Time.deltaTime * move_speed);
+
+        anim.SetFloat("Speed", chara.velocity.magnitude);
     }
 
     void PlayerRotate()
