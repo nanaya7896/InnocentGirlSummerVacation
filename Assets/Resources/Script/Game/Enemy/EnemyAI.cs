@@ -45,7 +45,7 @@ public  class EnemyAI : MonoBehaviour{
 
     void Update()
     {
-     //Debug.Log(m_Player.GetComponent<PlayerMove>().transform.position);   
+        
     }
 
     //Zombieがする行動の一覧
@@ -63,6 +63,14 @@ public  class EnemyAI : MonoBehaviour{
         SERACH
     }
 
+    /// <summary>
+    /// ゾンビのAIを実行する処理
+    /// </summary>
+    /// <param name="aiName">Ai name.</param>
+    /// <param name="enemyPosition">Enemy position.</param>
+    /// <param name="enemyRotate">Enemy rotate.</param>
+    /// <param name="speed">Speed.</param>
+    /// <param name="enemy">Enemy.</param>
     public void ZombieAIExcute(ZombieAI aiName, Vector3 enemyPosition, Vector3 enemyRotate, float speed,GameObject enemy)
     {
         switch(aiName)
@@ -96,6 +104,11 @@ public  class EnemyAI : MonoBehaviour{
         return enemyRotate;
     }
 
+    /// <summary>
+    /// ゾンビが歩く処理
+    /// </summary>
+    /// <param name="speed">Speed.</param>
+    /// <param name="enemy">Enemy.</param>
     private  void ZombieWalk(float speed,GameObject enemy)
     {
         //プレイヤーの座標を代入
@@ -104,8 +117,8 @@ public  class EnemyAI : MonoBehaviour{
         //単位化(距離要素を取り除く)
         direction = direction.normalized;
         m_EnemyPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
-        enemyPosition.y = 1.0f;
-        enemy.transform.LookAt(m_Player);
+        enemyPosition.y = 0.0f;
+        //enemy.transform.LookAt(m_Player);
     }
 
     private void ZombieSlider()

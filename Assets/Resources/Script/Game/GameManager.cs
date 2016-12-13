@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour {
         m_Time.GetComponent<TimeChangeScript>().Reset();
         m_PlayerTool.GetComponent<PlayerMove>().Reset();
 
-
+        AudioManager.Instance.PlaySE("count");
 
     }
 
@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour {
         if (m_Time.GetComponent<TimeChangeScript>().isTimeStart)
         {
             //ステートをGameに移行
+
             stateMachine.SetState(State.Game);
         }   
     }
@@ -120,7 +121,7 @@ public class GameManager : MonoBehaviour {
     void GameInit()
     {
         Debug.Log("GameInit");
-        AudioManager.Instance.PlaySE("count");
+       
         m_PlayerTool.GetComponent<PlayerMove>().isMove =true;
         m_EnemyTool.GetComponent<Zombie>().isMove =true;
     }

@@ -17,13 +17,25 @@ public class Zombie : EnemyActor {
             return parent;
         }
     }
+    Transform player=null;
+    Transform m_Player
+    {
+        get
+        {
+            if(player ==null)
+            {
+                player = GameObject.FindWithTag("Player").transform;
+            }
+            return player;
+        }
+    }
 
     /// <summary>
     /// The enemy.
     /// </summary>
     List<EnemyActor> enemy = new List<EnemyActor>();
 
-    private enum State
+    public enum State
     {
         //待機
         IDEL,
@@ -50,9 +62,6 @@ public class Zombie : EnemyActor {
         stateMachine.Add(State.DROWNED, DrownedInit, DrownedUpdate, DrownedEnd);
         stateMachine.Add(State.SERACH, SearchInit, SearchUpdate, SearchEnd);
         stateMachine.SetState(State.IDEL);
-
-
-       
     }
 
     // Use this for initialization
@@ -73,7 +82,7 @@ public class Zombie : EnemyActor {
     {
         for (int i = 0; i < EnemyActor.Size; i++)
         {
-            enemy.Add(Instantiate(Resources.Load<EnemyActor>("Model/Enemy/Zombie")));
+            enemy.Add(Instantiate(Resources.Load<EnemyActor>("Model/Enemy/z@walk")));
             if (enemy == null)
             {
                 Debug.Log(i + "番目のゾンビが生成できませんでした");
@@ -95,12 +104,11 @@ public class Zombie : EnemyActor {
             enemy[i].gameObject.tag = "Enemy";
             //服装の切り替え(ここは未完成部分です。また修正します)
             enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,3));
-            enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
+            //enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
-            enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 1.0f, Random.Range(-100f, 100.0f));
+            enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 0.1f, Random.Range(-100f, 100.0f));
             //AIのスクリプトがついたオブジェクトを格納
             enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
-
         }
     }
 
@@ -159,7 +167,10 @@ public class Zombie : EnemyActor {
         {
             enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
             enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
-            enemy[i].transform.position = enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition();
+            enemy[i].transform.position = new Vector3(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().x,0.0f,enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().z);
+            enemy[i].transform.LookAt(m_Player);
+           // enemy[i].transform.rotation = new Quaternion(0.0f, enemy[i]., 0.0f, 1.0f);
+
         }
 
         //スライダーの中に入ったら
