@@ -31,10 +31,29 @@ public class Zombie : EnemyActor {
     }
 
     /// <summary>
+    /// エネミーと衝突したか
+    /// </summary>
+    public bool isHit = false;
+    /// <summary>
+    /// 歩行可能状態か
+    /// </summary>
+    public bool isMove = false;
+
+    /// <summary>
+    /// スライダーを滑る状態か
+    /// </summary>
+    [SerializeField]
+    private bool isSlider = false;
+    /// <summary>
+    /// 階段を登る状態か
+    /// </summary>
+    private bool isStepUp = false;
+
+    /// <summary>
     /// The enemy.
     /// </summary>
     List<EnemyActor> enemy = new List<EnemyActor>();
-    public bool isHit = false;
+
     public enum State
     {
         //待機
@@ -49,9 +68,7 @@ public class Zombie : EnemyActor {
         SERACH
     }
 
-    public bool isMove = false;
-    [SerializeField]
-    private bool isSlider = false;
+
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
 
     void Awake()
@@ -106,9 +123,11 @@ public class Zombie : EnemyActor {
             enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,3));
             //enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
-            enemy[i].transform.position = new Vector3(Random.Range(-10.0f, 10.0f), 0.0f, Random.Range(-10.0f, 10.0f));
+            enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 0.0f, Random.Range(-100.0f, 100.0f));
             //AIのスクリプトがついたオブジェクトを格納
             enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
+            //ナビメッシュコンポーネントをつけて自動移動処理を追加する
+            enemy[i].gameObject.AddComponent<NavMeshAgent>();
         }
     }
 
@@ -120,7 +139,9 @@ public class Zombie : EnemyActor {
         isMove = false;
         isSlider = false;
         isHit = false;
+        isStepUp = false;
         stateMachine.SetState(State.IDEL);
+        EnemyCreate();
     }
 
 
@@ -136,12 +157,25 @@ public class Zombie : EnemyActor {
     }
 
 
+    private bool EnemyStepUp()
+    {
+
+
+        return false;
+    }
+
     //=======================ここからステートマシン==========================//
+    /// <summary>
+    /// 待機状態の初期化
+    /// </summary>
     void IdelInit()
     {
         
     }
 
+    /// <summary>
+    /// 待機状態のアップデート
+    /// </summary>
     void IdelUpdate()
     {
         if(isMove)
@@ -151,51 +185,83 @@ public class Zombie : EnemyActor {
 
     }
 
+    /// <summary>
+    /// 待機状態の終了処理
+    /// </summary>
     void IdelEnd()
     {
         
     }
 
+
+    /// <summary>
+    /// 歩きの初期化処理
+    /// </summary>
     void WalkInit()
     {
         
     }
 
+    /// <summary>
+    /// 歩きの更新処理
+    /// <comment>プレイヤーを常に追いかけ続けるステート</comment>
+    /// </summary>
     void WalkUpdate()
     {
-        
-        for (int i = 0; i < EnemyActor.Size; i++)
-        {
-            enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
-            enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
-            enemy[i].transform.position = new Vector3(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().x,0.0f,enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().z);
-            enemy[i].transform.LookAt(m_Player);
-           // enemy[i].transform.rotation = new Quaternion(0.0f, enemy[i]., 0.0f, 1.0f);
-
-        }
 
         //スライダーの中に入ったら
-        if(isSlider)
+        if (isStepUp)
         {
-            stateMachine.SetState(State.SLIDER);
+            //階段を登り終えたら
+            if (true)
+            {
+                //スライダーの処理移行
+                stateMachine.SetState(State.SLIDER);
+            }
         }
+        else
+        {
+            for (int i = 0; i < EnemyActor.Size; i++)
+            {
+                enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
+                enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
+                enemy[i].transform.position = new Vector3(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().x, 0.0f, enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().z);
+                enemy[i].transform.LookAt(m_Player);
+                // enemy[i].transform.rotation = new Quaternion(0.0f, enemy[i]., 0.0f, 1.0f);
+
+            }
+
+        }
+ 
     }
 
+    /// <summary>
+    /// 歩きの終了関数
+    /// </summary>
     void WalkEnd()
     {
         
     }
 
+    /// <summary>
+    /// スライダーですべる時の初期化関数
+    /// </summary>
     void SliderInit()
     {
         isMove = false;
     }
 
+    /// <summary>
+    /// スライダーですべるときの更新処理
+    /// <comment>スライダーを滑り終わるまで呼ばれ続ける</comment>
+    /// </summary>
     void SliderUpdate()
     {
         //
         enemy[1].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[1].transform.position;
         enemy[1].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.SLIDER, transform.position, transform.rotation.eulerAngles, enemy[1].speed, this.gameObject);
+
+
         //スライダーが終了したら
         if(true)
         {
@@ -204,19 +270,30 @@ public class Zombie : EnemyActor {
         }
     }
 
+    /// <summary>
+    /// スライダーで滑り終えた時に呼ばれる終了処理
+    /// </summary>
     void SliderEnd()
     {
         //スライダー状態を切る
         isSlider = false;   
     }
 
+    /// <summary>
+    /// 溺れる処理の初期化
+    /// </summary>
     void DrownedInit()
     {
         
     }
 
+    /// <summary>
+    /// 溺れ続ける処理
+    /// <comment>ゾンビが溺れて沈むまで繰り返す</comment>
+    /// </summary>
     void DrownedUpdate()
     {
+        
         if(true)
         {
             stateMachine.SetState(State.IDEL);
@@ -224,22 +301,34 @@ public class Zombie : EnemyActor {
             
     }
 
+    /// <summary>
+    /// 溺れ終わった後の終了処理
+    /// </summary>
     void DrownedEnd()
     {
         //沈む処理が終了したら生き返る処理
         Revive(1);
     }
 
+    /// <summary>
+    /// 探索初期化
+    /// </summary>
     void SearchInit()
     {
         
     }
 
+    /// <summary>
+    /// 探索更新処理
+    /// </summary>
     void SearchUpdate()
     {
         
     }
 
+    /// <summary>
+    /// 探索終了処理
+    /// </summary>
     void SearchEnd()
     {
         
