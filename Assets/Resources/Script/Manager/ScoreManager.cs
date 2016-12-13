@@ -21,6 +21,9 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
 	//ハイスコア
 	private static int m_High_Score;
 
+    private static int m_rankTotal;
+    private int[] m_rankPoint;
+
 
 	public int Score 
 	{
@@ -33,6 +36,14 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
 			return m_score;
 		}
 	}
+
+    public int[] rankPoint
+    {
+        get
+        {
+            return m_rankPoint;
+        }
+    }
 
 	public int GetHighScore {
 
@@ -51,13 +62,32 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
 
 	}
 
-	/*
+    public void Start()
+    {
+        m_rankPoint = new int[m_rankTotal];
+
+        for (int i = 0;i< m_rankTotal; i++){
+
+            m_rankPoint[i] = PlayerPrefs.GetInt("Rank"+i.ToString(),0);
+        }
+        Debug.Log("ハイスコアロード完了");
+    }
+
+    public void OnApplicationQuit()
+    {
+        for (int i = 0; i < m_rankTotal; i++){
+            PlayerPrefs.SetInt("Rank"+i.ToString(), m_rankPoint[i]);
+        }
+
+        Debug.Log("ハイスコアセーブ完了");
+    }
+    /*
 	 *関数名	:ScoreManager
 	 *内容	:パラメータを持たないコンストラクタ
 	 *引数	:
 	 *戻り値	:
 	*/
-	public ScoreManager(){}
+    public ScoreManager(){}
 
 	/*
 	 *関数名	:AddScore
