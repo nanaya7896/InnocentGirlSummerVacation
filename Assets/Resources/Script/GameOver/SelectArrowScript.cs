@@ -17,14 +17,17 @@ public class SelectArrowScript : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
             this.transform.position = leftselectPos;
+            SelectSE();
         }
         else if(Input.GetKeyDown(KeyCode.RightArrow))
         {
             this.transform.position = rightselectPos;
+            SelectSE();
         }
 
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
+            AudioManager.Instance.PlaySE("y_kettei");
             if (this.transform.position == leftselectPos)
             {
                 FadeManager.Instance.LoadLevel(SceneManage.SceneName.TITLE, 1.0f, false);
@@ -35,6 +38,11 @@ public class SelectArrowScript : MonoBehaviour {
                 SceneManage.Instance.SceneChangeLoad(SceneManage.SceneName.GAME);
             }
         }
-
 	}
+
+    void SelectSE()
+    {
+        AudioManager.Instance.PlaySE("y_sentaku");
+    }
+
 }

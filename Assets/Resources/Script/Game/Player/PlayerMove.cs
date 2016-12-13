@@ -5,50 +5,74 @@ public class PlayerMove : MonoBehaviour {
 
 
 
-    //移動速度
-    [SerializeField]
-    private float speed;
-
     public bool isMove = false;
 
     public bool isHit = false;
-	// Use this for initialization
-	void Start () {
-	
-	}
+
+    Vector3 direction;
+    //移動速度 
+    public float move_speed = 5f;
+    //回転速度 
+    public float rotate_speed = 180f;
+
+    //重力 
+    private float gravity = 20f;
+    //アニメーターコンポーネント 
+    Animator anim;
+    //キャラコントローラー 
+    CharacterController chara;
+
+    Transform cam_trans;
+    // Use this for initialization
+    void Start () {
+	      chara = GetComponent<CharacterController>();
+          anim = GetComponentInChildren<Animator>();
+        cam_trans = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (isMove)
+        
+       // if (isMove)
         {
             PlayerMoving();
-            PlayerRotate();
         }
+
+
 	}
 
     void PlayerMoving()
     {
-        if(Input.GetKey(KeyCode.W))
+        if (chara.isGrounded)
         {
-            transform.position += transform.forward * speed;
-        }
-        if(Input.GetKey(KeyCode.S))
-        {
-            transform.position += transform.forward * (-speed);
+            if (isMove)
+            {
+                // direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); 
+                direction = (cam_trans.transform.right * Input.GetAxis("Horizontal")) +
+                     (cam_trans.transform.forward * Input.GetAxis("Vertical"));
+
+                // Debug.Log(direction.sqrMagnitude);
+
+                if (direction.sqrMagnitude > 0.1f && Input.GetAxis("Vertical") == 0)
+                {
+                    Vector3 forward = Vector3.Slerp(transform.forward, direction, rotate_speed * Time.deltaTime / Vector3.Angle(transform.forward, direction));
+                    transform.LookAt(transform.position + forward);
+
+                }
+            }
+
         }
 
-        if(Input.GetKey(KeyCode.D))
-        {
-            transform.position += transform.right * speed;
-        }
-        if(Input.GetKey(KeyCode.A))
-        {
-            transform.position += transform.right * (-speed);
-        }
+        direction.y -= gravity * Time.deltaTime;
+
+        chara.Move(direction * Time.deltaTime * move_speed);
+
+        anim.SetFloat("Speed", chara.velocity.magnitude);
     }
 
     void PlayerRotate()
     {
+        /*
         if(Input.GetKey(KeyCode.RightArrow))
         {
                transform.Rotate(0, 10, 0);
@@ -57,6 +81,7 @@ public class PlayerMove : MonoBehaviour {
         {
             transform.Rotate(0, -10, 0);
         }
+        */
     }
 
     public void Reset()
@@ -65,16 +90,17 @@ public class PlayerMove : MonoBehaviour {
         isHit = false;
     }
 
-    //エネミーとヒットしたら呼び出す
-    void OnCollisionEnter(Collision other)
+    //=============================Get関数================================//
+    public string GetPlayerPosition()
     {
-
-        Debug.Log(other.gameObject.tag);
-        if(other.gameObject.tag =="Enemy")
-        {
-            isHit = true;   
-        }
-       
+        return this.transform.position.ToString();
     }
+
+        void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Debug.Log(hit.gameObject.tag);
+        isHit |= hit.gameObject.tag == "Enemy";
+    }
+
 
 }

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class gameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour {
+
 
     //エネミーの管理
     Transform enemyTool = null;
@@ -57,6 +59,9 @@ public class gameManager : MonoBehaviour {
     }
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
 
+
+    public GUIStyle style;
+    public bool debugMode = false;
     /// <summary>
     /// ゲーム開始時にステートを追加
     /// </summary>
@@ -91,7 +96,7 @@ public class gameManager : MonoBehaviour {
         m_Time.GetComponent<TimeChangeScript>().Reset();
         m_PlayerTool.GetComponent<PlayerMove>().Reset();
 
-
+        AudioManager.Instance.PlaySE("count");
 
     }
 
@@ -101,6 +106,7 @@ public class gameManager : MonoBehaviour {
         if (m_Time.GetComponent<TimeChangeScript>().isTimeStart)
         {
             //ステートをGameに移行
+
             stateMachine.SetState(State.Game);
         }   
     }
@@ -115,7 +121,9 @@ public class gameManager : MonoBehaviour {
     void GameInit()
     {
         Debug.Log("GameInit");
-        m_PlayerTool.GetComponent<PlayerMove>().isMove =true;   
+       
+        m_PlayerTool.GetComponent<PlayerMove>().isMove =true;
+        m_EnemyTool.GetComponent<Zombie>().isMove =true;
     }
 
     void GameUpdate()
@@ -151,6 +159,33 @@ public class gameManager : MonoBehaviour {
     //
 
 
+    //==================ここからデバッグモード=============================//
+    void OnGUI()
+    {
+     //デバッグ必要なものを適宜追加していく   
+        if(debugMode)
+        {
+            GUI.Box(new Rect(0,0,300,500),"Box");
+            //プレイヤーのポジション
+            GUI.Label(new Rect(20,20,100,120),"PlayerPosition");
+            GUI.Label(new Rect(130,20,200,120),m_PlayerTool.GetComponent<PlayerMove>().GetPlayerPosition(),style);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+    }
 
 }

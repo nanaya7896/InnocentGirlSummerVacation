@@ -11,7 +11,7 @@ public class EnemyActor : MonoBehaviour{
     /// </summary>
     public int ID;
 
-    public static int Size=50;
+    public static int Size=1;
     /// <summary>
     /// Enemyの移動速度
     /// </summary>
@@ -26,4 +26,8 @@ public class EnemyActor : MonoBehaviour{
     /// 服の種類
     /// </summary>
     public Material clothnumber;
+
+
+    public Transform enemyAIObj;
+
 }
