@@ -34,7 +34,7 @@ public class Zombie : EnemyActor {
     /// The enemy.
     /// </summary>
     List<EnemyActor> enemy = new List<EnemyActor>();
-
+    public bool isHit = false;
     public enum State
     {
         //待機
@@ -106,7 +106,7 @@ public class Zombie : EnemyActor {
             enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,3));
             //enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
-            enemy[i].transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 0.1f, Random.Range(-100f, 100.0f));
+            enemy[i].transform.position = new Vector3(Random.Range(-10.0f, 10.0f), 0.0f, Random.Range(-10.0f, 10.0f));
             //AIのスクリプトがついたオブジェクトを格納
             enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
         }
@@ -119,6 +119,7 @@ public class Zombie : EnemyActor {
     {
         isMove = false;
         isSlider = false;
+        isHit = false;
         stateMachine.SetState(State.IDEL);
     }
 
@@ -242,6 +243,12 @@ public class Zombie : EnemyActor {
     void SearchEnd()
     {
         
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Debug.Log(hit.gameObject.tag);
+        isHit |= hit.gameObject.tag == "Player";
     }
 }
 

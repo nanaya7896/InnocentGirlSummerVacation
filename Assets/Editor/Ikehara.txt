@@ -1,0 +1,8 @@
+NavMeshの使い方
+・Window＞Navgationを起動させる
+・Static属性を付与した地面(通りたい道)にNavMeshをBake
+・動かしたオブジェクトにNavMeshAgentをつける
+・障害物へはNavMeshObstractをつけCurveにチェックを入れる
+・ GetComponent<NavMeshAgent>().SetDestination(target.transform.position); targetは目標地点
+今回のゲームでの使用
+階段などにひっかからないようにする階段の登りに対してNavMeshで移動させる

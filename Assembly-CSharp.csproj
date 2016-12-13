@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ClearSE.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\FaceUpdate.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\IdleChanger.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\Resources\Script\Game\Enemy\Zombie.cs" />
      <Compile Include="Assets\Resources\Script\Game\GameManager.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\CameraMove.cs" />
+     <Compile Include="Assets\Resources\Script\Game\Player\PlayerController.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\PlayerMove.cs" />
      <Compile Include="Assets\Resources\Script\Game\TimeChangeScript.cs" />
      <Compile Include="Assets\Resources\Script\Game\switchingCamera.cs" />
@@ -76,6 +78,7 @@
      <Compile Include="Assets\Resources\Script\Manager\ScoreManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\SingletonMonoBehaviour.cs" />
      <Compile Include="Assets\Resources\Script\Title\BGMPlayTool.cs" />
+     <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
      <Compile Include="Assets\Resources\Script\test\test.cs" />
      <None Include="Assets\ImportAsset\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
@@ -168,6 +171,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SimpleClear.shader" />
      <None Include="Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularDisplacement.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA3Console.shader" />
+     <None Include="Assets\Editor\Ikehara.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
