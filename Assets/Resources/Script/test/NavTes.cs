@@ -16,6 +16,6 @@ public class NavTes : MonoBehaviour {
         {
             GetComponent<NavMeshAgent>().SetDestination(target.transform.position);
         }
-        Debug.Log(GetComponent<NavMeshAgent>().autoRepath);
+     //   Debug.Log(GetComponent<NavMeshAgent>().gameObject);
 	}
 }
