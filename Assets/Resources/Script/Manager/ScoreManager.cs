@@ -19,10 +19,10 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
 	//スコア
 	private static int m_score;
 	//ハイスコア
-	private static int m_High_Score;
+
 
     private static int m_rankTotal;
-    private int[] m_rankPoint;
+    private int[] m_HighScore;
 
 
 	public int Score 
@@ -41,16 +41,10 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
     {
         get
         {
-            return m_rankPoint;
+            return m_HighScore;
         }
     }
 
-	public int GetHighScore {
-
-		get { 
-			return m_High_Score;
-		}
-	}
 
 	public void Awake(){
 
@@ -64,11 +58,11 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
 
     public void Start()
     {
-        m_rankPoint = new int[m_rankTotal];
+        m_HighScore = new int[m_rankTotal];
 
         for (int i = 0;i< m_rankTotal; i++){
 
-            m_rankPoint[i] = PlayerPrefs.GetInt("Rank"+i.ToString(),0);
+            m_HighScore[i] = PlayerPrefs.GetInt("Rank"+i.ToString(),0);
         }
         Debug.Log("ハイスコアロード完了");
     }
@@ -76,7 +70,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
     public void OnApplicationQuit()
     {
         for (int i = 0; i < m_rankTotal; i++){
-            PlayerPrefs.SetInt("Rank"+i.ToString(), m_rankPoint[i]);
+            PlayerPrefs.SetInt("Rank"+i.ToString(), m_HighScore[i]);
         }
 
         Debug.Log("ハイスコアセーブ完了");
@@ -99,13 +93,27 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
 	{
 		//スコア加算
 		m_score+=value;
-
-		//もしHighScoreを超えていたら
-		if (m_score > m_High_Score) {
-			//入れ替える
-			m_High_Score = m_score;
-		}
 	}
+
+    public void RankIncheck()
+    {
+        if(m_score> rankPoint[0])
+        {
+            rankPoint[2] = rankPoint[1];
+            rankPoint[1] = rankPoint[0];
+            rankPoint[0] = m_score;
+        }
+        if (m_score > rankPoint[1])
+        {
+            rankPoint[2] = rankPoint[1];
+            rankPoint[1] = m_score;
+        }
+        if (m_score > rankPoint[2])
+        {
+            rankPoint[2] = m_score;
+        }
+        m_score = 0;
+    }
 
 	/*
 	 *関数名	:Reset

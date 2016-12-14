@@ -7,7 +7,6 @@ using System.Collections;
 public  class EnemyAI : MonoBehaviour{
 
 
-
     public  Vector3 enemyPosition;
     Vector3 m_EnemyPosition
     {
