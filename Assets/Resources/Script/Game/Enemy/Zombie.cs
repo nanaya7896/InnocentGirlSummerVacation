@@ -68,6 +68,8 @@ public class Zombie : EnemyActor {
         SERACH
     }
 
+    [SerializeField]
+    State testState=State.IDEL;
 
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
 
@@ -90,6 +92,7 @@ public class Zombie : EnemyActor {
 	// Update is called once per frame
     void Update () {
         stateMachine.Update();
+        setState();
 	}
 
     /// <summary>
@@ -163,6 +166,12 @@ public class Zombie : EnemyActor {
 
         return false;
     }
+
+    private void setState()
+    {
+        stateMachine.SetState(testState);
+    }
+
 
     //=======================ここからステートマシン==========================//
     /// <summary>
