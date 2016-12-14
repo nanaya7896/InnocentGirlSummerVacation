@@ -45,13 +45,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ClearSE.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\FaceUpdate.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\IdleChanger.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\SceneLoader.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
+     <Compile Include="Assets\Resources\Script\Clear\ClearSE.cs" />
      <Compile Include="Assets\Resources\Script\Clear\SpriteAutoChange.cs" />
      <Compile Include="Assets\Resources\Script\Common\CreateMasterScript.cs" />
      <Compile Include="Assets\Resources\Script\Common\EnumExtensions.cs" />
@@ -61,7 +61,7 @@
      <Compile Include="Assets\Resources\Script\Common\SceneChanger.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
-     <Compile Include="Assets\Resources\Script\DissorveTest.cs" />
+     <Compile Include="Assets\Resources\Script\Game\DissorveTest.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyAI.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyActor.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\Zombie.cs" />
