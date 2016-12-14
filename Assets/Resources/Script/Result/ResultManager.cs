@@ -24,21 +24,29 @@ public class ResultManager : MonoBehaviour {
     [SerializeField]
     List<GameObject> one = new List<GameObject>();
 
+    GameObject m_resultScore;
+    GameObject m_rankScore;
 
     void StartToState()
     {
+     
         switch (m_resultState)
         {
             case ResultState.Result:
                 m_backGroundSprite.sprite = Resources.Load<Sprite>("Image/I_Result/clear");
+                m_rankScore.SetActive(false);
                 break;
 
             case ResultState.Rank:
                 m_backGroundSprite.sprite = Resources.Load<Sprite>("Image/I_Result/ranking");
+                m_resultScore.SetActive(false);
+                m_rankScore.SetActive(true);
                 break;
 
             case ResultState.Credit:
                 m_backGroundSprite.sprite = Resources.Load<Sprite>("Image/I_Result/credit2");
+                m_resultScore.SetActive(false);
+                m_rankScore.SetActive(false);
                 break;
         }
     }
@@ -46,7 +54,8 @@ public class ResultManager : MonoBehaviour {
     void Awake()
     {
         m_backGroundSprite = GameObject.Find("Canvas/BackGround").GetComponent<Image>();
-
+        m_resultScore = GameObject.Find("Canvas/ResultScore");
+        m_rankScore = GameObject.Find("Canvas/RankScore");
 
         foreach (Sprite spr in Resources.LoadAll<Sprite>("Image/Number"))
         {
