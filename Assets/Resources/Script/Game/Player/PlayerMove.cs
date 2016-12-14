@@ -70,37 +70,9 @@ public class PlayerMove : MonoBehaviour {
         anim.SetFloat("Speed", chara.velocity.magnitude);
     }
 
-    void PlayerRotate()
-    {
-        /*
-        if(Input.GetKey(KeyCode.RightArrow))
-        {
-               transform.Rotate(0, 10, 0);
-        }
-        else if(Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Rotate(0, -10, 0);
-        }
-        */
-    }
 
-    public void Reset()
-    {
-        isMove = false;
-        isHit = false;
-    }
 
-    //=============================Get関数================================//
-    public string GetPlayerPosition()
-    {
-        return this.transform.position.ToString();
-    }
 
-        void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        Debug.Log(hit.gameObject.tag);
-        isHit |= hit.gameObject.tag == "Enemy";
-    }
 
 
 }

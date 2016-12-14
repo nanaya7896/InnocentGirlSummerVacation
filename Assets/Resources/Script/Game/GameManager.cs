@@ -20,16 +20,16 @@ public class GameManager : MonoBehaviour {
     }
 
     //プレイヤー管理
-    Transform playerTool = null;
-    Transform m_PlayerTool
+    Transform playerController = null;
+    Transform m_PlayerController
     {
         get
         {
-            if(playerTool ==null)
+			if(playerController ==null)
             {
-				playerTool = transform.FindChild("unitychan");
+				playerController = transform.FindChild("unitychan");
             }
-            return playerTool;
+			return playerController;
         }
     }
 
@@ -94,8 +94,8 @@ public class GameManager : MonoBehaviour {
         //初期化
         ScoreManager.Instance.Reset();
         m_Time.GetComponent<TimeChangeScript>().Reset();
-        m_PlayerTool.GetComponent<PlayerMove>().Reset();
-
+		m_PlayerController.GetComponent<PlayerController>().Reset();
+		AudioManager.Instance.StopSE();
         AudioManager.Instance.PlaySE("count");
 
     }
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("GameInit");
        
-        m_PlayerTool.GetComponent<PlayerMove>().isMove =true;
+		m_PlayerController.GetComponent<PlayerController>().isMove =true;
         m_EnemyTool.GetComponent<Zombie>().isMove =true;
     }
 
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour {
         {
             stateMachine.SetState(State.End);
         }
-        if(m_PlayerTool.GetComponent<PlayerMove>().isHit==true)
+		if(m_PlayerController.GetComponent<PlayerController>().isHit==true || m_EnemyTool.GetComponent<Zombie>().isHit ==true)
         {
             stateMachine.SetState(State.GameOver);
         }
@@ -168,7 +168,7 @@ public class GameManager : MonoBehaviour {
             GUI.Box(new Rect(0,0,300,500),"Box");
             //プレイヤーのポジション
             GUI.Label(new Rect(20,20,100,120),"PlayerPosition");
-            GUI.Label(new Rect(130,20,200,120),m_PlayerTool.GetComponent<PlayerMove>().GetPlayerPosition(),style);
+			GUI.Label(new Rect(130,20,200,120),m_PlayerController.GetComponent<PlayerController>().GetPlayerPosition(),style);
 
 
 

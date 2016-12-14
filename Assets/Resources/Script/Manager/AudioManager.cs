@@ -1,14 +1,5 @@
 ﻿//===============================
-//
-//
 //オーディオを管理するクラス
-/// <summary>
-/// Audio manager.
-/// </summary>
-/// 使い方
-/// すきなスクリプトから１行指定すればならせます
-/// AudioManager.Instance.Play ("BGMファイル名");
-/// 
 //===============================
 
 using UnityEngine;
@@ -21,7 +12,12 @@ using System.Collections;
 //ジェネリックコレクションを使用する為に宣言します
 using System.Collections.Generic;
 
-//シングルトンクラスを継承
+/// <summary>
+/// Audio manager.
+/// </summary>
+/// 使い方
+/// すきなスクリプトから１行指定すればならせます
+/// AudioManager.Instance.Play ("BGMファイル名");
 public class AudioManager : SingletonMonoBehaviour<AudioManager> {
 
 	//======
@@ -181,6 +177,11 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager> {
 			s_se.loop = false;
 		}
 
+		createSeDict ();
+	}
+
+	public void createSeDict()
+	{
 		//[Resources/Audio/SE]フォルダからSEを探す
 		this.seDict = new Dictionary<string, AudioClip>();
 		//オーディオクリップをSEフォルダから読み込み
@@ -188,7 +189,6 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager> {
 			this.seDict.Add (se.name, se);
 		}
 	}
-
 
 	/*
 	 *関数名 :playSE
@@ -198,6 +198,9 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager> {
 	*/
 	public void PlaySE(string seName)
 	{
+		if (seDict == null) {
+			createSeDict ();
+		}
 		//Dictionary内のファイル名を探す
 		if (!this.seDict.ContainsKey (seName)) {
 			Debug.LogError (string.Format ("SE名[{0}]が見つかりません", seName));

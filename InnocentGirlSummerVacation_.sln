@@ -5,7 +5,7 @@ Project("{57AA8E07-F5C4-B7E2-4FE7-34A997201AC9}") = "InnocentGirlSummerVacation_
 EndProject
 Project("{57AA8E07-F5C4-B7E2-4FE7-34A997201AC9}") = "InnocentGirlSummerVacation_", "Assembly-CSharp.csproj", "{D1544316-BCD4-0F70-2CBD-F19FA3D3CCA5}"
 EndProject
-Project("{57AA8E07-F5C4-B7E2-4FE7-34A997201AC9}") = "InnocentGirlSummerVacation_", "Assembly-CSharp-Editor.csproj", "{87C65081-20D0-C32B-B3F5-597F240FE2B4}"
+Project("{57AA8E07-F5C4-B7E2-4FE7-34A997201AC9}") = "InnocentGirlSummerVacation_", "Assembly-CSharp-Editor-firstpass.csproj", "{F77F8F85-E382-7E80-C91F-05025E8DD025}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,10 @@ Global
 		{D1544316-BCD4-0F70-2CBD-F19FA3D3CCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1544316-BCD4-0F70-2CBD-F19FA3D3CCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1544316-BCD4-0F70-2CBD-F19FA3D3CCA5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{87C65081-20D0-C32B-B3F5-597F240FE2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87C65081-20D0-C32B-B3F5-597F240FE2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87C65081-20D0-C32B-B3F5-597F240FE2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87C65081-20D0-C32B-B3F5-597F240FE2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F77F8F85-E382-7E80-C91F-05025E8DD025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F77F8F85-E382-7E80-C91F-05025E8DD025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F77F8F85-E382-7E80-C91F-05025E8DD025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F77F8F85-E382-7E80-C91F-05025E8DD025}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
