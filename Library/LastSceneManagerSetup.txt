@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/tests/Navtest.unity
+- path: Assets/Scene/tests/waterTest.unity
   isLoaded: 1
   isActive: 1
