@@ -36,6 +36,10 @@ public class DissorveTest : MonoBehaviour {
     {
 		
 		if (StartDissolve) {
+			this.transform.localScale = new Vector3 (this.transform.localScale.x, this.transform.localScale.y - Time.deltaTime, this.transform.localScale.z);
+			if (transform.localScale.y < 0.0f) {
+				this.transform.localScale = new Vector3 (this.transform.localScale.x, 0.0f, this.transform.localScale.z);
+			}
 			float delta = Time.deltaTime;
 
 			// 待ち時間
