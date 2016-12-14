@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation.CSharp.Plugins", "InnocentGirlSummerVacation.CSharp.Plugins.csproj", "{2B982CB1-8868-1373-B978-AC146B03F653}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation.CSharp", "InnocentGirlSummerVacation.CSharp.csproj", "{99BEA0F3-586F-A75D-A3A6-80DCB4A20F33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation.CSharp.Editor", "InnocentGirlSummerVacation.CSharp.Editor.csproj", "{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B982CB1-8868-1373-B978-AC146B03F653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B982CB1-8868-1373-B978-AC146B03F653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B982CB1-8868-1373-B978-AC146B03F653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B982CB1-8868-1373-B978-AC146B03F653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99BEA0F3-586F-A75D-A3A6-80DCB4A20F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99BEA0F3-586F-A75D-A3A6-80DCB4A20F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99BEA0F3-586F-A75D-A3A6-80DCB4A20F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99BEA0F3-586F-A75D-A3A6-80DCB4A20F33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
