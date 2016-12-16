@@ -72,7 +72,7 @@ public class ResultManager : MonoBehaviour {
         {
             result.Add(GameObject.Find("Canvas/ResultScore/" + i));
         }
-        ScoreManager.Instance
+        //ScoreManager.Instance
     }
 	
 	// Update is called once per frame
