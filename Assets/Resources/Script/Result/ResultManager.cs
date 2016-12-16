@@ -20,9 +20,8 @@ public class ResultManager : MonoBehaviour {
     [SerializeField]
     List<Sprite> sp = new List<Sprite>();
 
-    //時間を描画するためのSpriteRendererコンポーネントを持つGameObject
     [SerializeField]
-    List<GameObject> one = new List<GameObject>();
+    List<GameObject> result = new List<GameObject>();
 
     GameObject m_resultScore;
     GameObject m_rankScore;
@@ -68,6 +67,12 @@ public class ResultManager : MonoBehaviour {
 
         StartToState();
 
+        //子オブジェクトの数だけ数字用GameObjectを取得
+        for (int i = 1; i < transform.childCount * 10; i = i * 10)
+        {
+            result.Add(GameObject.Find("Canvas/ResultScore/" + i));
+        }
+        ScoreManager.Instance
     }
 	
 	// Update is called once per frame
