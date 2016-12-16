@@ -51,6 +51,7 @@
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\SceneLoader.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
+     <Compile Include="Assets\ImportAsset\p5-MSAFluid-master\src\msafluid\MSAFluidSolver2D.cs" />
      <Compile Include="Assets\Resources\Script\Clear\ClearSE.cs" />
      <Compile Include="Assets\Resources\Script\Clear\SpriteAutoChange.cs" />
      <Compile Include="Assets\Resources\Script\Common\CreateMasterScript.cs" />
@@ -81,6 +82,7 @@
      <Compile Include="Assets\Resources\Script\Title\BGMPlayTool.cs" />
      <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
      <Compile Include="Assets\Resources\Script\test\test.cs" />
+     <Compile Include="Assets\testes.cs" />
      <None Include="Assets\ImportAsset\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
@@ -112,6 +114,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+     <None Include="Assets\ofxMSAFluid-master\example\bin\data\ofxMSAFluidSettings.xml" />
      <None Include="Assets\ImportAsset\UnityChan\license.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
      <None Include="Assets\ImportAsset\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />

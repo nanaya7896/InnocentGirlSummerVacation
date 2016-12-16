@@ -1,7 +1,3 @@
-/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/Assembly-CSharp.dll.mdb
-/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/Assembly-CSharp.dll
-/Users/nanaya/Desktop/InnocentGirlSummerVacation_/obj/Debug/Assembly-CSharp.dll
-/Users/nanaya/Desktop/InnocentGirlSummerVacation_/obj/Debug/Assembly-CSharp.dll.mdb
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEngine.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEngine.UI.dll
