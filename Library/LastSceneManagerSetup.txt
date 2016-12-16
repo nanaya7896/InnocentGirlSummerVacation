@@ -1,4 +1,12 @@
 sceneSetups:
+<<<<<<< HEAD
+<<<<<<< HEAD
 - path: Assets/Scene/Result.unity
+=======
+- path: Assets/Scene/tests/AITest.unity
+>>>>>>> Ikehara
+=======
+- path: Assets/Scene/Title.unity
+>>>>>>> Ikehara
   isLoaded: 1
   isActive: 1
