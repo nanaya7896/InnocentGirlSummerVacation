@@ -1,0 +1,197 @@
+fileFormatVersion: 2
+guid: d9a6ea69ee69e431aa0260acb6a6ba2a
+timeCreated: 1481873486
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Base Human
+    100002: Base HumanHead
+    100004: "Base HumanHead\u30AE\u30BA\u30E2"
+    100006: Base HumanLCollarbone
+    100008: Base HumanLForearm1
+    100010: "Base HumanLForearm1\u30AE\u30BA\u30E2"
+    100012: Base HumanLForearm2
+    100014: Base HumanLPalm
+    100016: "Base HumanLPalm\u30AE\u30BA\u30E2"
+    100018: Base HumanLUpperarm
+    100020: "Base HumanLUpperarm\u30AE\u30BA\u30E2"
+    100022: "Base HumanL\u630711"
+    100024: "Base HumanL\u630712"
+    100026: "Base HumanL\u630713"
+    100028: "Base HumanL\u630721"
+    100030: "Base HumanL\u630722"
+    100032: "Base HumanL\u630723"
+    100034: "Base HumanL\u630731"
+    100036: "Base HumanL\u630732"
+    100038: "Base HumanL\u630733"
+    100040: "Base HumanL\u630741"
+    100042: "Base HumanL\u630742"
+    100044: "Base HumanL\u630743"
+    100046: "Base HumanL\u630751"
+    100048: "Base HumanL\u630752"
+    100050: "Base HumanL\u630753"
+    100052: Base HumanNeck1
+    100054: Base HumanNeck2
+    100056: Base HumanPelvis
+    100058: "Base HumanPelvis\u30AE\u30BA\u30E2"
+    100060: Base HumanRCollarbone
+    100062: Base HumanRForearm1
+    100064: "Base HumanRForearm1\u30AE\u30BA\u30E2"
+    100066: Base HumanRForearm2
+    100068: Base HumanRibcage
+    100070: Base HumanRPalm
+    100072: "Base HumanRPalm\u30AE\u30BA\u30E2"
+    100074: Base HumanRUpperarm
+    100076: "Base HumanRUpperarm\u30AE\u30BA\u30E2"
+    100078: "Base HumanR\u630711"
+    100080: "Base HumanR\u630712"
+    100082: "Base HumanR\u630713"
+    100084: "Base HumanR\u630721"
+    100086: "Base HumanR\u630722"
+    100088: "Base HumanR\u630723"
+    100090: "Base HumanR\u630731"
+    100092: "Base HumanR\u630732"
+    100094: "Base HumanR\u630733"
+    100096: "Base HumanR\u630741"
+    100098: "Base HumanR\u630742"
+    100100: "Base HumanR\u630743"
+    100102: "Base HumanR\u630751"
+    100104: "Base HumanR\u630752"
+    100106: "Base HumanR\u630753"
+    100108: Base HumanSpine1
+    100110: Base HumanSpine2
+    100112: Base HumanSpine3
+    100114: Base HumanSpine4
+    100116: Box003
+    100118: //RootNode
+    100120: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    400000: Base Human
+    400002: Base HumanHead
+    400004: "Base HumanHead\u30AE\u30BA\u30E2"
+    400006: Base HumanLCollarbone
+    400008: Base HumanLForearm1
+    400010: "Base HumanLForearm1\u30AE\u30BA\u30E2"
+    400012: Base HumanLForearm2
+    400014: Base HumanLPalm
+    400016: "Base HumanLPalm\u30AE\u30BA\u30E2"
+    400018: Base HumanLUpperarm
+    400020: "Base HumanLUpperarm\u30AE\u30BA\u30E2"
+    400022: "Base HumanL\u630711"
+    400024: "Base HumanL\u630712"
+    400026: "Base HumanL\u630713"
+    400028: "Base HumanL\u630721"
+    400030: "Base HumanL\u630722"
+    400032: "Base HumanL\u630723"
+    400034: "Base HumanL\u630731"
+    400036: "Base HumanL\u630732"
+    400038: "Base HumanL\u630733"
+    400040: "Base HumanL\u630741"
+    400042: "Base HumanL\u630742"
+    400044: "Base HumanL\u630743"
+    400046: "Base HumanL\u630751"
+    400048: "Base HumanL\u630752"
+    400050: "Base HumanL\u630753"
+    400052: Base HumanNeck1
+    400054: Base HumanNeck2
+    400056: Base HumanPelvis
+    400058: "Base HumanPelvis\u30AE\u30BA\u30E2"
+    400060: Base HumanRCollarbone
+    400062: Base HumanRForearm1
+    400064: "Base HumanRForearm1\u30AE\u30BA\u30E2"
+    400066: Base HumanRForearm2
+    400068: Base HumanRibcage
+    400070: Base HumanRPalm
+    400072: "Base HumanRPalm\u30AE\u30BA\u30E2"
+    400074: Base HumanRUpperarm
+    400076: "Base HumanRUpperarm\u30AE\u30BA\u30E2"
+    400078: "Base HumanR\u630711"
+    400080: "Base HumanR\u630712"
+    400082: "Base HumanR\u630713"
+    400084: "Base HumanR\u630721"
+    400086: "Base HumanR\u630722"
+    400088: "Base HumanR\u630723"
+    400090: "Base HumanR\u630731"
+    400092: "Base HumanR\u630732"
+    400094: "Base HumanR\u630733"
+    400096: "Base HumanR\u630741"
+    400098: "Base HumanR\u630742"
+    400100: "Base HumanR\u630743"
+    400102: "Base HumanR\u630751"
+    400104: "Base HumanR\u630752"
+    400106: "Base HumanR\u630753"
+    400108: Base HumanSpine1
+    400110: Base HumanSpine2
+    400112: Base HumanSpine3
+    400114: Base HumanSpine4
+    400116: Box003
+    400118: //RootNode
+    400120: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    4300000: Box003
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Box003
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
