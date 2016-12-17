@@ -21,7 +21,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
 	//ハイスコア
 
 
-    private static int m_rankTotal;
+    private static int m_rankTotal=3;
     private int[] m_HighScore;
 
 
@@ -63,6 +63,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
         for (int i = 0;i< m_rankTotal; i++){
 
             m_HighScore[i] = PlayerPrefs.GetInt("Rank"+i.ToString(),0);
+           
         }
         Debug.Log("ハイスコアロード完了");
     }
@@ -71,6 +72,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
     {
         for (int i = 0; i < m_rankTotal; i++){
             PlayerPrefs.SetInt("Rank"+i.ToString(), m_HighScore[i]);
+          
         }
 
         Debug.Log("ハイスコアセーブ完了");

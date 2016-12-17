@@ -22,6 +22,9 @@ public class ResultManager : MonoBehaviour {
 
     [SerializeField]
     List<GameObject> result = new List<GameObject>();
+    List<GameObject> rank1  = new List<GameObject>();
+    List<GameObject> rank2 = new List<GameObject>();
+    List<GameObject> rank3 = new List<GameObject>();
 
     GameObject m_resultScore;
     GameObject m_rankScore;
@@ -62,21 +65,53 @@ public class ResultManager : MonoBehaviour {
         }
     }
 
+    void ScoreSet(List<GameObject> _list,int _score)
+    {
+
+        for(int i = 0; i < 3; i++)
+        {
+            int idx;
+            idx = (_score % 10); _score /= 10;// 1桁目を取り出す
+            _list[i].GetComponent<Image>().sprite = sp[idx];
+        }
+    }
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+
+      
+        //子オブジェクトの数だけ数字用GameObjectを取得
+        for (int i = 1; i < System.Math.Pow(10, GameObject.Find("Canvas/ResultScore").transform.childCount); i = i * 10)
+        {
+            result.Add(GameObject.Find("Canvas/ResultScore/" + i));
+            rank1.Add(GameObject.Find("Canvas/RankScore/Rank1/" + i));
+            rank2.Add(GameObject.Find("Canvas/RankScore/Rank2/" + i));
+            rank3.Add(GameObject.Find("Canvas/RankScore/Rank3/" + i));
+
+        }
+
+        int score = ScoreManager.Instance.Score;
+
+        ScoreSet(result, score);
+
+        ScoreSet(rank1, ScoreManager.Instance.rankPoint[0]);
+        ScoreSet(rank2, ScoreManager.Instance.rankPoint[1]);
+        ScoreSet(rank3, ScoreManager.Instance.rankPoint[2]);
 
         StartToState();
 
-        //子オブジェクトの数だけ数字用GameObjectを取得
-        for (int i = 1; i < transform.childCount * 10; i = i * 10)
-        {
-            result.Add(GameObject.Find("Canvas/ResultScore/" + i));
-        }
-        //ScoreManager.Instance
+        //int[] resultidx = new int[3];
+        //resultidx[0] = (score % 10); score /= 10;// 1桁目を取り出す
+        //resultidx[1] = (score % 10); score /= 10;// 2桁目を取り出す
+        //resultidx[2] = (score % 10); score /= 10;// 3桁目を取り出す
+
+        //result[0].GetComponent<Image>().sprite = sp[resultidx[0]];
+        //result[1].GetComponent<Image>().sprite = sp[resultidx[1]];
+        //result[2].GetComponent<Image>().sprite = sp[resultidx[2]];
     }
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
