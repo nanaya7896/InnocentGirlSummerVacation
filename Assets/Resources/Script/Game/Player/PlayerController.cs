@@ -47,12 +47,12 @@ public class PlayerController : MonoBehaviour {
 			if (isMove)
 			{
 				// direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); 
-				direction = (cam_trans.transform.right * Input.GetAxis("Horizontal")) +
-					(cam_trans.transform.forward * Input.GetAxis("Vertical"));
+				direction = (cam_trans.transform.right * ControllerManager.Instance.GetLeftHorizontal()) +
+					(cam_trans.transform.forward * ControllerManager.Instance.GetLeftVertical());
 
 				// Debug.Log(direction.sqrMagnitude);
 
-				if (direction.sqrMagnitude > 0.1f && Input.GetAxis("Vertical") == 0)
+				if (direction.sqrMagnitude > 0.1f && ControllerManager.Instance.GetLeftVertical() == 0)
 				{
 					Vector3 forward = Vector3.Slerp(transform.forward, direction, rotate_speed * Time.deltaTime / Vector3.Angle(transform.forward, direction));
 					transform.LookAt(transform.position + forward);
