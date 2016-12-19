@@ -82,7 +82,6 @@
      <Compile Include="Assets\Resources\Script\Title\BGMPlayTool.cs" />
      <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
      <Compile Include="Assets\Resources\Script\test\test.cs" />
-     <Compile Include="Assets\testes.cs" />
      <None Include="Assets\ImportAsset\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
