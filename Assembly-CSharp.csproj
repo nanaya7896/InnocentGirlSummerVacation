@@ -80,6 +80,7 @@
      <Compile Include="Assets\Resources\Script\Manager\ScoreManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\SingletonMonoBehaviour.cs" />
      <Compile Include="Assets\Resources\Script\Title\BGMPlayTool.cs" />
+     <Compile Include="Assets\Resources\Script\animtest.cs" />
      <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
      <Compile Include="Assets\Resources\Script\test\test.cs" />
      <None Include="Assets\ImportAsset\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
 	//重力 
 	private float gravity = 20f;
 	//アニメーターコンポーネント 
-	Animator anim;
+	//Animator anim;
 	//キャラコントローラー 
 	CharacterController chara;
 	//
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		chara = GetComponent<CharacterController>();
-		anim = GetComponentInChildren<Animator>();
+	//	anim = GetComponentInChildren<Animator>();
 		cam_trans = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
 	}
 
@@ -42,6 +42,12 @@ public class PlayerController : MonoBehaviour {
 
 	void PlayerMoving()
 	{
+
+        Debug.Log(chara.name);
+        direction.y -= gravity * Time.deltaTime;
+
+        chara.Move(direction * Time.deltaTime * move_speed);
+
 		if (chara.isGrounded)
 		{
 			if (isMove)
@@ -60,13 +66,12 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 
+
 		}
 
-		direction.y -= gravity * Time.deltaTime;
 
-		chara.Move(direction * Time.deltaTime * move_speed);
 
-		anim.SetFloat("Speed", chara.velocity.magnitude);
+		//anim.SetFloat("Speed", chara.velocity.magnitude);
 	}
 
 	//=============================Get関数================================//

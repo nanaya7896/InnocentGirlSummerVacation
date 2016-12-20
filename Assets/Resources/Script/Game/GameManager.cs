@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
         {
 			if(playerController ==null)
             {
-				playerController = transform.FindChild("unitychan");
+				playerController = transform.FindChild("yuki_taiki");
             }
 			return playerController;
         }
@@ -95,8 +95,8 @@ public class GameManager : MonoBehaviour {
         ScoreManager.Instance.Reset();
         m_Time.GetComponent<TimeChangeScript>().Reset();
 		m_PlayerController.GetComponent<PlayerController>().Reset();
-		AudioManager.Instance.StopSE();
-        AudioManager.Instance.PlaySE("count");
+		//AudioManager.Instance.StopSE();
+        //AudioManager.Instance.PlaySE("count");
 
     }
 
