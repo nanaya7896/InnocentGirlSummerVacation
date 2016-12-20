@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
         {
 			if(playerController ==null)
             {
-				playerController = transform.FindChild("unitychan");
+				playerController = transform.FindChild("yuki_taiki");
             }
 			return playerController;
         }
@@ -94,9 +94,9 @@ public class GameManager : MonoBehaviour {
         //初期化
         ScoreManager.Instance.Reset();
         m_Time.GetComponent<TimeChangeScript>().Reset();
-		m_PlayerController.GetComponent<PlayerController>().Reset();
-		AudioManager.Instance.StopSE();
-        AudioManager.Instance.PlaySE("count");
+	//	m_PlayerController.GetComponent<PlayerController>().Reset();
+		//AudioManager.Instance.StopSE();
+        //AudioManager.Instance.PlaySE("count");
 
     }
 
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("GameInit");
        
-		m_PlayerController.GetComponent<PlayerController>().isMove =true;
+	//	m_PlayerController.GetComponent<PlayerController>().isMove =true;
         m_EnemyTool.GetComponent<Zombie>().isMove =true;
     }
 
@@ -133,10 +133,11 @@ public class GameManager : MonoBehaviour {
         {
             stateMachine.SetState(State.End);
         }
-		if(m_PlayerController.GetComponent<PlayerController>().isHit==true || m_EnemyTool.GetComponent<Zombie>().isHit ==true)
+	/*	if(m_PlayerController.GetComponent<PlayerController>().isHit==true || m_EnemyTool.GetComponent<Zombie>().isHit ==true)
         {
             stateMachine.SetState(State.GameOver);
         }
+        */
     }
 
     void GameEnd()

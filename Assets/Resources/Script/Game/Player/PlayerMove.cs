@@ -67,10 +67,25 @@ public class PlayerMove : MonoBehaviour {
 
         chara.Move(direction * Time.deltaTime * move_speed);
 
-        anim.SetFloat("Speed", chara.velocity.magnitude);
+        //anim.SetFloat("Speed", chara.velocity.magnitude);
     }
 
+	void OnCollisionEnter(Collision col)
+	{
+		Debug.Log (col.gameObject.tag);
+		string tagName = col.gameObject.tag;
+		switch (tagName) {
+		case "":
+			break;
+		case "Zombie":
+			isHit = true;
+			break;
 
+
+
+		}
+
+	}
 
 
 
