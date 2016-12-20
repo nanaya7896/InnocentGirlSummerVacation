@@ -52,6 +52,7 @@
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
      <Compile Include="Assets\ImportAsset\p5-MSAFluid-master\src\msafluid\MSAFluidSolver2D.cs" />
+     <Compile Include="Assets\MoveForPlayer.cs" />
      <Compile Include="Assets\Resources\Script\Clear\ClearSE.cs" />
      <Compile Include="Assets\Resources\Script\Clear\SpriteAutoChange.cs" />
      <Compile Include="Assets\Resources\Script\Common\CreateMasterScript.cs" />
@@ -187,7 +188,7 @@
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
      <None Include="Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularDisplacement.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA3Console.shader" />
-     <None Include="Assets\Ikehara.txt" />
+     <None Include="Assets\Text\Ikehara.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
