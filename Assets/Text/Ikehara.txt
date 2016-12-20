@@ -6,3 +6,11 @@ NavMeshの使い方
 ・ GetComponent<NavMeshAgent>().SetDestination(target.transform.position); targetは目標地点
 今回のゲームでの使用
 階段などにひっかからないようにする階段の登りに対してNavMeshで移動させる
+
+12/20
+・カメラのズームイン・アウトを入れてはどうか？
+・B版までの作業を発表資料に入れると良い。
+・追いかけられている時のシステム
+・北野先生に相談してねって言ってた
+
+

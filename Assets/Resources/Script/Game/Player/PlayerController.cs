@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 ido;
 	private Vector3 Animdir = Vector3.zero;
 
-	public float runspeed = 0.01f;
+	public float runspeed = 0.001f;
 
 
 	Animator anim=null;
@@ -60,25 +60,31 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-			PlayerMoving();
+
+		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
+		Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
+		if (clipInfo.clip.name == "agari") {
+			this.GetComponent<Rigidbody> ().useGravity = false;
+			float tmp = this.transform.position.y + (0.06f * Time.deltaTime);
+			if (tmp > 0.1f) {
+				tmp = 0.1f;
+			}
+			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
+		} else {
+			this.GetComponent<Rigidbody> ().useGravity = true;
+		}
+		PlayerMoving();
+		PlayerRotate();
+
 	}
 
 	void PlayerMoving()
 	{
-<<<<<<< HEAD
+
 		Vector3 prevPos = this.transform.position;
 		//キーボード数値取得。プレイヤーの方向として扱う
 		float h = Input.GetAxis("Horizontal");//横
 		float v = Input.GetAxis("Vertical");//縦
-=======
-		if (chara.isGrounded)
-		{
-			if (isMove)
-			{
-				// direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); 
-				direction = (cam_trans.transform.right * ControllerManager.Instance.GetLeftHorizontal()) +
-					(cam_trans.transform.forward * ControllerManager.Instance.GetLeftVertical());
->>>>>>> 7dd6de706183ead9dd5802a18548a65a578eb859
 
 		//カメラのTransformが取得されてれば実行
 		if (CamPos != null)
@@ -89,22 +95,12 @@ public class PlayerController : MonoBehaviour {
 			ido = v * Camforward * runspeed + h * CamPos.right * runspeed;
 			//Debug.Log(ido);
 		}
-
-<<<<<<< HEAD
+					
 		//現在のポジションにidoのトランスフォームの数値を入れる
 		transform.position = new Vector3(
 			transform.position.x + ido.x,
-			transform.position.y +ido.y,
+			transform.position.y + ido.y,
 			transform.position.z + ido.z);
-=======
-				if (direction.sqrMagnitude > 0.1f && ControllerManager.Instance.GetLeftVertical() == 0)
-				{
-					Vector3 forward = Vector3.Slerp(transform.forward, direction, rotate_speed * Time.deltaTime / Vector3.Angle(transform.forward, direction));
-					transform.LookAt(transform.position + forward);
-
-				}
-			}
->>>>>>> 7dd6de706183ead9dd5802a18548a65a578eb859
 
 		if (prevPos != transform.position) {
 			m_Anim.SetBool ("isWalk", true);
@@ -112,18 +108,15 @@ public class PlayerController : MonoBehaviour {
 			m_Anim.SetBool ("isWalk", false);
 		}
 
-		//方向転換用Transform
 
-		Vector3 AnimDir = ido;
-		AnimDir.y = 0;
-		//方向転換
-		if (AnimDir.sqrMagnitude > 0.001)
-		{
-			Vector3 newDir = Vector3.RotateTowards(transform.forward,AnimDir,5f*Time.deltaTime,0f);
-			transform.rotation = Quaternion.LookRotation(newDir);
-		}
 	}
 
+	void PlayerRotate()
+	{
+		float r = ControllerManager.Instance.GetRightHorizontal();
+		this.transform.Rotate (0.0f, r, 0.0f);
+	}
+	
 	//=============================Get関数================================//
 	public string GetPlayerPosition()
 	{

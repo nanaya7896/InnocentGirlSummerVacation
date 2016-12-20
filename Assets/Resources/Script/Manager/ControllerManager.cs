@@ -11,11 +11,14 @@ public class ControllerManager : SingletonMonoBehaviour<ControllerManager>
             return;
         }
         DontDestroyOnLoad(this.gameObject);
+
+			
+
+
     }
 
     public float GetLeftHorizontal()
     {
-
         return Input.GetAxis("Horizontal");
     }
     public float GetLeftVertical()

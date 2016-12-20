@@ -1,77 +1,28 @@
-<<<<<<< HEAD
-﻿<Properties StartupConfiguration="{F77F8F85-E382-7E80-C91F-05025E8DD025}|単体テスト">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-﻿<Properties StartupConfiguration="{87C65081-20D0-C32B-B3F5-597F240FE2B4}|単体テスト">
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/Game/Player/CameraMove.cs">
-    <Files>
-      <File FileName="Assets/Resources/Script/Game/Player/CameraMove.cs" Line="13" Column="6" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/GameOver/SelectArrowScript.cs">
-    <Files>
-      <File FileName="Assets/Resources/Script/Game/Enemy/Zombie.cs" Line="65" Column="89" />
-      <File FileName="Assets/Resources/Script/Game/TimeChangeScript.cs" Line="41" Column="32" />
-      <File FileName="Assets/Resources/Script/Game/Player/PlayerMove.cs" Line="75" Column="26" />
-      <File FileName="Assets/Resources/Script/Game/gameManager.cs" Line="130" Column="51" />
-      <File FileName="Assets/Resources/Script/GameOver/SelectArrowScript.cs" Line="29" Column="14" />
-      <File FileName="Assets/Resources/Script/Common/SceneChanger.cs" Line="16" Column="4" />
->>>>>>> Ikehara
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/Game/Enemy/Zombie.cs">
-    <Files>
-      <File FileName="Assets/Resources/Script/Game/Enemy/Zombie.cs" Line="99" Column="52" />
-      <File FileName="Assets/Resources/Script/Game/Enemy/EnemyAI.cs" Line="67" Column="22" />
-      <File FileName="Assets/Resources/Script/Game/Enemy/EnemyActor.cs" Line="32" Column="5" />
-      <File FileName="Assets/Resources/Script/Game/Player/PlayerMove.cs" Line="58" Column="87" />
-      <File FileName="Assets/Resources/Script/Game/GameManager.cs" Line="20" Column="6" />
->>>>>>> Ikehara
-=======
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
->>>>>>> origin/Mitsushiro_NotePC
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/Game/DissorveTest.cs">
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/Game/Enemy/Zombie.cs">
->>>>>>> Ikehara
-=======
+﻿<Properties StartupConfiguration="{F77F8F85-E382-7E80-C91F-05025E8DD025}|単体テスト" StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/Game/Player/PlayerController.cs">
->>>>>>> Ikehara
     <Files>
-      <File FileName="Assets/Resources/Script/Game/DissorveTest.cs" Line="118" Column="147" />
-      <File FileName="Assets/Resources/Script/Game/Enemy/Zombie.cs" Line="71" Column="20" />
+      <File FileName="Assets/Resources/Script/Game/DissorveTest.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Script/Game/Enemy/Zombie.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Script/Game/Enemy/EnemyAI.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Script/Game/Enemy/EnemyActor.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/Player/PlayerController.cs" Line="49" Column="61" />
-      <File FileName="Assets/Resources/Script/Game/Player/PlayerMove.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/GameManager.cs" Line="99" Column="11" />
+      <File FileName="Assets/Resources/Script/Game/GameManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Script/test/NavTes.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Script/Common/SceneChanger.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Script/Title/BGMPlayTool.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Script/Game/switchingCamera.cs" Line="1" Column="1" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <File FileName="Assets/Resources/Script/DissorveTest.cs" Line="1" Column="1" />
->>>>>>> Ikehara
-=======
-      <File FileName="Assets/shader/Dissolve.shader" Line="23" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/DissorveTest.cs" Line="39" Column="4" />
->>>>>>> Ikehara
-=======
       <File FileName="Assets/shader/Dissolve.shader" Line="1" Column="1" />
->>>>>>> Ikehara
+      <File FileName="Assets/Resources/Script/Game/Player/PlayerController.cs" Line="77" Column="19" />
+      <File FileName="Assets/Text/Ikehara.txt" Line="1" Column="1" />
+      <File FileName="Assets/Text/作業リスト.txt" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Assets/Resources/Script/Manager/AudioManager.cs" relfile="Assets/Resources/Script/Manager/AudioManager.cs" line="138" column="1" />
-      <Breakpoint file="/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Assets/Resources/Script/Manager/AudioManager.cs" relfile="Assets/Resources/Script/Manager/AudioManager.cs" line="127" column="1" />
+      <Breakpoint file="/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Assets/Resources/Script/Manager/AudioManager.cs" line="138" column="1" />
+      <Breakpoint file="/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Assets/Resources/Script/Manager/AudioManager.cs" line="127" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor-firstpass PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
