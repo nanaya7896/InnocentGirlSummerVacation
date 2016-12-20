@@ -110,13 +110,15 @@ public  class EnemyAI : MonoBehaviour{
     /// <param name="enemy">Enemy.</param>
     private  void ZombieWalk(float speed,GameObject enemy)
     {
+		/*
         //プレイヤーの座標を代入
         Vector3 playerPos = m_Player.transform.position;
         Vector3 direction = playerPos - m_EnemyPosition;
         //単位化(距離要素を取り除く)
         direction = direction.normalized;
         m_EnemyPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
-        enemyPosition.y = 0.0f;
+        enemyPosition.y = 0.0f;*/
+		GetComponent<NavMeshAgent>().SetDestination(m_Player.transform.position);
         //enemy.transform.LookAt(m_Player);
     }
 
