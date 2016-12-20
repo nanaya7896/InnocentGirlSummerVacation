@@ -50,6 +50,10 @@ public class ResultManager : MonoBehaviour {
                 m_resultScore.SetActive(false);
                 m_rankScore.SetActive(false);
                 break;
+
+            default:
+               // SceneManage.Instance.SceneChangeLoad(SceneManage.SceneName.TITLE);
+                break;
         }
     }
 
@@ -98,7 +102,7 @@ public class ResultManager : MonoBehaviour {
         ScoreSet(rank1, ScoreManager.Instance.rankPoint[0]);
         ScoreSet(rank2, ScoreManager.Instance.rankPoint[1]);
         ScoreSet(rank3, ScoreManager.Instance.rankPoint[2]);
-
+        m_resultState = ResultState.Result;
         StartToState();
 
         //int[] resultidx = new int[3];
@@ -113,7 +117,7 @@ public class ResultManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || ControllerManager.Instance.GetReturnDown())
         {
             m_resultState++;
             StartToState();

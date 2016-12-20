@@ -65,10 +65,20 @@ public class PlayerController : MonoBehaviour {
 
 	void PlayerMoving()
 	{
+<<<<<<< HEAD
 		Vector3 prevPos = this.transform.position;
 		//キーボード数値取得。プレイヤーの方向として扱う
 		float h = Input.GetAxis("Horizontal");//横
 		float v = Input.GetAxis("Vertical");//縦
+=======
+		if (chara.isGrounded)
+		{
+			if (isMove)
+			{
+				// direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); 
+				direction = (cam_trans.transform.right * ControllerManager.Instance.GetLeftHorizontal()) +
+					(cam_trans.transform.forward * ControllerManager.Instance.GetLeftVertical());
+>>>>>>> 7dd6de706183ead9dd5802a18548a65a578eb859
 
 		//カメラのTransformが取得されてれば実行
 		if (CamPos != null)
@@ -80,11 +90,21 @@ public class PlayerController : MonoBehaviour {
 			//Debug.Log(ido);
 		}
 
+<<<<<<< HEAD
 		//現在のポジションにidoのトランスフォームの数値を入れる
 		transform.position = new Vector3(
 			transform.position.x + ido.x,
 			transform.position.y +ido.y,
 			transform.position.z + ido.z);
+=======
+				if (direction.sqrMagnitude > 0.1f && ControllerManager.Instance.GetLeftVertical() == 0)
+				{
+					Vector3 forward = Vector3.Slerp(transform.forward, direction, rotate_speed * Time.deltaTime / Vector3.Angle(transform.forward, direction));
+					transform.LookAt(transform.position + forward);
+
+				}
+			}
+>>>>>>> 7dd6de706183ead9dd5802a18548a65a578eb859
 
 		if (prevPos != transform.position) {
 			m_Anim.SetBool ("isWalk", true);

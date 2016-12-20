@@ -35,6 +35,11 @@ public class ControllerManager : SingletonMonoBehaviour<ControllerManager>
     {
         return Input.GetButton("Submit");
     }
+
+    public bool GetReturnDown()
+    {
+        return Input.GetButtonDown("Submit");
+    }
     public bool GetCancel()
     {
         return Input.GetButton("Cancel");

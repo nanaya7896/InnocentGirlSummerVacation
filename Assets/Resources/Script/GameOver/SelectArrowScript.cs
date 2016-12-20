@@ -14,18 +14,18 @@ public class SelectArrowScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        if(Input.GetKeyDown(KeyCode.LeftArrow)|| ControllerManager.Instance.GetLeftHorizontal()<-0.5f)
         {
             this.transform.position = leftselectPos;
             SelectSE();
         }
-        else if(Input.GetKeyDown(KeyCode.RightArrow))
+        else if(Input.GetKeyDown(KeyCode.RightArrow)|| ControllerManager.Instance.GetLeftHorizontal() > 0.5f)
         {
             this.transform.position = rightselectPos;
             SelectSE();
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || ControllerManager.Instance.GetReturnDown() )
         {
             AudioManager.Instance.PlaySE("y_kettei");
             if (this.transform.position == leftselectPos)
