@@ -183,10 +183,11 @@ public  class EnemyAI : MonoBehaviour{
 			//Debug.Log (dista);
 			if (dista < 0.1f) {
 				changetarget = !changetarget;
-				//idou = false;
+				obj = secondObj;
+				secondObj = null;
 			}
 		} else {
-			Vector3 di = secondObj.transform.position - m_EnemyPosition;
+		/*	Vector3 di = secondObj.transform.position - m_EnemyPosition;
 			//単位化(距離要素を取り除く)
 			di = di.normalized;
 			m_EnemyPosition = (m_EnemyPosition + (di * speed * Time.deltaTime));
@@ -195,6 +196,18 @@ public  class EnemyAI : MonoBehaviour{
 			//Debug.Log (dista);
 			if (dista < 0.1f) {
 				changetarget = !changetarget;
+				idou = false;
+			}*/
+			Vector3 di = obj.transform.position - m_EnemyPosition;
+			//単位化(距離要素を取り除く)
+			di = di.normalized;
+			m_EnemyPosition = (m_EnemyPosition + (di * speed * Time.deltaTime));
+			//enemy.transform.LookAt (obj.transform);
+			float dista = Vector3.Distance (m_EnemyPosition, obj.transform.position);
+			//Debug.Log (dista);
+			if (dista < 0.1f) {
+				changetarget = !changetarget;
+				obj = null;
 				idou = false;
 			}
 		}
@@ -208,13 +221,11 @@ public  class EnemyAI : MonoBehaviour{
 			Vector3 tmp = enemyPosition - targetObj [i].transform.position;
 			tmp = tmp.normalized;
 			float di = Vector3.Distance(enemyPosition, targetObj[i].transform.position);
-			//例外的に近すぎるものは省く
-			if (di < 0.1f) 
-			{
-				continue;
+			if (di < d) {
+				d = di;
+				obj = targetObj [i];
 			}
-
-			if (tmpDistance [0] > di) {
+			/*if (tmpDistance [0] > di) {
 				tmpDistance[0] = di;
 				obj = targetObj [i];
 			}
@@ -224,8 +235,23 @@ public  class EnemyAI : MonoBehaviour{
 			}
 			else if (tmpDistance [2] > di) {
 				tmpDistance [2] = di;
+			}*/
+
+		}
+
+		d = 9999.0f;
+
+		for (int i = 0; i < 8; i++) 
+		{
+			Vector3 tmp = (obj.transform.position - targetObj [i].transform.position).normalized;
+			float di = Vector3.Distance(obj.transform.position, targetObj[i].transform.position);
+			if (targetObj [i] == obj) {
+				continue;
 			}
-			
+			if (di < d) {
+				d = di;
+				secondObj = targetObj [i];
+			}
 		}
 	}
     private void ZombieSlider()
