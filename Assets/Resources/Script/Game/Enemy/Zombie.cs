@@ -127,13 +127,14 @@ public class Zombie : EnemyActor {
             enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,3));
             //enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
-            enemy[i].transform.position = new Vector3(Random.Range(-2.0f, 2.0f), 1.0f, Random.Range(-2.0f, 2.0f));
+			enemy[i].transform.position = new Vector3(1.0f,this.transform.position.y,1.0f);//new Vector3(Random.Range(-2.0f, 2.0f), this.transform.position.y, Random.Range(-2.0f, 2.0f));
+			//enemy[i].GetComponent<Rigidbody> ().useGravity = false;
             //AIのスクリプトがついたオブジェクトを格納
             enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
             //ナビメッシュコンポーネントをつけて自動移動処理を追加する
             //以下ナビメッシュの設定
-			enemy[i].gameObject.AddComponent<NavMeshAgent>();
-			enemy [i].gameObject.GetComponent<NavMeshAgent> ().speed = 0.1f;
+			//enemy[i].gameObject.AddComponent<NavMeshAgent>();
+			//enemy[i].gameObject.GetComponent<NavMeshAgent> ().speed = 0.1f;
 
         }
     }
@@ -237,12 +238,12 @@ public class Zombie : EnemyActor {
         {
             for (int i = 0; i < EnemyActor.Size; i++)
             {
-               // enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
-               // enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
-               /* enemy[i].transform.position = new Vector3(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().x, 0.1f, enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().z);
-                enemy[i].transform.LookAt(m_Player);*/
-                // enemy[i].transform.rotation = new Quaternion(0.0f, enemy[i]., 0.0f, 1.0f);
-				enemy[i].GetComponent<NavMeshAgent>().SetDestination(m_Player.transform.position);
+				enemy[i].transform.LookAt(m_Player);
+                enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
+				enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyRotate = enemy[i].transform.rotation.eulerAngles;
+                enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
+				enemy[i].transform.position = new Vector3(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().x, 0.1f, enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().z);
+
             }
 
         }
