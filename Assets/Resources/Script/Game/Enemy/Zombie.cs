@@ -242,7 +242,7 @@ public class Zombie : EnemyActor {
                 enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
 				enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyRotate = enemy[i].transform.rotation.eulerAngles;
                 enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
-				enemy[i].transform.position = new Vector3(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().x, 0.1f, enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().z);
+				enemy[i].transform.position = new Vector3(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().x,enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().y , enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().z);
 
             }
 
