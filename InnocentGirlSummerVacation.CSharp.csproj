@@ -105,12 +105,19 @@
     <Compile Include="Assets\Resources\Script\Manager\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\Resources\Script\Result\ResultManager.cs" />
     <Compile Include="Assets\Resources\Script\Title\BGMPlayTool.cs" />
+    <Compile Include="Assets\Resources\Script\test\MoveForPlayer.cs" />
     <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
+    <Compile Include="Assets\Resources\Script\test\animtest.cs" />
     <Compile Include="Assets\Resources\Script\test\test.cs" />
-    <Compile Include="Assets\testes.cs" />
+    <Compile Include="Assets\iTweenEditor\Examples\StartAndStopTween.cs" />
+    <Compile Include="Assets\iTweenEditor\Helper Classes\EventParamMappings.cs" />
+    <Compile Include="Assets\iTweenEditor\Helper Classes\Vector3OrTransform.cs" />
+    <Compile Include="Assets\iTweenEditor\Helper Classes\Vector3OrTransformArray.cs" />
+    <Compile Include="Assets\iTweenEditor\iTween.cs" />
+    <Compile Include="Assets\iTweenEditor\iTweenEvent.cs" />
+    <Compile Include="Assets\iTweenEditor\iTweenPath.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Ikehara.txt" />
     <None Include="Assets\ImportAsset\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
     <None Include="Assets\ImportAsset\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
     <None Include="Assets\ImportAsset\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
@@ -124,6 +131,7 @@
     <None Include="Assets\ImportAsset\UnityChan\Stage\Shader\AlphaMask.shader" />
     <None Include="Assets\ImportAsset\UnityChan\license.txt" />
     <None Include="Assets\ImportAsset\Wispy Sky\ReadMe.txt" />
+    <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
@@ -216,6 +224,9 @@
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
+    <None Include="Assets\Text\Ikehara.txt" />
+    <None Include="Assets\Text\作業リスト.txt" />
+    <None Include="Assets\iTweenEditor\README.txt" />
     <None Include="Assets\ofxMSAFluid-master\example\bin\data\ofxMSAFluidSettings.xml" />
     <None Include="Assets\shader\Dissolve.shader" />
   </ItemGroup>

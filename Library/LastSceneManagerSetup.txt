@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/tests/AITest.unity
+- path: Assets/Scene/tests/testWaterSlider.unity
   isLoaded: 1
   isActive: 1

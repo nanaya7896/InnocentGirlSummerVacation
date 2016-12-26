@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation.CSharp.Editor.Plugins", "InnocentGirlSummerVacation.CSharp.Editor.Plugins.csproj", "{C1537839-966E-5B5B-4166-FC5D4D00559E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation.CSharp.Editor", "InnocentGirlSummerVacation.CSharp.Editor.csproj", "{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{C1537839-966E-5B5B-4166-FC5D4D00559E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1537839-966E-5B5B-4166-FC5D4D00559E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1537839-966E-5B5B-4166-FC5D4D00559E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E8489B-C119-EB41-9AFE-ECE33C26CCFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
