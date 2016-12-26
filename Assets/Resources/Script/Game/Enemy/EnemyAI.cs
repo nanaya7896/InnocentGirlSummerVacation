@@ -13,7 +13,6 @@ public  class EnemyAI : MonoBehaviour{
 	public List<Vector3> dir = new List<Vector3> ();
 	public bool idou =false;
 	float d=9999.0f;
-	float[] tmpDistance = new float[]{9999.0f,9999.0f,9999.0f};
 	public GameObject obj;
 	public GameObject secondObj;
 	public bool changetarget=false;
@@ -186,18 +185,9 @@ public  class EnemyAI : MonoBehaviour{
 				obj = secondObj;
 				secondObj = null;
 			}
-		} else {
-		/*	Vector3 di = secondObj.transform.position - m_EnemyPosition;
-			//単位化(距離要素を取り除く)
-			di = di.normalized;
-			m_EnemyPosition = (m_EnemyPosition + (di * speed * Time.deltaTime));
-			//enemy.transform.LookAt (obj.transform);
-			float dista = Vector3.Distance (m_EnemyPosition, secondObj.transform.position);
-			//Debug.Log (dista);
-			if (dista < 0.1f) {
-				changetarget = !changetarget;
-				idou = false;
-			}*/
+		} 
+		else
+		{
 			Vector3 di = obj.transform.position - m_EnemyPosition;
 			//単位化(距離要素を取り除く)
 			di = di.normalized;
@@ -205,7 +195,8 @@ public  class EnemyAI : MonoBehaviour{
 			//enemy.transform.LookAt (obj.transform);
 			float dista = Vector3.Distance (m_EnemyPosition, obj.transform.position);
 			//Debug.Log (dista);
-			if (dista < 0.1f) {
+			if (dista < 0.1f) 
+			{
 				changetarget = !changetarget;
 				obj = null;
 				idou = false;
@@ -275,7 +266,7 @@ public  class EnemyAI : MonoBehaviour{
 		float maxDistance =1.0f;
 		Vector3 distance = (m_Player.transform.position-m_EnemyPosition).normalized;
 		distance.y = -3.0f;
-		Debug.Log (distance);
+		//Debug.Log (distance);
 		//Rayの作成
 		Ray ray =new Ray(m_EnemyPosition+new Vector3(0.0f,0.15f,0.0f),distance);
 		// Rayの可視化
