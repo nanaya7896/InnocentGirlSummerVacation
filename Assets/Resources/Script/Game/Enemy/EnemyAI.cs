@@ -261,7 +261,7 @@ public  class EnemyAI : MonoBehaviour{
 
 	string Ray(GameObject enemy)
 	{
-		/*
+		
 		//ray.direction *= 0.01f;
 		//Rayが衝突したコライダーの情報を得る
 		//ray.direction*=new Vector3(-0.001f,-0.001f,-0.001f);
@@ -279,7 +279,7 @@ public  class EnemyAI : MonoBehaviour{
 		}
 
 		return hit.transform.gameObject.tag;
-		*/
-		return string.Empty;
+
+		//return string.Empty;
 	}
 }
