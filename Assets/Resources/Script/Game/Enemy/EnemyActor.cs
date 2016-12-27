@@ -11,7 +11,7 @@ public class EnemyActor : MonoBehaviour{
     /// </summary>
     public int ID;
 
-    public static int Size=1;
+    public static int Size=30;
     /// <summary>
     /// Enemyの移動速度
     /// </summary>
@@ -30,6 +30,6 @@ public class EnemyActor : MonoBehaviour{
     /// <summary>
     /// The enemy AIO bj.
     /// </summary>
-    public Transform enemyAIObj;
+    //public Transform enemyAIObj;
 
 }

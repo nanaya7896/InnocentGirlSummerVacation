@@ -9,7 +9,7 @@ public  class EnemyAI : MonoBehaviour{
 
     public  Vector3 enemyPosition;
 	public LayerMask mask;
-	public GameObject[] targetObj;
+	public GameObject[] targetObj =new GameObject[8];
 	public List<Vector3> dir = new List<Vector3> ();
 	public bool idou =false;
 	float d=9999.0f;
@@ -172,7 +172,8 @@ public  class EnemyAI : MonoBehaviour{
 
 	private void AutoMove(float speed)
 	{
-		if (!changetarget) {
+		if (!changetarget) 
+		{
 			Vector3 di = obj.transform.position - m_EnemyPosition;
 			//単位化(距離要素を取り除く)
 			di = di.normalized;
@@ -180,7 +181,8 @@ public  class EnemyAI : MonoBehaviour{
 			//enemy.transform.LookAt (obj.transform);
 			float dista = Vector3.Distance (m_EnemyPosition, obj.transform.position);
 			//Debug.Log (dista);
-			if (dista < 0.1f) {
+			if (dista < 0.1f) 
+			{
 				changetarget = !changetarget;
 				obj = secondObj;
 				secondObj = null;
@@ -259,7 +261,7 @@ public  class EnemyAI : MonoBehaviour{
 
 	string Ray(GameObject enemy)
 	{
-
+		/*
 		//ray.direction *= 0.01f;
 		//Rayが衝突したコライダーの情報を得る
 		//ray.direction*=new Vector3(-0.001f,-0.001f,-0.001f);
@@ -270,12 +272,14 @@ public  class EnemyAI : MonoBehaviour{
 		//Rayの作成
 		Ray ray =new Ray(m_EnemyPosition+new Vector3(0.0f,0.15f,0.0f),distance);
 		// Rayの可視化
-		Debug.DrawRay(ray.origin, ray.direction, Color.red, 1.0f);
+		//Debug.DrawRay(ray.origin, ray.direction, Color.red, 1.0f);
 		if (Physics.Raycast (ray, out hit, maxDistance, mask))
 		{
 			Debug.Log(hit.transform.gameObject.tag);
 		}
 
 		return hit.transform.gameObject.tag;
+		*/
+		return string.Empty;
 	}
 }
