@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour {
         if (m_Time.GetComponent<TimeChangeScript>().isTimeStart)
         {
             //ステートをGameに移行
-
             stateMachine.SetState(State.Game);
         }   
     }
@@ -123,7 +122,9 @@ public class GameManager : MonoBehaviour {
         Debug.Log("GameInit");
        
 	//	m_PlayerController.GetComponent<PlayerController>().isMove =true;
-        m_EnemyTool.GetComponent<Zombie>().isMove =true;
+		for (int i = 0; i < EnemyActor.Size; i++) {
+			m_EnemyTool.GetComponent<EnemyActor> ().ChangeMove (i,true);
+		}
     }
 
     void GameUpdate()

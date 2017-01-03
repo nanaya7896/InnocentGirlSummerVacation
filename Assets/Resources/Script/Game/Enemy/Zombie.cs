@@ -17,6 +17,22 @@ public class Zombie : EnemyActor {
             return parent;
         }
     }
+
+	EnemyAI enemyAI =null;
+	EnemyAI m_EnemyAI
+	{
+		get
+		{
+			if (enemyAI == null)
+			{
+				enemyAI = this.GetComponent<EnemyAI> ();
+			}
+			return enemyAI;
+		}
+
+	}
+
+
     Transform player=null;
     Transform m_Player
     {
@@ -34,10 +50,6 @@ public class Zombie : EnemyActor {
     /// エネミーと衝突したか
     /// </summary>
     public bool isHit = false;
-    /// <summary>
-    /// 歩行可能状態か
-    /// </summary>
-    public bool isMove = false;
 
     /// <summary>
     /// スライダーを滑る状態か
@@ -53,7 +65,7 @@ public class Zombie : EnemyActor {
     /// <summary>
     /// The enemy.
     /// </summary>
-    List<EnemyActor> enemy = new List<EnemyActor>();
+	//List<Zombie> enemy = new List<Zombie>();
 
     public enum State
     {
@@ -87,23 +99,23 @@ public class Zombie : EnemyActor {
     // Use this for initialization
     void Start()
     {
-        EnemyCreate();
+        //EnemyCreate();
     }
  
 	// Update is called once per frame
     void Update () {
         stateMachine.Update();
-        setState();
+        //setState();
 	}
 
     /// <summary>
     /// Enemyを作成する
     /// </summary>
-    void EnemyCreate()
+   /* void EnemyCreate()
     {
         for (int i = 0; i < EnemyActor.Size; i++)
         {
-			enemy.Add(Instantiate(Resources.Load<EnemyActor>("Model/Enemy/zombie_hokou")));
+			enemy.Add(Instantiate(Resources.Load<Zombie>("Model/Enemy/zombie_hokou")));
             if (enemy == null)
             {
                 Debug.Log(i + "番目のゾンビが生成できませんでした");
@@ -127,10 +139,20 @@ public class Zombie : EnemyActor {
             enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,3));
             //enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
             //初期位置の設定
-			enemy[i].transform.position = new Vector3(1.0f,this.transform.position.y,1.0f);//new Vector3(Random.Range(-2.0f, 2.0f), this.transform.position.y, Random.Range(-2.0f, 2.0f));
+			if (i < 25) {
+				enemy [i].transform.position = new Vector3(Random.Range(-2.0f, 2.0f), this.transform.position.y, Random.Range(-2.0f, -1.5f));
+			} else {
+				enemy [i].transform.position = new Vector3(Random.Range(-2.0f, 2.0f), this.transform.position.y, Random.Range(1.5f, 2.0f));			
+			}
 			//enemy[i].GetComponent<Rigidbody> ().useGravity = false;
             //AIのスクリプトがついたオブジェクトを格納
-            enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
+			enemy[i].transform.gameObject.AddComponent<EnemyAI>();
+			enemy [i].GetComponent<EnemyAI> ().mask = 1<<12;
+			for(int j=0;j<8;j++)
+			{
+				enemy [i].GetComponent<EnemyAI> ().targetObj [j] = GameObject.Find ("Target"+(j+1));
+			}
+            //enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
             //ナビメッシュコンポーネントをつけて自動移動処理を追加する
             //以下ナビメッシュの設定
 			//enemy[i].gameObject.AddComponent<NavMeshAgent>();
@@ -138,7 +160,7 @@ public class Zombie : EnemyActor {
 
         }
     }
-
+*/
     /// <summary>
     /// ゲームリトライ時等に一度リセットしなければならないものを入れる
     /// </summary>
@@ -149,7 +171,7 @@ public class Zombie : EnemyActor {
         isHit = false;
         isStepUp = false;
         stateMachine.SetState(State.IDEL);
-        EnemyCreate();
+        //EnemyCreate();
     }
 
 
@@ -158,9 +180,9 @@ public class Zombie : EnemyActor {
     /// </summary>
     public void Revive(int num)
     {
-        enemy[num].isAlive = true;
+      //  enemy[num].isAlive = true;
         //生成位置
-        enemy[num].transform.position = this.transform.position;
+      //  enemy[num].transform.position = this.transform.position;
         isMove = true;
     }
 
@@ -222,8 +244,6 @@ public class Zombie : EnemyActor {
     /// </summary>
     void WalkUpdate()
     {
-		
-
         //スライダーの中に入ったら
         if (isStepUp)
         {
@@ -236,18 +256,19 @@ public class Zombie : EnemyActor {
         }
         else
         {
-            for (int i = 0; i < EnemyActor.Size; i++)
-            {
-				enemy[i].transform.LookAt(m_Player);
-                enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
-				enemy[i].enemyAIObj.GetComponent<EnemyAI>().enemyRotate = enemy[i].transform.rotation.eulerAngles;
-                enemy[i].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
-				enemy[i].transform.position = new Vector3(enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().x,enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().y , enemy[i].enemyAIObj.GetComponent<EnemyAI>().GetEnemyPosition().z);
-
-            }
-
+			m_EnemyAI.transform.LookAt(m_Player);
+			m_EnemyAI.enemyPosition = this.transform.position;
+			m_EnemyAI.enemyRotate = this.transform.rotation.eulerAngles;
+			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
+			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
+			transform.position =new Vector3(m_EnemyAI.GetEnemyPosition().x,m_EnemyAI.GetEnemyPosition().y , m_EnemyAI.GetEnemyPosition().z);
+			/*enemy[i].transform.LookAt(m_Player);
+                enemy[i].GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
+				enemy[i].GetComponent<EnemyAI>().enemyRotate = enemy[i].transform.rotation.eulerAngles;
+                enemy[i].GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, enemy[i].speed, this.gameObject);
+				enemy[i].transform.position = new Vector3(enemy[i].GetComponent<EnemyAI>().GetEnemyPosition().x,enemy[i].GetComponent<EnemyAI>().GetEnemyPosition().y , enemy[i].GetComponent<EnemyAI>().GetEnemyPosition().z);
+            */
         }
- 
     }
 
     /// <summary>
@@ -273,8 +294,8 @@ public class Zombie : EnemyActor {
     void SliderUpdate()
     {
         //
-        enemy[1].enemyAIObj.GetComponent<EnemyAI>().enemyPosition = enemy[1].transform.position;
-        enemy[1].enemyAIObj.GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.SLIDER, transform.position, transform.rotation.eulerAngles, enemy[1].speed, this.gameObject);
+        enemy[1].GetComponent<EnemyAI>().enemyPosition = enemy[1].transform.position;
+        enemy[1].GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.SLIDER, transform.position, transform.rotation.eulerAngles, enemy[1].speed, this.gameObject);
 
 
         //スライダーが終了したら
