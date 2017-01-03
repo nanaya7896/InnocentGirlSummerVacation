@@ -130,7 +130,8 @@ public class PlayerController : MonoBehaviour {
             isInWaterMove = true;
 #pragma warning disable CS0436 // 型がインポートされた型と競合しています
             iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("WaterSlider1"),"time",5, "easetype", iTween.EaseType.easeInQuad ));
-            iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("WaterSlider2"), "delay", 5, "time", 7));
+            iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("WaterSlider2"), "delay", 5, "time", 6, "easetype", iTween.EaseType.linear));
+            iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("WaterSlider3"), "delay", 11, "time", 2 ,"easetype",iTween.EaseType.linear));
 #pragma warning restore CS0436 // 型がインポートされた型と競合しています
         }
     }
