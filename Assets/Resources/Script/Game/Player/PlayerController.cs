@@ -79,6 +79,13 @@ public class PlayerController : MonoBehaviour {
         else {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
+
+        if (isInWaterMove && GetComponent<iTween>()==null)
+        {
+            isInWaterMove = false;
+            this.transform.rotation = Quaternion.Euler(0.0f, this.transform.rotation.y+180.0f, 0.0f);
+
+        }
 		PlayerMoving();
 		PlayerRotate();
 
@@ -129,9 +136,8 @@ public class PlayerController : MonoBehaviour {
         {
             isInWaterMove = true;
 #pragma warning disable CS0436 // 型がインポートされた型と競合しています
-            iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("WaterSlider1"),"time",5, "easetype", iTween.EaseType.easeInQuad ));
-            iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("WaterSlider2"), "delay", 5, "time", 6, "easetype", iTween.EaseType.linear));
-            iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("WaterSlider3"), "delay", 11, "time", 2 ,"easetype",iTween.EaseType.linear));
+            iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("WaterSlider1"),"time",10, "easetype", iTween.EaseType.easeInQuad ,"orienttopath", true));
+       
 #pragma warning restore CS0436 // 型がインポートされた型と競合しています
         }
     }
