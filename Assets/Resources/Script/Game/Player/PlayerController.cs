@@ -97,11 +97,24 @@ public class PlayerController : MonoBehaviour {
 		}
 					
 		//現在のポジションにidoのトランスフォームの数値を入れる
-		transform.position = new Vector3(
+		/*transform.position = new Vector3(
 			transform.position.x + ido.x,
 			transform.position.y + ido.y,
 			transform.position.z + ido.z);
-
+			*/
+		if (isInWater) {
+			//現在のポジションにidoのトランスフォームの数値を入れる
+			transform.position = new Vector3(
+				transform.position.x + ido.x,
+				transform.position.y + ido.y +0.1f,
+				transform.position.z + ido.z);
+		} else {
+			//現在のポジションにidoのトランスフォームの数値を入れる
+			transform.position = new Vector3(
+				transform.position.x + ido.x,
+				transform.position.y + ido.y,
+				transform.position.z + ido.z);
+		}
 		if (prevPos != transform.position) {
 			m_Anim.SetBool ("isWalk", true);
 		} else {
@@ -123,6 +136,8 @@ public class PlayerController : MonoBehaviour {
 		return this.transform.position.ToString();
 	}
 
+	public bool isDebug=false;
+
 	void OnCollisionEnter(Collision col)
 	{
 		Debug.Log (col.gameObject.tag);
@@ -131,17 +146,22 @@ public class PlayerController : MonoBehaviour {
 		{
 		case "Ground":
 			m_Anim.SetBool ("isGround", true);
-			m_Anim.SetBool ("isInWater",false);
+			m_Anim.SetBool ("isInWater", false);
+			isInWater = false;
 			break;
 		case "Water":
 			m_Anim.SetBool ("isGround", false);
-			m_Anim.SetBool ("isInWater",true);
+			m_Anim.SetBool ("isInWater", true);
+			m_Anim.SetBool ("isSlider", false);
+			isInWater = true;
 			break;
 		case "Slider":
 			m_Anim.SetBool ("isSlider", true);
 			break;
 		case "Enemy":
-			isHit = true;
+			if (isDebug) {
+				isHit = true;
+			}
 			break;
 		}
 

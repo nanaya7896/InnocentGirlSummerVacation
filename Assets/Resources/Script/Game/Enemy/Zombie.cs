@@ -62,10 +62,25 @@ public class Zombie : EnemyActor {
 	[SerializeField]
     private bool isStepUp = false;
 
+
+	private int targetnum =0;
     /// <summary>
     /// The enemy.
     /// </summary>
 	//List<Zombie> enemy = new List<Zombie>();
+	Animator anim=null;
+	Animator m_Anim
+	{
+		get
+		{
+			if (anim == null)
+			{
+				anim = this.GetComponent<Animator> ();
+			}
+			return anim;
+		}
+	}
+
 
     public enum State
     {
@@ -94,6 +109,10 @@ public class Zombie : EnemyActor {
         stateMachine.Add(State.DROWNED, DrownedInit, DrownedUpdate, DrownedEnd);
         stateMachine.Add(State.SERACH, SearchInit, SearchUpdate, SearchEnd);
         stateMachine.SetState(State.IDEL);
+
+		for (int i = 0; i < 3; i++) {
+			targetObj [i] = GameObject.Find ("/GameManager/MapTool/stuga_water_kaidan/targetObj"+i);
+		}
     }
 
     // Use this for initialization
@@ -235,7 +254,8 @@ public class Zombie : EnemyActor {
     /// </summary>
     void WalkInit()
     {
-        
+		targetnum = 0;
+		isStepUp = false;
     }
 
     /// <summary>
@@ -247,12 +267,15 @@ public class Zombie : EnemyActor {
         //スライダーの中に入ったら
         if (isStepUp)
         {
+			
             //階段を登り終えたら
-            if (true)
-            {
-                //スライダーの処理移行
-                stateMachine.SetState(State.SLIDER);
-            }
+			if (targetnum > 2) {
+				targetnum = 0;
+				//スライダーの処理移行
+				stateMachine.SetState (State.SLIDER);
+			} else {
+				StepUpMove ();
+			}
         }
         else
         {
@@ -294,8 +317,6 @@ public class Zombie : EnemyActor {
     void SliderUpdate()
     {
         //
-        enemy[1].GetComponent<EnemyAI>().enemyPosition = enemy[1].transform.position;
-        enemy[1].GetComponent<EnemyAI>().ZombieAIExcute(EnemyAI.ZombieAI.SLIDER, transform.position, transform.rotation.eulerAngles, enemy[1].speed, this.gameObject);
 
 
         //スライダーが終了したら
@@ -320,20 +341,30 @@ public class Zombie : EnemyActor {
     /// </summary>
     void DrownedInit()
     {
-        
+		rangeValue = Random.Range (-1.0f, 1.0f);
+		m_Anim.SetBool ("Death", true);
     }
-
+	float rangeValue=0.0f;
+	static float drownedTime = 3.0f;
     /// <summary>
     /// 溺れ続ける処理
     /// <comment>ゾンビが溺れて沈むまで繰り返す</comment>
     /// </summary>
     void DrownedUpdate()
     {
-        
-        if(true)
-        {
-            stateMachine.SetState(State.IDEL);
-        }
+		transform.position = new Vector3 (transform.position.x+rangeValue,transform.position.y,transform.position.z+rangeValue);
+
+		if (drownedTime < 0.0f) {
+			float pos = transform.position.y;
+			pos = pos -(speed * Time.deltaTime);
+			transform.position = new Vector3 (transform.position.x,pos,transform.position.z);
+			if(pos<-0.3f)
+			{
+				stateMachine.SetState(State.IDEL);
+			}
+		}
+		drownedTime -= Time.deltaTime;
+
             
     }
 
@@ -351,7 +382,7 @@ public class Zombie : EnemyActor {
     /// </summary>
     void SearchInit()
     {
-        
+		
     }
 
     /// <summary>
@@ -370,6 +401,42 @@ public class Zombie : EnemyActor {
         
     }
 
+
+	private void StepUpMove()
+	{
+		Vector3 position =targetObj[targetnum].transform.position- this.transform.position;
+		position = position.normalized;
+
+		transform.position = (transform.position + (position * speed * Time.deltaTime));
+
+		float dista = Vector3.Distance (transform.position, targetObj[targetnum].transform.position);
+		//Debug.Log (dista);
+		if (dista < 0.1f) 
+		{
+			targetnum++;
+		}
+	}
+
+	private string tagName;
+	void OnCollisionEnter(Collision col)
+	{
+		//Debug.Log (col.gameObject.tag);
+		if (tagName == col.gameObject.tag) {
+			return;
+		}
+
+		switch (col.gameObject.tag) 
+		{
+		case "Ground":
+			tagName = col.gameObject.tag;
+			break;
+		case "StepUp":
+			isStepUp = true;
+			tagName = col.gameObject.tag;
+			break;
+		}
+
+	}
 
 }
 
