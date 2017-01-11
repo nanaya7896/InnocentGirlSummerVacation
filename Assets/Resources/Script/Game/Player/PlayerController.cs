@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 	//ゾンビとhitしたか
 	public bool isHit = false;
 
+    public bool isInWaterSlider = false;
 
 	//アニメーター用変数
 	bool isWalk=false;
@@ -70,7 +71,12 @@ public class PlayerController : MonoBehaviour {
 				tmp = 0.1f;
 			}
 			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
-		} else {
+		}
+        else if (isInWaterSlider)
+        {
+            this.GetComponent<Rigidbody>().useGravity = false;
+        }
+        else {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
 		PlayerMoving();
@@ -129,7 +135,25 @@ public class PlayerController : MonoBehaviour {
 		float r = ControllerManager.Instance.GetRightHorizontal();
 		this.transform.Rotate (0.0f, r, 0.0f);
 	}
-	
+
+    void PlayerSlider() {
+
+        if (this.GetComponent<iTween>() != null)
+        {
+            return;
+        }
+        var moveHash = new Hashtable();
+
+        moveHash.Add("time",10.0f);
+        moveHash.Add("path", iTweenPath.GetPath("WaterSlider1"));
+        moveHash.Add("easetype",iTween.EaseType.easeInQuad);
+        moveHash.Add("orienttopath", true);
+
+        iTween.MoveTo(this.gameObject, moveHash);
+        isInWaterSlider = true;
+
+    }
+
 	//=============================Get関数================================//
 	public string GetPlayerPosition()
 	{
@@ -155,8 +179,9 @@ public class PlayerController : MonoBehaviour {
 			m_Anim.SetBool ("isSlider", false);
 			isInWater = true;
 			break;
-		case "Slider":
+		case "SliderWater":
 			m_Anim.SetBool ("isSlider", true);
+            PlayerSlider();
 			break;
 		case "Enemy":
 			if (isDebug) {
