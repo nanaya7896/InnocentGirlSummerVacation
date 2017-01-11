@@ -17,7 +17,7 @@ public  class EnemyAI : MonoBehaviour{
 	public GameObject secondObj;
 	public bool changetarget=false;
 	RaycastHit hit;
-    Vector3 m_EnemyPosition
+    public Vector3 m_EnemyPosition
     {
         get
         {
@@ -123,19 +123,7 @@ public  class EnemyAI : MonoBehaviour{
     {
 		if (!idou)
 		{
-			if (Ray (enemy) =="Water") 
-			{
-				NearTargetPosition ();
-				idou = true;
-			} 
-			else if(Ray(enemy) =="Bridge")
-			{
-				ZombieMoveB (speed);
-			}
-			else
-			{
-				ZombieMove (speed);
-			}
+			ZombieMove (speed);
 		}
 		else 
 		{
@@ -155,18 +143,27 @@ public  class EnemyAI : MonoBehaviour{
 		Vector3 direction = playerPos - m_EnemyPosition;
 		//単位化(距離要素を取り除く)
 		direction = direction.normalized;
-		m_EnemyPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
-		m_EnemyPosition= new Vector3(m_EnemyPosition.x,0.1f,m_EnemyPosition.z);
+		Vector3 tmpPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
+		//m_EnemyPosition= new Vector3(m_EnemyPosition.x,0.1f,m_EnemyPosition.z);
+		Debug.Log (tmpPosition.y < 0.08f);
+		if (tmpPosition.y < 0.08f) {
+			NearTargetPosition ();
+			idou = true;
+		} else {
+			m_EnemyPosition = tmpPosition;
+		}
 		//enemy.transform.LookAt (m_Player);
 	}
+
 	private void ZombieMoveB(float speed)
 	{
+		/*
 		//プレイヤーの座標を代入
 		Vector3 playerPos = m_Player.transform.position;
 		Vector3 direction = playerPos - m_EnemyPosition;
 		//単位化(距離要素を取り除く)
 		direction = direction.normalized;
-		m_EnemyPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
+		m_EnemyPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));*/
 	}
 
 
@@ -282,4 +279,8 @@ public  class EnemyAI : MonoBehaviour{
 
 		//return string.Empty;
 	}
+
+
+
+
 }

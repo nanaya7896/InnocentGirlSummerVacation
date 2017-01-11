@@ -257,10 +257,10 @@ public class Zombie : EnemyActor {
         else
         {
 			m_EnemyAI.transform.LookAt(m_Player);
-			m_EnemyAI.enemyPosition = this.transform.position;
+			m_EnemyAI.m_EnemyPosition = this.transform.position;
 			m_EnemyAI.enemyRotate = this.transform.rotation.eulerAngles;
 			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
-			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
+			//m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
 			transform.position =new Vector3(m_EnemyAI.GetEnemyPosition().x,m_EnemyAI.GetEnemyPosition().y , m_EnemyAI.GetEnemyPosition().z);
 			/*enemy[i].transform.LookAt(m_Player);
                 enemy[i].GetComponent<EnemyAI>().enemyPosition = enemy[i].transform.position;
@@ -370,10 +370,6 @@ public class Zombie : EnemyActor {
         
     }
 
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        Debug.Log(hit.gameObject.tag);
-        isHit |= hit.gameObject.tag == "Player";
-    }
+
 }
 

@@ -8,8 +8,7 @@ public class PlayerController : MonoBehaviour {
 	//ゾンビとhitしたか
 	public bool isHit = false;
 
-    //ウォータースライダー移動を行うかどうか
-    public bool isInWaterMove = false;
+
 	//アニメーター用変数
 	bool isWalk=false;
 	bool isSlider =false;
@@ -21,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 ido;
 	private Vector3 Animdir = Vector3.zero;
 
-	public float runspeed = 0.001f;
+	public float runspeed = 0.0001f;
 
 
 	Animator anim=null;
@@ -71,21 +70,9 @@ public class PlayerController : MonoBehaviour {
 				tmp = 0.1f;
 			}
 			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
-		}else if (isInWaterMove)
-        {
-            this.GetComponent<Rigidbody>().useGravity = false;
-        }
-
-        else {
+		} else {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
-
-        if (isInWaterMove && GetComponent<iTween>()==null)
-        {
-            isInWaterMove = false;
-            this.transform.rotation = Quaternion.Euler(0.0f, this.transform.rotation.y+180.0f, 0.0f);
-
-        }
 		PlayerMoving();
 		PlayerRotate();
 
@@ -130,18 +117,6 @@ public class PlayerController : MonoBehaviour {
 		this.transform.Rotate (0.0f, r, 0.0f);
 	}
 	
-    void InWaterSlider(string _getTag)
-    {
-        if ("SliderWater" == _getTag && !isInWaterMove)
-        {
-            isInWaterMove = true;
-#pragma warning disable CS0436 // 型がインポートされた型と競合しています
-            iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("WaterSlider1"),"time",10, "easetype", iTween.EaseType.easeInQuad ,"orienttopath", true));
-       
-#pragma warning restore CS0436 // 型がインポートされた型と競合しています
-        }
-    }
-
 	//=============================Get関数================================//
 	public string GetPlayerPosition()
 	{
@@ -152,7 +127,6 @@ public class PlayerController : MonoBehaviour {
 	{
 		Debug.Log (col.gameObject.tag);
 		string tagName = col.gameObject.tag;
-
 		switch (tagName) 
 		{
 		case "Ground":
@@ -166,13 +140,10 @@ public class PlayerController : MonoBehaviour {
 		case "Slider":
 			m_Anim.SetBool ("isSlider", true);
 			break;
-		case "Zombie":
+		case "Enemy":
 			isHit = true;
 			break;
-
 		}
-
-        InWaterSlider(tagName);
 
 	}
 
