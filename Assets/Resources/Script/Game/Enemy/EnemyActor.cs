@@ -40,6 +40,8 @@ public class EnemyActor : MonoBehaviour{
     /// </summary>
     //public Transform enemyAIObj;
 
+	public GameObject[] targetObj = new GameObject[3];
+
 	void Awake()
 	{
 		
