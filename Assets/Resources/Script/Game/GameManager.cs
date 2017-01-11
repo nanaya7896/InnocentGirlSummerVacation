@@ -134,11 +134,11 @@ public class GameManager : MonoBehaviour {
         {
             stateMachine.SetState(State.End);
         }
-	/*	if(m_PlayerController.GetComponent<PlayerController>().isHit==true || m_EnemyTool.GetComponent<Zombie>().isHit ==true)
+		if(m_PlayerController.GetComponent<PlayerController>().isHit==true)
         {
             stateMachine.SetState(State.GameOver);
         }
-        */
+
     }
 
     void GameEnd()

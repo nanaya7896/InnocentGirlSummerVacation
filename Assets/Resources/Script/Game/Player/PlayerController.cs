@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 ido;
 	private Vector3 Animdir = Vector3.zero;
 
-	public float runspeed = 0.001f;
+	public float runspeed = 0.0001f;
 
 
 	Animator anim=null;
@@ -140,13 +140,9 @@ public class PlayerController : MonoBehaviour {
 		case "Slider":
 			m_Anim.SetBool ("isSlider", true);
 			break;
-		case "Zombie":
+		case "Enemy":
 			isHit = true;
 			break;
-
-
-
-
 		}
 
 	}
