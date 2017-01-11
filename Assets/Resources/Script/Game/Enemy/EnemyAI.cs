@@ -145,7 +145,7 @@ public  class EnemyAI : MonoBehaviour{
 		direction = direction.normalized;
 		Vector3 tmpPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
 		//m_EnemyPosition= new Vector3(m_EnemyPosition.x,0.1f,m_EnemyPosition.z);
-		Debug.Log (tmpPosition.y < 0.08f);
+		//Debug.Log (tmpPosition.y < 0.08f);
 		if (tmpPosition.y < 0.08f) {
 			NearTargetPosition ();
 			idou = true;
@@ -154,18 +154,6 @@ public  class EnemyAI : MonoBehaviour{
 		}
 		//enemy.transform.LookAt (m_Player);
 	}
-
-	private void ZombieMoveB(float speed)
-	{
-		/*
-		//プレイヤーの座標を代入
-		Vector3 playerPos = m_Player.transform.position;
-		Vector3 direction = playerPos - m_EnemyPosition;
-		//単位化(距離要素を取り除く)
-		direction = direction.normalized;
-		m_EnemyPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));*/
-	}
-
 
 	private void AutoMove(float speed)
 	{
@@ -256,7 +244,7 @@ public  class EnemyAI : MonoBehaviour{
 
 
 
-	string Ray(GameObject enemy)
+	/*string Ray(GameObject enemy)
 	{
 		
 		//ray.direction *= 0.01f;
@@ -278,7 +266,7 @@ public  class EnemyAI : MonoBehaviour{
 		return hit.transform.gameObject.tag;
 
 		//return string.Empty;
-	}
+	}*/
 
 
 
