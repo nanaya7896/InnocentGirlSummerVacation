@@ -11,10 +11,6 @@ public class ControllerManager : SingletonMonoBehaviour<ControllerManager>
             return;
         }
         DontDestroyOnLoad(this.gameObject);
-
-			
-
-
     }
 
     public float GetLeftHorizontal()
