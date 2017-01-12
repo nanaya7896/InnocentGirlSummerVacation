@@ -197,8 +197,11 @@ public class Zombie : EnemyActor {
     /// </summary>
     public void Revive()
     {
+
+		m_Anim.SetBool ("Death", false);
         //生成位置
-		transform.position = new Vector3(0.0f,1.0f,0.0f);
+		transform.position = new Vector3(0.0f,0.1f,0.0f);
+		this.transform.Rotate (new Vector3(0.0f,0.0f,0.0f));
         isMove = true;
     }
 
@@ -222,7 +225,7 @@ public class Zombie : EnemyActor {
     /// </summary>
     void IdelInit()
     {
-        
+		this.transform.Rotate (Vector3.zero);
     }
 
     /// <summary>
@@ -231,7 +234,7 @@ public class Zombie : EnemyActor {
     void IdelUpdate()
     {
         if(isMove)
-        {
+		{
             stateMachine.SetState(State.WALK);
         }
 
@@ -254,6 +257,7 @@ public class Zombie : EnemyActor {
 		targetnum = 0;
 		isStepUp = false;
 		isSlider = false;
+		this.transform.Rotate (Vector3.zero);
     }
 
     /// <summary>
@@ -296,7 +300,7 @@ public class Zombie : EnemyActor {
 		moveHash.Add("time",10.0f);
 		moveHash.Add("path", iTweenPath.GetPath("WaterSlider1"));
 		moveHash.Add("easetype",iTween.EaseType.easeInQuad);
-		moveHash.Add("orienttopath",true);
+		moveHash.Add("orienttopath",false);
 		moveHash.Add ("oncompletetarget", this.gameObject);
 		moveHash.Add ("oncomplete", "SliderAnimationComplete");
 		iTween.MoveTo(this.gameObject, moveHash);
@@ -336,23 +340,26 @@ public class Zombie : EnemyActor {
 		m_Anim.SetBool ("Death", true);
     }
 	float rangeValue=0.0f;
-	static float drownedTime = 3.0f;
+	float drownedTime = 1.0f;
 	bool isRevive = false;
-	static float reviveTime =1.0f;
+	float reviveTime =2.0f;
     /// <summary>
     /// 溺れ続ける処理
     /// <comment>ゾンビが溺れて沈むまで繰り返す</comment>
     /// </summary>
     void DrownedUpdate()
     {
-		transform.position = new Vector3 (transform.position.x+rangeValue,transform.position.y,transform.position.z+rangeValue);
-		if (!isRevive) {
-			if (drownedTime < 0.0f) {
-				float pos = transform.position.y;
-				pos = pos - (speed * Time.deltaTime);
-				transform.position = new Vector3 (transform.position.x, pos, transform.position.z);
-				if (pos < -0.3f) {
+		
+		if (!isRevive) 
+		{
+			if (drownedTime < 0.0f) 
+			{
+				//float pos = transform.position.y;
+				//pos = pos - (1.0f * Time.deltaTime);
+				transform.position = new Vector3 (transform.position.x+rangeValue, transform.position.y-(0.05f), transform.position.z+rangeValue);
+				if (transform.position.y < -2.0f) {
 					isRevive = true;
+					drownedTime = 1.0f;
 				}
 			}
 			drownedTime -= Time.deltaTime;  
@@ -369,8 +376,9 @@ public class Zombie : EnemyActor {
     /// </summary>
     void DrownedEnd()
     {
+		reviveTime = 2.0f;
         //沈む処理が終了したら生き返る処理
-        Revive();
+		Revive();
     }
 
     /// <summary>
@@ -442,7 +450,7 @@ public class Zombie : EnemyActor {
 		}
 		this.GetComponent<Rigidbody> ().useGravity = false;
 		var moveHash = new Hashtable();
-		moveHash.Add("time",5.0f);
+		moveHash.Add("time",7.0f);
 		moveHash.Add("path", iTweenPath.GetPath("StepUp1"));
 		moveHash.Add("easetype",iTween.EaseType.easeInSine);
 		moveHash.Add("orienttopath",false);
@@ -459,6 +467,7 @@ public class Zombie : EnemyActor {
 	void SliderAnimationComplete()
 	{
 		isSlider = false;
+		this.transform.Rotate (Vector3.zero);
 	}
 }
 
