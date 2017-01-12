@@ -1,10 +1,12 @@
 -debug
 -target:library
 -nowarn:0169
--out:'Temp/Assembly-CSharp-Editor-firstpass.dll'
+-out:'Temp/Assembly-CSharp-Editor.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Managed/UnityEngine.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.dll'
 -r:'Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll'
+-r:'Library/ScriptAssemblies/Assembly-CSharp.dll'
+-r:'Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll'
 -r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll'
 -r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/EditorTestsRunner/Editor/nunit.framework.dll'
 -r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/EditorTestsRunner/Editor/UnityEditor.EditorTestsRunner.dll'
@@ -97,20 +99,7 @@
 -define:UNITY_EDITOR_OSX
 -define:UNITY_TEAM_LICENSE
 -define:CROSS_PLATFORM_INPUT
-'Assets/Standard Assets/Editor/CrossPlatformInput/CrossPlatformInputInitialize.cs'
-'Assets/Standard Assets/Editor/ImageEffects/AntialiasingEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/BloomAndFlaresEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/BloomEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/CameraMotionBlurEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/ColorCorrectionCurvesEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/ColorCorrectionLookupEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/CreaseShadingEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/DepthOfFieldDeprecatedEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/DepthOfFieldEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/EdgeDetectionEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/NoiseAndGrainEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/SunShaftsEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/TonemappingEditor.cs'
-'Assets/Standard Assets/Editor/ImageEffects/VignetteAndChromaticAberrationEditor.cs'
+'Assets/iTweenEditor/Editor/iTweenEventDataEditor.cs'
+'Assets/iTweenEditor/Editor/iTweenPathEditor.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/2.0/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/2.0/System.Xml.Linq.dll'

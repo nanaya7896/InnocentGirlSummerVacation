@@ -103,16 +103,15 @@ public class PlayerController : MonoBehaviour {
 		}
 					
 		//現在のポジションにidoのトランスフォームの数値を入れる
-		/*transform.position = new Vector3(
+		transform.position = new Vector3(
 			transform.position.x + ido.x,
 			transform.position.y + ido.y,
 			transform.position.z + ido.z);
-			*/
-		if (isInWater) {
+		/*if (isInWater) {
 			//現在のポジションにidoのトランスフォームの数値を入れる
 			transform.position = new Vector3(
 				transform.position.x + ido.x,
-				transform.position.y + ido.y +0.1f,
+				transform.position.y + ido.y,
 				transform.position.z + ido.z);
 		} else {
 			//現在のポジションにidoのトランスフォームの数値を入れる
@@ -120,7 +119,7 @@ public class PlayerController : MonoBehaviour {
 				transform.position.x + ido.x,
 				transform.position.y + ido.y,
 				transform.position.z + ido.z);
-		}
+		}*/
 		if (prevPos != transform.position) {
 			m_Anim.SetBool ("isWalk", true);
 		} else {
@@ -164,7 +163,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
-		Debug.Log (col.gameObject.tag);
+		//Debug.Log (col.gameObject.tag);
 		string tagName = col.gameObject.tag;
 		switch (tagName) 
 		{
@@ -191,6 +190,4 @@ public class PlayerController : MonoBehaviour {
 		}
 
 	}
-
-
 }

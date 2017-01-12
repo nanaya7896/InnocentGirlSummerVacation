@@ -84,9 +84,9 @@ public class EnemyActor : MonoBehaviour{
 		//enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
 		//初期位置の設定
 		if (num < 25) {
-			enemy [num].transform.position = new Vector3(Random.Range(-2.0f, 2.0f), this.transform.position.y, Random.Range(-2.0f, -1.5f));
+			enemy [num].transform.position = new Vector3(Random.Range(-2.0f, 2.0f), 1.0f, Random.Range(-2.0f, -1.5f));
 		} else {
-			enemy [num].transform.position = new Vector3(Random.Range(-2.0f, 2.0f), this.transform.position.y, Random.Range(1.5f, 2.0f));			
+			enemy [num].transform.position = new Vector3(Random.Range(-2.0f, 2.0f),1.0f, Random.Range(1.5f, 2.0f));			
 		}
 		//enemy[i].GetComponent<Rigidbody> ().useGravity = false;
 		//AIのスクリプトがついたオブジェクトを格納
@@ -108,5 +108,7 @@ public class EnemyActor : MonoBehaviour{
 	{
 		enemy[num].GetComponent<Zombie>().isMove = check;
 	}
+
+
 
 }
