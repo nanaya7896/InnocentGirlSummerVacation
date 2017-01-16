@@ -20,11 +20,12 @@ public class switchingCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (isStart) {
-			if (time > 13.0f) {
+			if (time > 12.0f) {
 				for (int i = 0; i < 3; i++) {
 					sliderCamera [i].gameObject.SetActive (false);
 				}
 				MainCamera.SetActive (true);
+				isStart = true;
 				time = 0.0f;
 			}
 			else if (time > 9.7f) {
@@ -56,5 +57,10 @@ public class switchingCamera : MonoBehaviour {
 	public void reset()
 	{
 		time = 0.0f;
+	}
+
+	public bool GetisStart()
+	{
+		return isStart;
 	}
 }
