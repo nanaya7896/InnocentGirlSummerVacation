@@ -52,7 +52,7 @@ public class ResultManager : MonoBehaviour {
                 break;
 
             default:
-               // SceneManage.Instance.SceneChangeLoad(SceneManage.SceneName.TITLE);
+                SceneManage.Instance.SceneChangeLoad(SceneManage.SceneName.TITLE);
                 break;
         }
     }

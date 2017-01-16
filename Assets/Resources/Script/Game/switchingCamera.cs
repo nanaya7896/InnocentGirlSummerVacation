@@ -32,7 +32,7 @@ public class switchingCamera : MonoBehaviour {
 				sliderCamera [1].gameObject.SetActive (false);
 				sliderCamera [2].gameObject.SetActive (true);   
 			} 
-			else if (time > 7.0f) {
+			else if (time > 7.5f) {
 				sliderCamera [0].gameObject.SetActive (false);
 				sliderCamera [1].gameObject.SetActive (true);
 				sliderCamera [2].gameObject.SetActive (false);

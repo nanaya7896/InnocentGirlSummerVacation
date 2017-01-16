@@ -79,9 +79,10 @@ public class PlayerController : MonoBehaviour {
         else {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
-		PlayerMoving();
-		PlayerRotate();
-
+		if (isMove) {
+			PlayerMoving ();
+			PlayerRotate ();
+		}
 	}
 
 	void PlayerMoving()

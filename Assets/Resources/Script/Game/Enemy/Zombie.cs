@@ -450,7 +450,7 @@ public class Zombie : EnemyActor {
 		}
 		this.GetComponent<Rigidbody> ().useGravity = false;
 		var moveHash = new Hashtable();
-		moveHash.Add("time",7.0f);
+		moveHash.Add("time",8.0f);
 		moveHash.Add("path", iTweenPath.GetPath("StepUp1"));
 		moveHash.Add("easetype",iTween.EaseType.easeInSine);
 		moveHash.Add("orienttopath",false);
