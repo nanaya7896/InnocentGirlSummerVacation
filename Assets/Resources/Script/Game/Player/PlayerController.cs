@@ -88,10 +88,7 @@ public class PlayerController : MonoBehaviour {
 			PlayerMoving ();
 			PlayerRotate ();
 		}
-<<<<<<< HEAD
 
-=======
->>>>>>> Ikehara
 
         if (isInWaterSlider)
         {
@@ -102,10 +99,7 @@ public class PlayerController : MonoBehaviour {
                 isInWaterSlider = false;
             }
         }
-<<<<<<< HEAD
-        
-=======
->>>>>>> Ikehara
+
 	}
 
 	void PlayerMoving()
