@@ -128,6 +128,7 @@
 'Assets/Resources/Script/test/NavTes.cs'
 'Assets/Resources/Script/test/animtest.cs'
 'Assets/Resources/Script/test/test.cs'
+'Assets/Score.cs'
 'Assets/iTweenEditor/Examples/StartAndStopTween.cs'
 'Assets/iTweenEditor/Helper Classes/EventParamMappings.cs'
 'Assets/iTweenEditor/Helper Classes/Vector3OrTransform.cs'
