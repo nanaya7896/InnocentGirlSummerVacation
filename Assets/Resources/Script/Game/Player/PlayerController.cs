@@ -63,7 +63,9 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-
+		if (!sc.GetisStart()) {
+			dista = 9999.9f;
+		}
 		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
 		if (clipInfo.clip.name == "agari") {
@@ -81,14 +83,11 @@ public class PlayerController : MonoBehaviour {
         else {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
-<<<<<<< HEAD
+
 		if (isMove) {
 			PlayerMoving ();
 			PlayerRotate ();
 		}
-=======
-		PlayerMoving();
-		PlayerRotate();
 
         if (isInWaterSlider)
         {
@@ -99,8 +98,6 @@ public class PlayerController : MonoBehaviour {
                 isInWaterSlider = false;
             }
         }
-
->>>>>>> 7569e7acfd208fe20f77d3b15318eceba4643fc2
 	}
 
 	void PlayerMoving()
@@ -170,12 +167,28 @@ public class PlayerController : MonoBehaviour {
         moveHash.Add("path", iTweenPath.GetPath("WaterSlider1"));
         moveHash.Add("easetype",iTween.EaseType.easeInQuad);
         moveHash.Add("orienttopath", true);
-
+		moveHash.Add ("oncompletetarget", this.gameObject);
+		moveHash.Add ("oncomplete", "SliderAnimationComplete");
         iTween.MoveTo(this.gameObject, moveHash);
         isInWaterSlider = true;
-
     }
 
+	float dista =9999.9f; 
+	void SliderAnimationComplete()
+	{
+		if (dista > 0.1f) {
+			float x = -0.9770367f - transform.localPosition.x;
+			float y = 0.02354169f - transform.localPosition.y;
+			float z = -0.3872362f - transform.localPosition.z;
+			Vector3 tmp = new Vector3 (x, y, z);
+			tmp = tmp.normalized;
+			transform.position = transform.position + (tmp * runspeed * Time.deltaTime);
+			dista= Vector3.Distance (transform.position, tmp);
+		}
+
+
+		
+	}
 	//=============================Get関数================================//
 	public string GetPlayerPosition()
 	{
@@ -199,14 +212,15 @@ public class PlayerController : MonoBehaviour {
 			m_Anim.SetBool ("isGround", false);
 			m_Anim.SetBool ("isInWater", true);
 			m_Anim.SetBool ("isSlider", false);
-			sc.SetBool (false);
+			//sc.SetBool (false);
 			isInWater = true;
 			break;
 		case "SliderWater":
-
-           if (this.transform.position.y < 0.5f) return;
+			if (this.transform.position.y < 0.5f) {
+				break;
+				return;
+			}
 			m_Anim.SetBool ("isSlider", true);
-
             PlayerSlider();
 			sc.SetBool (true);
 			break;
