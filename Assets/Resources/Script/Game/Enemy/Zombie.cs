@@ -300,7 +300,7 @@ public class Zombie : EnemyActor {
 		moveHash.Add("time",10.0f);
 		moveHash.Add("path", iTweenPath.GetPath("WaterSlider1"));
 		moveHash.Add("easetype",iTween.EaseType.easeInQuad);
-		moveHash.Add("orienttopath",false);
+		moveHash.Add("orienttopath",true);
 		moveHash.Add ("oncompletetarget", this.gameObject);
 		moveHash.Add ("oncomplete", "SliderAnimationComplete");
 		iTween.MoveTo(this.gameObject, moveHash);
@@ -327,7 +327,7 @@ public class Zombie : EnemyActor {
     void SliderEnd()
     {
         //スライダー状態を切る
-     	//isSlider = false;   
+     	isSlider = false;   
 		this.GetComponent<Rigidbody> ().useGravity = true;
     }
 
@@ -468,6 +468,27 @@ public class Zombie : EnemyActor {
 	{
 		isSlider = false;
 		this.transform.Rotate (Vector3.zero);
+
+        int randamResPwanPoint = Random.Range(0, 3);
+        Vector3 respwanVector;
+        switch (randamResPwanPoint)
+        {
+            case 0:
+                respwanVector = new Vector3(0,0.1f,0.0f);
+                break;
+
+            case 1:
+                respwanVector = new Vector3(0, 0.1f, 0.0f);
+
+                break;
+
+            case 2:
+                respwanVector = new Vector3(0, 0.1f, 0.0f);
+
+                break;
+
+        }
+        
 	}
 }
 
