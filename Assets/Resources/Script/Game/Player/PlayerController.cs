@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	bool isWalk=false;
 	bool isSlider =false;
 	bool isInWater =false;
-
+	public switchingCamera sc;
 	[SerializeField]
 	private Transform CamPos;
 	private Vector3 Camforward;
@@ -176,11 +176,13 @@ public class PlayerController : MonoBehaviour {
 			m_Anim.SetBool ("isGround", false);
 			m_Anim.SetBool ("isInWater", true);
 			m_Anim.SetBool ("isSlider", false);
+			sc.SetBool (false);
 			isInWater = true;
 			break;
 		case "SliderWater":
 			m_Anim.SetBool ("isSlider", true);
-            PlayerSlider();
+			PlayerSlider ();
+			sc.SetBool (true);
 			break;
 		case "Enemy":
 			if (isDebug) {
