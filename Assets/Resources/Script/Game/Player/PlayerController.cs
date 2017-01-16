@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 
     public bool isInWaterSlider = false;
 
+    string bTagName;
+
 	//アニメーター用変数
 	bool isWalk=false;
 	bool isSlider =false;
@@ -81,6 +83,16 @@ public class PlayerController : MonoBehaviour {
 		}
 		PlayerMoving();
 		PlayerRotate();
+
+        if (isInWaterSlider)
+        {
+            if (this.GetComponent<iTween>() == null)
+            {
+                //this.transform.rotation();
+                this.transform.rotation = Quaternion.Euler(0, 0, 0);
+                isInWaterSlider = false;
+            }
+        }
 
 	}
 
@@ -184,8 +196,11 @@ public class PlayerController : MonoBehaviour {
 			isInWater = true;
 			break;
 		case "SliderWater":
+
+           if (this.transform.position.y < 0.5f) return;
 			m_Anim.SetBool ("isSlider", true);
-			PlayerSlider ();
+
+            PlayerSlider();
 			sc.SetBool (true);
 			break;
 		case "Enemy":
@@ -194,6 +209,8 @@ public class PlayerController : MonoBehaviour {
 			}
 			break;
 		}
+
+        bTagName = tagName;
 
 	}
 }

@@ -474,16 +474,16 @@ public class Zombie : EnemyActor {
         switch (randamResPwanPoint)
         {
             case 0:
-                respwanVector = new Vector3(0,0.1f,0.0f);
+                respwanVector = new Vector3(-0.034f,0.1f, 0.957964f);
                 break;
 
             case 1:
-                respwanVector = new Vector3(0, 0.1f, 0.0f);
+                respwanVector = new Vector3(-1.903f, 0.1f, 0.1644f);
 
                 break;
 
             case 2:
-                respwanVector = new Vector3(0, 0.1f, 0.0f);
+                respwanVector = new Vector3(-0.066f, 0.1f, -1.983f);
 
                 break;
 
