@@ -197,7 +197,7 @@ public class Zombie : EnemyActor {
     /// </summary>
     public void Revive()
     {
-
+		ScoreManager.Instance.AddScore (1);
 		m_Anim.SetBool ("Death", false);
         //生成位置
 		transform.position = new Vector3(0.0f,0.1f,0.0f);
