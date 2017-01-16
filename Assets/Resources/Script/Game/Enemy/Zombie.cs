@@ -200,8 +200,27 @@ public class Zombie : EnemyActor {
 		ScoreManager.Instance.AddScore (1);
 		m_Anim.SetBool ("Death", false);
         //生成位置
-		transform.position = new Vector3(0.0f,0.1f,0.0f);
-		this.transform.Rotate (new Vector3(0.0f,0.0f,0.0f));
+
+        int randamResPwanPoint = Random.Range(0, 3);
+        Vector3 respwanVector=Vector3.zero;
+        switch (randamResPwanPoint)
+        {
+            case 0:
+                respwanVector = new Vector3(0.0f, 0.1f, -1.95f);
+                break;
+
+            case 1:
+                respwanVector = new Vector3(-1.95f, 0.1f, 0f);
+
+                break;
+
+            case 2:
+                respwanVector = new Vector3(-0.066f, 0.1f, -1.983f);
+                break;
+
+        }
+        this.transform.position = respwanVector;
+        this.transform.Rotate (new Vector3(0.0f,0.0f,0.0f));
         isMove = true;
     }
 
@@ -469,25 +488,6 @@ public class Zombie : EnemyActor {
 		isSlider = false;
 		this.transform.Rotate (Vector3.zero);
 
-        int randamResPwanPoint = Random.Range(0, 3);
-        Vector3 respwanVector;
-        switch (randamResPwanPoint)
-        {
-            case 0:
-                respwanVector = new Vector3(-0.034f,0.1f, 0.957964f);
-                break;
-
-            case 1:
-                respwanVector = new Vector3(-1.903f, 0.1f, 0.1644f);
-
-                break;
-
-            case 2:
-                respwanVector = new Vector3(-0.066f, 0.1f, -1.983f);
-
-                break;
-
-        }
         
 	}
 }

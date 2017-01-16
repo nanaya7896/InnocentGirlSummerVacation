@@ -81,14 +81,12 @@ public class PlayerController : MonoBehaviour {
         else {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
-<<<<<<< HEAD
+
 		if (isMove) {
 			PlayerMoving ();
 			PlayerRotate ();
 		}
-=======
-		PlayerMoving();
-		PlayerRotate();
+
 
         if (isInWaterSlider)
         {
@@ -99,8 +97,7 @@ public class PlayerController : MonoBehaviour {
                 isInWaterSlider = false;
             }
         }
-
->>>>>>> 7569e7acfd208fe20f77d3b15318eceba4643fc2
+        
 	}
 
 	void PlayerMoving()
