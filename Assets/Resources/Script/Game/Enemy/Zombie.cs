@@ -197,7 +197,7 @@ public class Zombie : EnemyActor {
     /// </summary>
     public void Revive()
     {
-
+		ScoreManager.Instance.AddScore (1);
 		m_Anim.SetBool ("Death", false);
         //生成位置
 		transform.position = new Vector3(0.0f,0.1f,0.0f);
@@ -269,7 +269,7 @@ public class Zombie : EnemyActor {
 		if(!isStepUp)
         {
 			m_EnemyAI.m_EnemyPosition = this.transform.position;
-			if (transform.position.y < m_Player.transform.position.y) {
+			if (0.2f< m_Player.transform.position.y) {
 				m_EnemyAI.transform.LookAt (transform.forward);
 			} else {
 				m_EnemyAI.transform.LookAt (m_Player);

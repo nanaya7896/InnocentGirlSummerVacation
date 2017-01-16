@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate () {
 
 		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
-		Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
+		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
 		if (clipInfo.clip.name == "agari") {
 			this.GetComponent<Rigidbody> ().useGravity = false;
 			float tmp = this.transform.position.y + (0.06f * Time.deltaTime);
@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour {
 			transform.position.x + ido.x,
 			transform.position.y + ido.y,
 			transform.position.z + ido.z);
+		
 		/*if (isInWater) {
 			//現在のポジションにidoのトランスフォームの数値を入れる
 			transform.position = new Vector3(
@@ -120,6 +121,7 @@ public class PlayerController : MonoBehaviour {
 				transform.position.y + ido.y,
 				transform.position.z + ido.z);
 		}*/
+
 		if (prevPos != transform.position) {
 			m_Anim.SetBool ("isWalk", true);
 		} else {
@@ -134,6 +136,8 @@ public class PlayerController : MonoBehaviour {
 		float r = ControllerManager.Instance.GetRightHorizontal();
 		this.transform.Rotate (0.0f, r, 0.0f);
 	}
+
+
 
     void PlayerSlider() {
 
@@ -185,7 +189,7 @@ public class PlayerController : MonoBehaviour {
 			sc.SetBool (true);
 			break;
 		case "Enemy":
-			if (isDebug) {
+			if (!isDebug) {
 				isHit = true;
 			}
 			break;

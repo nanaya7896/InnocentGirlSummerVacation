@@ -188,3 +188,5 @@ Cmd: preprocess
   insize=1149 outsize=1043 ok=1
 Cmd: preprocess
   insize=2448 outsize=1905 ok=1
+
+Quitting shader compiler process

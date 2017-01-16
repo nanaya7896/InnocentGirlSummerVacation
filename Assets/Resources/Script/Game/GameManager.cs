@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour {
 
     void FirstInit()
     {
-        Debug.Log("FirstInit");
+        //Debug.Log("FirstInit");
         //初期化
         ScoreManager.Instance.Reset();
         m_Time.GetComponent<TimeChangeScript>().Reset();
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour {
 
     void FirstEnd()
     {
-        Debug.Log("FirstEnd");
+        //Debug.Log("FirstEnd");
     }
 
     /*ここからGameステート*/
