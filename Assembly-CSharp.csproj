@@ -87,6 +87,7 @@
      <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
      <Compile Include="Assets\Resources\Script\test\animtest.cs" />
      <Compile Include="Assets\Resources\Script\test\test.cs" />
+     <Compile Include="Assets\Score.cs" />
      <Compile Include="Assets\iTweenEditor\Examples\StartAndStopTween.cs" />
      <Compile Include="Assets\iTweenEditor\Helper Classes\EventParamMappings.cs" />
      <Compile Include="Assets\iTweenEditor\Helper Classes\Vector3OrTransform.cs" />
