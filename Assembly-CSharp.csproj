@@ -52,6 +52,7 @@
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
      <Compile Include="Assets\ImportAsset\p5-MSAFluid-master\src\msafluid\MSAFluidSolver2D.cs" />
+     <Compile Include="Assets\Node.cs" />
      <Compile Include="Assets\Resources\Script\Clear\ClearSE.cs" />
      <Compile Include="Assets\Resources\Script\Clear\SpriteAutoChange.cs" />
      <Compile Include="Assets\Resources\Script\Common\CreateMasterScript.cs" />

@@ -12,7 +12,7 @@ public class EnemyActor : MonoBehaviour{
     /// </summary>
     public int ID;
 
-    public static int Size=30;
+    public static int Size=1;
     /// <summary>
     /// Enemyの移動速度
     /// </summary>
@@ -94,7 +94,7 @@ public class EnemyActor : MonoBehaviour{
 		enemy[num].GetComponent<EnemyAI> ().mask = 1<<12;
 		for(int j=0;j<8;j++)
 		{
-			enemy [num].GetComponent<EnemyAI> ().targetObj [j] = GameObject.Find ("Target"+(j+1));
+			enemy [num].GetComponent<EnemyAI> ().targetObj [j] = GameObject.Find ("Target_"+(j+1));
 		}
 		//enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
 		//ナビメッシュコンポーネントをつけて自動移動処理を追加する

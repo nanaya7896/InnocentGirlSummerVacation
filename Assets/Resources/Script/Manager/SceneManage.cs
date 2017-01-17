@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 
 public class SceneManage : SingletonMonoBehaviour<SceneManage>
 {
-
+	[SerializeField]
+	bool isDebug = false;
     /// <summary>
     /// ゲームで使うシーンを列挙する
     /// </summary>
@@ -60,20 +61,19 @@ public class SceneManage : SingletonMonoBehaviour<SceneManage>
 	// Use this for initialization
 	void Start ()
     {
-        
-        if (GetAllBuildIndexCount() > (int)SceneName.NULL)
-        {
-            Debug.LogAssertion("登録していないシーンネームがありませんか？");
-            //明示的にエラーを表示し、停止する
-            Debug.Break();
+		if (!isDebug) {
+			if (GetAllBuildIndexCount () > (int)SceneName.NULL) {
+				Debug.LogAssertion ("登録していないシーンネームがありませんか？");
+				//明示的にエラーを表示し、停止する
+				Debug.Break ();
 
-        }
+			}
 
-        //BuildIndexに一つも登録していない場合エラーを返す
-        if (GetAllBuildIndexCount() == 0)
-        {
-            Debug.LogAssertion("BuildIndexにシーンが登録されていません");
-        }
+			//BuildIndexに一つも登録していない場合エラーを返す
+			if (GetAllBuildIndexCount () == 0) {
+				Debug.LogAssertion ("BuildIndexにシーンが登録されていません");
+			}
+		}
         //最初に現在のシーンの番号を格納
         prevSceneName = (SceneName)GetBuildIndexCount();
 	}
@@ -81,18 +81,17 @@ public class SceneManage : SingletonMonoBehaviour<SceneManage>
 	// Update is called once per frame
 	void Update ()
     {
-		
-        //Debug.Log(isSetActiveScene(SceneName.MAIN));
-        //シーンに変更がなければ処理を終了する
-        if (m_SceneNumber == prevSceneName)
-        {
-            return;
-        }
-       //シーンの変更があった場合シーン遷移を開始する
-        if (m_SceneNumber != prevSceneName)
-        {
-            LoadSceneMethod(isAsync);
-        }
+		if (!isDebug) {
+			//Debug.Log(isSetActiveScene(SceneName.MAIN));
+			//シーンに変更がなければ処理を終了する
+			if (m_SceneNumber == prevSceneName) {
+				return;
+			}
+			//シーンの変更があった場合シーン遷移を開始する
+			if (m_SceneNumber != prevSceneName) {
+				LoadSceneMethod (isAsync);
+			}
+		}
 
     }
 
