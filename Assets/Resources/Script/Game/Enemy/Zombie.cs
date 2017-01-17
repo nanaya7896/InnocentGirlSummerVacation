@@ -200,7 +200,6 @@ public class Zombie : EnemyActor {
 		ScoreManager.Instance.AddScore (1);
 		m_Anim.SetBool ("Death", false);
         //生成位置
-
         int randamResPwanPoint = Random.Range(0, 3);
         Vector3 respwanVector=Vector3.zero;
         switch (randamResPwanPoint)
@@ -487,8 +486,6 @@ public class Zombie : EnemyActor {
 	{
 		isSlider = false;
 		this.transform.Rotate (Vector3.zero);
-
-        
 	}
 }
 
