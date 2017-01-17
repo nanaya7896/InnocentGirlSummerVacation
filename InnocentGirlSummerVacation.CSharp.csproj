@@ -108,6 +108,7 @@
     <Compile Include="Assets\Resources\Script\Manager\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\Resources\Script\Result\ResultManager.cs" />
     <Compile Include="Assets\Resources\Script\Title\BGMPlayTool.cs" />
+    <Compile Include="Assets\Resources\Script\test\DebugEnterAddScore.cs" />
     <Compile Include="Assets\Resources\Script\test\MoveForPlayer.cs" />
     <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
     <Compile Include="Assets\Resources\Script\test\animtest.cs" />

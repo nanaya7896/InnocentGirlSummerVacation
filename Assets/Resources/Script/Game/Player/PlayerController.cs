@@ -90,11 +90,12 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
 
-		if (isMove) {
-			PlayerMoving ();
-			PlayerRotate ();
-		}
-			
+        if (isMove)
+        {
+            PlayerMoving();
+            PlayerRotate();
+
+        }
         if (isInWaterSlider)
         {
             if (this.GetComponent<iTween>() == null)
@@ -112,11 +113,12 @@ public class PlayerController : MonoBehaviour {
 
 		Vector3 prevPos = this.transform.position;
 		//キーボード数値取得。プレイヤーの方向として扱う
-		float h = Input.GetAxis("Horizontal");//横
-		float v = Input.GetAxis("Vertical");//縦
+		float h = ControllerManager.Instance.GetLeftHorizontal();//横
+		float v = ControllerManager.Instance.GetLeftVertical();//縦
 
-		//カメラのTransformが取得されてれば実行
-		if (CamPos != null)
+
+        //カメラのTransformが取得されてれば実行
+        if (CamPos != null)
 		{
 			//2つのベクトルの各成分の乗算(Vector3.Scale)。単位ベクトル化(.normalized)
 			Camforward = Vector3.Scale(CamPos.forward, new Vector3(1, 0, 1)).normalized;

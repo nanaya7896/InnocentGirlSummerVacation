@@ -83,8 +83,8 @@ public class ResultManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        ScoreManager.Instance.RankIncheck();
 
-      
         //子オブジェクトの数だけ数字用GameObjectを取得
         for (int i = 1; i < System.Math.Pow(10, GameObject.Find("Canvas/ResultScore").transform.childCount); i = i * 10)
         {
@@ -96,7 +96,7 @@ public class ResultManager : MonoBehaviour {
         }
 
         int score = ScoreManager.Instance.Score;
-
+        
         ScoreSet(result, score);
 
         ScoreSet(rank1, ScoreManager.Instance.rankPoint[0]);
