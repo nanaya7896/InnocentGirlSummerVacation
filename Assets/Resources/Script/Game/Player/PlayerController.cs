@@ -59,10 +59,15 @@ public class PlayerController : MonoBehaviour {
 	{
 		isMove = false;
 		isHit = false;
+		playerAutoMove = false;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if (playerAutoMove) {
+			InWaterAction ();
+			return;
+		}
 		if (!sc.GetisStart()) {
 			dista = 9999.9f;
 		}
@@ -71,7 +76,8 @@ public class PlayerController : MonoBehaviour {
 		if (clipInfo.clip.name == "agari") {
 			this.GetComponent<Rigidbody> ().useGravity = false;
 			float tmp = this.transform.position.y + (0.06f * Time.deltaTime);
-			if (tmp > 0.1f) {
+			if (tmp > 0.1f) 
+			{
 				tmp = 0.1f;
 			}
 			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
@@ -96,6 +102,7 @@ public class PlayerController : MonoBehaviour {
                 //this.transform.rotation();
                 this.transform.rotation = Quaternion.Euler(0, 0, 0);
                 isInWaterSlider = false;
+
             }
         }
 	}
@@ -138,9 +145,12 @@ public class PlayerController : MonoBehaviour {
 				transform.position.z + ido.z);
 		}*/
 
-		if (prevPos != transform.position) {
+		if (prevPos != transform.position)
+		{
 			m_Anim.SetBool ("isWalk", true);
-		} else {
+		} 
+		else 
+		{
 			m_Anim.SetBool ("isWalk", false);
 		}
 
@@ -150,6 +160,7 @@ public class PlayerController : MonoBehaviour {
 	void PlayerRotate()
 	{
 		float r = ControllerManager.Instance.GetRightHorizontal();
+		//Debug.Log (r);
 		this.transform.Rotate (0.0f, r, 0.0f);
 	}
 
@@ -173,21 +184,33 @@ public class PlayerController : MonoBehaviour {
         isInWaterSlider = true;
     }
 
-	float dista =9999.9f; 
+	float dista =9999.9f;
+	bool playerAutoMove=false;
+
 	void SliderAnimationComplete()
 	{
-		if (dista > 0.1f) {
-			float x = -0.9770367f - transform.localPosition.x;
-			float y = 0.02354169f - transform.localPosition.y;
-			float z = -0.3872362f - transform.localPosition.z;
+		playerAutoMove = true;
+	}
+	void InWaterAction()
+	{
+		this.GetComponent<CapsuleCollider> ().enabled = true;
+		if (dista > 1.5f) 
+		{
+			Debug.Log (dista);
+			this.gameObject.GetComponent<InPoolMove> ().enabled = false;
+			float x = -0.9770367f - transform.position.x;
+			float y = 0.02354169f - transform.position.y;
+			float z = -0.3872362f - transform.position.z;
 			Vector3 tmp = new Vector3 (x, y, z);
 			tmp = tmp.normalized;
-			transform.position = transform.position + (tmp * runspeed * Time.deltaTime);
+			transform.position = transform.position + (tmp * 0.1f * Time.deltaTime);
 			dista= Vector3.Distance (transform.position, tmp);
+			return;
 		}
-
-
-		
+		//ウォータースライダーの処理が終わったら
+		playerAutoMove = false;
+		sc.SetBool (false);
+		this.gameObject.GetComponent<InPoolMove> ().enabled = true;
 	}
 	//=============================Get関数================================//
 	public string GetPlayerPosition()
@@ -218,8 +241,8 @@ public class PlayerController : MonoBehaviour {
 		case "SliderWater":
 			if (this.transform.position.y < 0.5f) {
 				break;
-				return;
 			}
+			this.GetComponent<CapsuleCollider> ().enabled = false;
 			m_Anim.SetBool ("isSlider", true);
             PlayerSlider();
 			sc.SetBool (true);

@@ -191,11 +191,11 @@ public  class EnemyAI : MonoBehaviour{
 		}
 	}
 
+
 	private void NearTargetPosition()
 	{
 		for (int i = 0; i < 8; i++) 
 		{
-
 			Vector3 tmp = enemyPosition - targetObj [i].transform.position;
 			tmp = tmp.normalized;
 			float di = Vector3.Distance(enemyPosition, targetObj[i].transform.position);
@@ -203,18 +203,6 @@ public  class EnemyAI : MonoBehaviour{
 				d = di;
 				obj = targetObj [i];
 			}
-			/*if (tmpDistance [0] > di) {
-				tmpDistance[0] = di;
-				obj = targetObj [i];
-			}
-			else if (tmpDistance [1] > di) {
-				tmpDistance [1] = di;
-				secondObj = targetObj[i];
-			}
-			else if (tmpDistance [2] > di) {
-				tmpDistance [2] = di;
-			}*/
-
 		}
 
 		d = 9999.0f;
