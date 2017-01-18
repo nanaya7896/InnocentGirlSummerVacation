@@ -9,7 +9,7 @@ public  class EnemyAI : MonoBehaviour{
 
     public  Vector3 enemyPosition;
 	public LayerMask mask;
-	public GameObject[] targetObj =new GameObject[8];
+	public GameObject[] targetObj =new GameObject[9];
 	public List<Vector3> dir = new List<Vector3> ();
 	public bool idou =false;
 	float d=9999.0f;
