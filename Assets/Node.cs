@@ -55,8 +55,6 @@ public class Node : MonoBehaviour {
 
 		distance = 9999.0f;
 
-		while (true) 
-		{
 			for (int i = 0; i < 8; i++) 
 			{
 				//二回目以降のターゲットとの距離を調べる
@@ -66,14 +64,14 @@ public class Node : MonoBehaviour {
 					distance = tmp;
 					//後ろから順に新しいターゲットを格納する
 					searchTarget.Add (target [i]);
+				//もし新しいターゲットの近くにプレイヤーがいたら
+				if (SearchPlayer ()) {
+					//探索終了
+					break;
+				}
 				}
 			}
-			//もし新しいターゲットの近くにプレイヤーがいたら
-			if (SearchPlayer ()) {
-				//探索終了
-				break;
-			}
-		}
+
 	}
 	int targetnum=0;
 	bool isSearchEnd=false;

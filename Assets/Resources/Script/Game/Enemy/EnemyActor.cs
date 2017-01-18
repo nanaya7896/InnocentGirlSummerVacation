@@ -92,7 +92,7 @@ public class EnemyActor : MonoBehaviour{
 		//AIのスクリプトがついたオブジェクトを格納
 		enemy[num].transform.gameObject.AddComponent<EnemyAI>();
 		enemy[num].GetComponent<EnemyAI> ().mask = 1<<12;
-		for(int j=0;j<8;j++)
+		for(int j=0;j<9;j++)
 		{
 			enemy [num].GetComponent<EnemyAI> ().targetObj [j] = GameObject.Find ("Target_"+(j+1));
 		}
