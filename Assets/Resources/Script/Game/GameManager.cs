@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour {
         stateMachine.Add(State.End,EndInit,null,null);
         stateMachine.Add(State.GameOver, GameOverInit, null, null);
         stateMachine.SetState(State.First);
+
+        ScoreManager.Instance.Reset();
     }
 
 	// Use this for initialization

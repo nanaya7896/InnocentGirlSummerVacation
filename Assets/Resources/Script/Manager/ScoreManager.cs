@@ -18,11 +18,11 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
 	//private
 	//スコア
 	private static int m_score;
-	//ハイスコア
-
-
-    private static int m_rankTotal=3;
+    //ハイスコア
     private int[] m_HighScore;
+
+    //ランク順位
+    private static int m_rankTotal=3;
 
 
 	public int Score 
@@ -105,16 +105,15 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
             rankPoint[1] = rankPoint[0];
             rankPoint[0] = m_score;
         }
-        if (m_score > rankPoint[1])
+        else if (m_score > rankPoint[1])
         {
             rankPoint[2] = rankPoint[1];
             rankPoint[1] = m_score;
         }
-        if (m_score > rankPoint[2])
+        else if (m_score > rankPoint[2])
         {
             rankPoint[2] = m_score;
         }
-        m_score = 0;
     }
 
 	/*
