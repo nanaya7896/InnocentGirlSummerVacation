@@ -214,7 +214,7 @@ public class Zombie : EnemyActor {
                 break;
 
             case 2:
-                respwanVector = new Vector3(-0.066f, 0.1f, -1.983f);
+                respwanVector = new Vector3(0.0f, 0.1f, 1.95f);
                 break;
 
         }
