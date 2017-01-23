@@ -200,21 +200,23 @@ public class Zombie : EnemyActor {
 		ScoreManager.Instance.AddScore (1);
 		m_Anim.SetBool ("Death", false);
         //生成位置
-        int randamResPwanPoint = Random.Range(0, 3);
+        int randamResPwanPoint = Random.Range(0, 3); //ランダムで3つの門からでる位置を決める。
+
+        //
+        float randamGatePoint = Random.Range(-0.4f,0.4f);
         Vector3 respwanVector=Vector3.zero;
         switch (randamResPwanPoint)
         {
             case 0:
-                respwanVector = new Vector3(0.0f, 0.1f, -1.95f);
+                respwanVector = new Vector3(randamGatePoint, 0.1f, -1.95f);
                 break;
 
             case 1:
-                respwanVector = new Vector3(-1.95f, 0.1f, 0f);
-
+                respwanVector = new Vector3(-1.95f, 0.1f, randamGatePoint);
                 break;
 
             case 2:
-                respwanVector = new Vector3(0.0f, 0.1f, 1.95f);
+                respwanVector = new Vector3(randamGatePoint, 0.1f, 1.95f);
                 break;
 
         }
