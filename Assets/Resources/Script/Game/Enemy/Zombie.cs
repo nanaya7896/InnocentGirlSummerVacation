@@ -326,6 +326,8 @@ public class Zombie : EnemyActor {
 		moveHash.Add ("oncomplete", "SliderAnimationComplete");
 		iTween.MoveTo(this.gameObject, moveHash);
 		isSlider = true;
+		//向きを強制的に寝かせる
+		transform.Rotate (-90.0f, 0.0f, 0.0f);
     }
 
     /// <summary>
