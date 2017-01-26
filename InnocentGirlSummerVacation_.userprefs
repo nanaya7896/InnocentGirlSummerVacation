@@ -1,19 +1,10 @@
 ﻿<Properties StartupConfiguration="{F77F8F85-E382-7E80-C91F-05025E8DD025}|単体テスト" StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Node.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets/Resources/Script/Game/Player/PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/switchingCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/Enemy/EnemyActor.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/Enemy/Zombie.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Score.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/TimeChangeScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Manager/SceneManage.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Result/ResultManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Script/Game/Node.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Script/_Math.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Script/Game/Enemy/EnemyAI.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Manager/ScoreManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Manager/ControllerManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Node.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Script/Game/Enemy/EnemyActor.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />

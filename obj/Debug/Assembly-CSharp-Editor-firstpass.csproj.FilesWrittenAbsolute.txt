@@ -31,3 +31,4 @@
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll.mdb
+/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.WindowsStandalone.Extensions.dll
