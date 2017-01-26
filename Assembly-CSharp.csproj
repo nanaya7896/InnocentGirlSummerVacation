@@ -63,11 +63,13 @@
      <Compile Include="Assets\Resources\Script\Common\SceneChanger.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
+     <Compile Include="Assets\Resources\Script\Debug\DebugMode.cs" />
      <Compile Include="Assets\Resources\Script\Game\DissorveTest.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyAI.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyActor.cs" />
      <Compile Include="Assets\Resources\Script\Game\Enemy\Zombie.cs" />
      <Compile Include="Assets\Resources\Script\Game\GameManager.cs" />
+     <Compile Include="Assets\Resources\Script\Game\InWaterSliderMove.cs" />
      <Compile Include="Assets\Resources\Script\Game\Node.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\CameraMove.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\InPoolMove.cs" />
@@ -87,6 +89,7 @@
      <Compile Include="Assets\Resources\Script\Result\ResultManager.cs" />
      <Compile Include="Assets\Resources\Script\Title\BGMPlayTool.cs" />
      <Compile Include="Assets\Resources\Script\_Math.cs" />
+     <Compile Include="Assets\Resources\Script\test\DebugEnterAddScore.cs" />
      <Compile Include="Assets\Resources\Script\test\MoveForPlayer.cs" />
      <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
      <Compile Include="Assets\Resources\Script\test\animtest.cs" />

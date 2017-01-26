@@ -2,6 +2,11 @@
 using System.Collections;
 
 public class FllowPlayer : MonoBehaviour {
+
+
+	private Vector3 velocity =Vector3.zero;
+	[SerializeField,Header("目的地までの到達時間")]
+	float speed;
 	[SerializeField,Header("ゆきちゃん")]
 	Transform player=null;
 
@@ -27,6 +32,8 @@ public class FllowPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = m_Player.transform.position + offset;
+		Vector3 targetpos =  m_Player.transform.position + offset;
+		transform.position = Vector3.SmoothDamp (transform.position, targetpos,ref velocity,0.5f);
+	
 	}
 }
