@@ -294,6 +294,7 @@ public class Zombie : EnemyActor {
 			}
 			m_EnemyAI.enemyRotate = this.transform.rotation.eulerAngles;
 			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
+			if(m_EnemyAI.GetisSearchNow())
 			transform.position =new Vector3(m_EnemyAI.GetEnemyPosition().x,m_EnemyAI.GetEnemyPosition().y , m_EnemyAI.GetEnemyPosition().z);
 
         }

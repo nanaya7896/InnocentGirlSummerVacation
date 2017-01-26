@@ -9,7 +9,7 @@ public  class EnemyAI : MonoBehaviour{
 
     public  Vector3 enemyPosition;
 	public LayerMask mask;
-	public GameObject[] targetObj =new GameObject[8];
+	public GameObject[] targetObj =new GameObject[9];
 	public List<Vector3> dir = new List<Vector3> ();
 	public bool idou =false;
 	float d=9999.0f;
@@ -44,11 +44,24 @@ public  class EnemyAI : MonoBehaviour{
         }
     }
 
+	Node nodes =null;
+	Node m_Node
+	{
+		get
+		{
+			if (nodes == null) {
+				nodes = this.GetComponent<Node> ();
+			}
+			return nodes;
+		}
+	}
+
   
 
     void Start()
     {
-        
+		//m_Node.assessment ();
+		//m_Node.SearchInit ();
     }
 
     void Update()
@@ -121,15 +134,7 @@ public  class EnemyAI : MonoBehaviour{
     /// <param name="enemy">Enemy.</param>
     private  void ZombieWalk(float speed,GameObject enemy)
     {
-		if (!idou)
-		{
-			ZombieMove (speed);
-		}
-		else 
-		{
-			AutoMove (speed);
-		}
-
+		AutoMove (speed);
     }
 
 	/// <summary>
@@ -144,10 +149,11 @@ public  class EnemyAI : MonoBehaviour{
 		//単位化(距離要素を取り除く)
 		direction = direction.normalized;
 		Vector3 tmpPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
+
 		//m_EnemyPosition= new Vector3(m_EnemyPosition.x,0.1f,m_EnemyPosition.z);
 		//Debug.Log (tmpPosition.y < 0.08f);
 		if (tmpPosition.y < 0.08f) {
-			NearTargetPosition ();
+			//NearTargetPosition ();
 			idou = true;
 		} else {
 			m_EnemyPosition = tmpPosition;
@@ -157,41 +163,24 @@ public  class EnemyAI : MonoBehaviour{
 
 	private void AutoMove(float speed)
 	{
-		if (!changetarget) 
+		if (idou) {
+			m_Node.SearchEnd ();
+			m_Node.SearchInit ();
+			idou = false;
+		}	
+		if (m_Node.GetisSearch ()) 
 		{
-			Vector3 di = obj.transform.position - m_EnemyPosition;
-			//単位化(距離要素を取り除く)
-			di = di.normalized;
-			m_EnemyPosition = (m_EnemyPosition + (di * speed * Time.deltaTime));
-			//enemy.transform.LookAt (obj.transform);
-			float dista = Vector3.Distance (m_EnemyPosition, obj.transform.position);
-			//Debug.Log (dista);
-			if (dista < 0.1f) 
-			{
-				changetarget = !changetarget;
-				obj = secondObj;
-				secondObj = null;
-			}
-		} 
-		else
+			ZombieMove (speed);
+		} else 
 		{
-			Vector3 di = obj.transform.position - m_EnemyPosition;
-			//単位化(距離要素を取り除く)
-			di = di.normalized;
-			m_EnemyPosition = (m_EnemyPosition + (di * speed * Time.deltaTime));
-			//enemy.transform.LookAt (obj.transform);
-			float dista = Vector3.Distance (m_EnemyPosition, obj.transform.position);
-			//Debug.Log (dista);
-			if (dista < 0.1f) 
-			{
-				changetarget = !changetarget;
-				obj = null;
-				idou = false;
-			}
+			m_Node.SearchUpdate (speed);
 		}
 	}
 
-
+	public bool GetisSearchNow()
+	{
+		return m_Node.GetisSearch ();
+	}
 	private void NearTargetPosition()
 	{
 		for (int i = 0; i < 8; i++) 
