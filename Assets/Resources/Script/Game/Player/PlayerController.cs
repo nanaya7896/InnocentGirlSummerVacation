@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+        IsPlayerOutSlider();
 		if (playerAutoMove) {
 			InWaterAction ();
 			return;
@@ -90,23 +92,14 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
 
-        if (isMove)
-        {
-            PlayerMoving();
-            PlayerRotate();
+		if (isMove) {
+			PlayerMoving ();
+			PlayerRotate ();
+		}
 
-        }
-        if (isInWaterSlider)
-        {
-            if (this.GetComponent<iTween>() == null)
-            {
-                //this.transform.rotation();
-                this.transform.rotation = Quaternion.Euler(0, 0, 0);
-                isInWaterSlider = false;
+       
 
-            }
-        }
-	}
+    }
 
 	void PlayerMoving()
 	{
@@ -166,8 +159,25 @@ public class PlayerController : MonoBehaviour {
 		this.transform.Rotate (0.0f, r, 0.0f);
 	}
 
-
-
+    /// <summary>
+    /// ウォータースライダーから出たか確認
+    /// </summary>
+    void IsPlayerOutSlider()
+    {
+        //ウォータースライダーのフラグが立っているなら
+        if (isInWaterSlider)
+        {
+            //ウォータースライダーのitweenが終わっているなら
+            if (this.GetComponent<iTween>() == null)
+            {
+                this.transform.rotation = Quaternion.Euler(0, 0, 0);
+                isInWaterSlider = false;
+            }
+        }
+    }
+    /// <summary>
+    /// ウォータースライダーに入ったときにitweenを起動させる。
+    /// </summary>
     void PlayerSlider() {
 
         if (this.GetComponent<iTween>() != null)
@@ -178,7 +188,7 @@ public class PlayerController : MonoBehaviour {
 
         moveHash.Add("time",10.0f);
         moveHash.Add("path", iTweenPath.GetPath("WaterSlider1"));
-        moveHash.Add("easetype",iTween.EaseType.easeInQuad);
+        moveHash.Add("easetype",iTween.EaseType.linear);
         moveHash.Add("orienttopath", true);
 		moveHash.Add ("oncompletetarget", this.gameObject);
 		moveHash.Add ("oncomplete", "SliderAnimationComplete");
@@ -241,6 +251,7 @@ public class PlayerController : MonoBehaviour {
 			isInWater = true;
 			break;
 		case "SliderWater":
+                //応急処置
 			if (this.transform.position.y < 0.5f) {
 				break;
 			}
