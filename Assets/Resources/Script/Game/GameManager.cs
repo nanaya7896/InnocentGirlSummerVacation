@@ -158,9 +158,11 @@ public class GameManager : MonoBehaviour {
     void GameOverInit()
     {
         Debug.Log("GameOverInit");
-        FadeManager.Instance.LoadLevel(SceneManage.SceneName.GAMEOVER, 1.0f, false);
+        FadeManager.Instance.LoadLevel(SceneManage.SceneName.GAMEOVER, 5.0f, false);
+		AudioManager.Instance.PlaySE ("ahaha2");
     }
     //
+
 
 
     //==================ここからデバッグモード=============================//

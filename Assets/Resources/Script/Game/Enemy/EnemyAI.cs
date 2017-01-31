@@ -218,34 +218,4 @@ public  class EnemyAI : MonoBehaviour{
     {
         
     }
-
-
-
-	/*string Ray(GameObject enemy)
-	{
-		
-		//ray.direction *= 0.01f;
-		//Rayが衝突したコライダーの情報を得る
-		//ray.direction*=new Vector3(-0.001f,-0.001f,-0.001f);
-		float maxDistance =1.0f;
-		Vector3 distance = (m_Player.transform.position-m_EnemyPosition).normalized;
-		distance.y = -3.0f;
-		//Debug.Log (distance);
-		//Rayの作成
-		Ray ray =new Ray(m_EnemyPosition+new Vector3(0.0f,0.15f,0.0f),distance);
-		// Rayの可視化
-		//Debug.DrawRay(ray.origin, ray.direction, Color.red, 1.0f);
-		if (Physics.Raycast (ray, out hit, maxDistance, mask))
-		{
-			Debug.Log(hit.transform.gameObject.tag);
-		}
-
-		return hit.transform.gameObject.tag;
-
-		//return string.Empty;
-	}*/
-
-
-
-
 }

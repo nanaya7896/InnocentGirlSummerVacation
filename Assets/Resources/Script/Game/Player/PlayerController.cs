@@ -180,6 +180,8 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     void PlayerSlider() {
 
+
+		AudioManager.Instance.PlaySE ("slider");
         if (this.GetComponent<iTween>() != null)
         {
             return;
@@ -202,6 +204,7 @@ public class PlayerController : MonoBehaviour {
 	void SliderAnimationComplete()
 	{
 		playerAutoMove = true;
+		AudioManager.Instance.StopSE ();
 	}
 	void InWaterAction()
 	{
