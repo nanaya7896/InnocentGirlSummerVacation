@@ -126,59 +126,6 @@ public class Zombie : EnemyActor {
 	}
 
     /// <summary>
-    /// Enemyを作成する
-    /// </summary>
-   /* void EnemyCreate()
-    {
-        for (int i = 0; i < EnemyActor.Size; i++)
-        {
-			enemy.Add(Instantiate(Resources.Load<Zombie>("Model/Enemy/zombie_hokou")));
-            if (enemy == null)
-            {
-                Debug.Log(i + "番目のゾンビが生成できませんでした");
-                continue;
-            }
-            //以下情報入力
-            //Enemyの番号
-            enemy[i].ID = i;
-            //Enemyの生存フラグ
-            enemy[i].isAlive = true;
-            //Enemyの移動速度
-            enemy[i].speed = 0.1f;
-            //Eenmyの名前
-            enemy[i].name = "Zombie_" + i;
-            //Enemyの親
-            //enemy[i].transform.parent = m_Parent;
-            //Layerを設定
-            enemy[i].gameObject.layer = LayerMask.NameToLayer("Enemy");
-            enemy[i].gameObject.tag = "Enemy";
-            //服装の切り替え(ここは未完成部分です。また修正します)
-            enemy[i].clothnumber = Resources.Load<Material>("Model/Enemy/Material/Cloth_"+Random.Range(0,3));
-            //enemy[i].GetComponent<Renderer>().material = enemy[i].clothnumber;
-            //初期位置の設定
-			if (i < 25) {
-				enemy [i].transform.position = new Vector3(Random.Range(-2.0f, 2.0f), this.transform.position.y, Random.Range(-2.0f, -1.5f));
-			} else {
-				enemy [i].transform.position = new Vector3(Random.Range(-2.0f, 2.0f), this.transform.position.y, Random.Range(1.5f, 2.0f));			
-			}
-			//enemy[i].GetComponent<Rigidbody> ().useGravity = false;
-            //AIのスクリプトがついたオブジェクトを格納
-			enemy[i].transform.gameObject.AddComponent<EnemyAI>();
-			enemy [i].GetComponent<EnemyAI> ().mask = 1<<12;
-			for(int j=0;j<8;j++)
-			{
-				enemy [i].GetComponent<EnemyAI> ().targetObj [j] = GameObject.Find ("Target"+(j+1));
-			}
-            //enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
-            //ナビメッシュコンポーネントをつけて自動移動処理を追加する
-            //以下ナビメッシュの設定
-			//enemy[i].gameObject.AddComponent<NavMeshAgent>();
-			//enemy[i].gameObject.GetComponent<NavMeshAgent> ().speed = 0.1f;
-
-        }
-    }
-*/
-    /// <summary>
     /// ゲームリトライ時等に一度リセットしなければならないものを入れる
     /// </summary>
     public void Reset()
@@ -188,7 +135,7 @@ public class Zombie : EnemyActor {
         isHit = false;
         isStepUp = false;
         stateMachine.SetState(State.IDEL);
-        //EnemyCreate();
+      
     }
 
 

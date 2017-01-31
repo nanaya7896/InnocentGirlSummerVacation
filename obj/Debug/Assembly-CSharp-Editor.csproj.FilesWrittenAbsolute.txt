@@ -31,3 +31,6 @@
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.WindowsStandalone.Extensions.dll
+/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/Assembly-CSharp-Editor-firstpass.dll
+/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/Assembly-CSharp-Editor-firstpass.dll.mdb

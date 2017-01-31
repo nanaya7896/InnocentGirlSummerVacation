@@ -30,7 +30,10 @@ public class Node : MonoBehaviour {
 	//各々の距離を算出
 	public List<float> l_distance = new List<float> ();
 	//線引く
-	LineRenderer  rend;
+	//LineRenderer  rend;
+	int targetnum=0;
+	[SerializeField]
+	bool isSearchEnd=false;
 
 	// Use this for initialization
 	void Start () {
@@ -40,7 +43,7 @@ public class Node : MonoBehaviour {
 		}
 		assessment ();
 		//searchTarget.Add (null);*/
-		rend =this.GetComponent<LineRenderer>();
+		//rend =this.GetComponent<LineRenderer>();
 		SearchInit ();
 		prevPlayerNerObject = GoalPosition;
 	}
@@ -64,9 +67,6 @@ public class Node : MonoBehaviour {
 	/// </summary>
 	public void Reset()
 	{
-		for (int i = 0; i < searchTarget.Count; i++) {
-			searchTarget [i] = null;
-		}
 		targetnum = 0;
 
 		//nearDistance = 9999.0f;
@@ -80,6 +80,7 @@ public class Node : MonoBehaviour {
 	/// </summary>
 	public void SearchInit()
 	{
+		searchTarget.Clear ();
 		//始点
 		startPosition = NearisTarget(this.transform.position);
 		//スタックを頭に追加
@@ -104,11 +105,6 @@ public class Node : MonoBehaviour {
 		}
 		if (searchTarget [tmp].ToString() == GoalPosition.ToString())
 		{
-			
-			//searchTarget.Add (GoalPosition.gameObject);
-			rend.SetVertexCount(searchTarget.Count);
-			for(int i=0;i<searchTarget.Count;i++)
-				rend.SetPosition (i, searchTarget [i].transform.position);
 			return;
 		}
 		FindGetTargetObject ();
@@ -155,9 +151,7 @@ public class Node : MonoBehaviour {
 
 
 
-	int targetnum=0;
-	[SerializeField]
-	bool isSearchEnd=false;
+
 	public bool GetisSearch()
 	{
 		return isSearchEnd;
@@ -176,10 +170,10 @@ public class Node : MonoBehaviour {
 				isSearchEnd = true;
 				return;
 			}
+
 			//ターゲットとの距離の差分を算出
 			Vector3 tmp = searchTarget [targetnum].transform.position - transform.position;
 			tmp = tmp.normalized;
-
 			//自身のポジション＋（距離の差分　＊　キャラスピード　＊　時間）
 			transform.position = transform.position + (tmp * speed * Time.deltaTime);
 			float dis = Vector3.Distance (transform.position, searchTarget [targetnum].transform.position);
@@ -222,6 +216,9 @@ public class Node : MonoBehaviour {
 	void Next()
 	{
 		targetnum++;
+		if (targetnum > 8) {
+			isSearchEnd = true;
+		}
 	}
 
 	void Move ()
