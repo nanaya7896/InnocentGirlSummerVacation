@@ -26,21 +26,21 @@ public class FllowPlayer : MonoBehaviour {
     public float offset;
 
     [Header("カメラとプレイヤーの高さの相対距離"), SerializeField]
+    public float rotate;
+
+    [Header("カメラとプレイヤーの高さの相対距離（高さ）"), SerializeField]
     public float height;
 
-
-    public float rotate;
-  
-  
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        rotate += ControllerManager.Instance.GetRightHorizontal()*Time.deltaTime;
         
         Vector3 targetpos;
-
         targetpos = m_Player.position + new Vector3(Mathf.Sin(rotate) * offset, height,Mathf.Cos(rotate)*offset);
 
         transform.LookAt(m_Player.position);
