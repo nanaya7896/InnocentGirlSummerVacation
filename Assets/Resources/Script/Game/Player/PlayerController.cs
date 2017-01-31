@@ -208,7 +208,6 @@ public class PlayerController : MonoBehaviour {
 		this.GetComponent<CapsuleCollider> ().enabled = true;
 		if (dista > 1.5f) 
 		{
-			Debug.Log (dista);
 			this.gameObject.GetComponent<InPoolMove> ().enabled = false;
 			float x = -0.9770367f - transform.position.x;
 			float y = 0.02354169f - transform.position.y;
