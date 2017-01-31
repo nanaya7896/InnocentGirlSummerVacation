@@ -24,30 +24,34 @@ public class FllowPlayer : MonoBehaviour
     }
 
     [Header("カメラとプレイヤーの相対距離"), SerializeField]
-    public float offset;
+    public Vector3 offset;
 
-    [Header("カメラとプレイヤーの高さの相対距離"), SerializeField]
+    [Header("カメラの回転"), SerializeField]
     public float rotate;
 
-    [Header("カメラとプレイヤーの高さの相対距離（高さ）"), SerializeField]
-    public float height;
+    [Header("カメラの回転速度"), SerializeField]
+    public float rotateSpeed;
 
     // Use this for initialization
     void Start()
     {
+        offset = transform.position - m_Player.position;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        rotate += ControllerManager.Instance.GetRightHorizontal() * Time.deltaTime;
+        Vector3 targetpos = m_Player.position + offset;
 
-        Vector3 targetpos;
-        targetpos = m_Player.position + new Vector3(Mathf.Sin(rotate) * offset, height, Mathf.Cos(rotate) * offset);
+        rotate += ControllerManager.Instance.GetRightHorizontal() * Time.deltaTime * rotateSpeed;
 
-        transform.LookAt(m_Player.position);
-        transform.position = Vector3.SmoothDamp(transform.position, targetpos, ref velocity, 0.5f);
+        targetpos = m_Player.position + new Vector3(Mathf.Sin(rotate) * offset.z,
+                                                    offset.y,
+                                                    Mathf.Cos(rotate) * offset.z);
+
+        transform.eulerAngles = new Vector3(10, rotate * Mathf.Rad2Deg, 0);
+        transform.position = Vector3.SmoothDamp(transform.position, targetpos, ref velocity, speed);
 
     }
 }
