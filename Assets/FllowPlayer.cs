@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+///    カメラコントローラー
+/// </summary>
 public class FllowPlayer : MonoBehaviour
 {
 
-
     private Vector3 velocity = Vector3.zero;
+
     [SerializeField, Header("目的地までの到達時間")]
     float speed;
+
     [SerializeField, Header("ゆきちゃん")]
     Transform player = null;
-
     Transform m_Player
     {
         get
@@ -23,11 +26,12 @@ public class FllowPlayer : MonoBehaviour
         }
     }
 
+
     [Header("カメラとプレイヤーの相対距離"), SerializeField]
     public Vector3 offset;
 
     [Header("カメラの回転"), SerializeField]
-    public float rotate;
+    public float rotateCamera;
 
     [Header("カメラの回転速度"), SerializeField]
     public float rotateSpeed;
@@ -41,16 +45,16 @@ public class FllowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //回転を更新する
+        rotateCamera += ControllerManager.Instance.GetRightHorizontal() * Time.deltaTime * rotateSpeed;
 
-        Vector3 targetpos = m_Player.position + offset;
-
-        rotate += ControllerManager.Instance.GetRightHorizontal() * Time.deltaTime * rotateSpeed;
-
-        targetpos = m_Player.position + new Vector3(Mathf.Sin(rotate) * offset.z,
+        //回転したカメラのプレイヤーを中心として位置取りの計算をcos sinを使う
+        Vector3 targetpos = m_Player.position + new Vector3(Mathf.Sin(rotateCamera) * offset.z,
                                                     offset.y,
-                                                    Mathf.Cos(rotate) * offset.z);
+                                                    Mathf.Cos(rotateCamera) * offset.z);
 
-        transform.eulerAngles = new Vector3(10, rotate * Mathf.Rad2Deg, 0);
+        //回転及び座標をカメラに更新する
+        transform.eulerAngles = new Vector3(10, rotateCamera * Mathf.Rad2Deg, 0);
         transform.position = Vector3.SmoothDamp(transform.position, targetpos, ref velocity, speed);
 
     }
