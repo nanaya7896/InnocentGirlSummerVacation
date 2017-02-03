@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour {
         moveHash.Add("time",10.0f);
         moveHash.Add("path", iTweenPath.GetPath("WaterSlider1"));
         moveHash.Add("easetype",iTween.EaseType.linear);
-        moveHash.Add("orienttopath", true);
+       // moveHash.Add("orienttopath", true);
 		moveHash.Add ("oncompletetarget", this.gameObject);
 		moveHash.Add ("oncomplete", "SliderAnimationComplete");
         iTween.MoveTo(this.gameObject, moveHash);

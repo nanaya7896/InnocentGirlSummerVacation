@@ -98,6 +98,7 @@ public class EnemyActor : MonoBehaviour{
 		}
 
 		enemy [num].transform.gameObject.AddComponent<Node> ();
+        //enemy[num].gameObject.AddComponent<LookMove>();
 		//enemy [num].transform.gameObject.AddComponent<LineRenderer> ();
 		//enemy[i].enemyAIObj = GameObject.FindWithTag("EnemyAI").transform;
 		//ナビメッシュコンポーネントをつけて自動移動処理を追加する

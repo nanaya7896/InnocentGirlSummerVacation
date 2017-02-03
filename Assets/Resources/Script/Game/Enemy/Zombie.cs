@@ -262,19 +262,22 @@ public class Zombie : EnemyActor {
     /// </summary>
     void SliderInit()
     {
+        //階段で使った動いた方向に向くコンポーネントを削除
+         Destroy(GetComponent<LookMove>());
+
         isMove = false;
 		this.GetComponent<Rigidbody> ().useGravity = false;
 		var moveHash = new Hashtable();
 		moveHash.Add("time",10.0f);
 		moveHash.Add("path", iTweenPath.GetPath("WaterSlider1"));
 		moveHash.Add("easetype",iTween.EaseType.easeInQuad);
-		moveHash.Add("orienttopath",true);
+		//moveHash.Add("orienttopath",true);
 		moveHash.Add ("oncompletetarget", this.gameObject);
 		moveHash.Add ("oncomplete", "SliderAnimationComplete");
 		iTween.MoveTo(this.gameObject, moveHash);
 		isSlider = true;
-		//向きを強制的に寝かせる
-		transform.Rotate (-90.0f, 0.0f, 0.0f);
+        //向きを強制的に寝かせる
+        transform.Rotate(-90.0f, 0.0f, 0.0f);
     }
 
     /// <summary>
@@ -289,6 +292,8 @@ public class Zombie : EnemyActor {
             //沈む処理へ移行
             stateMachine.SetState(State.DROWNED);
         }
+
+   
     }
 
     /// <summary>
@@ -299,6 +304,7 @@ public class Zombie : EnemyActor {
         //スライダー状態を切る
      	isSlider = false;   
 		this.GetComponent<Rigidbody> ().useGravity = true;
+       
     }
 
     /// <summary>
@@ -420,13 +426,14 @@ public class Zombie : EnemyActor {
 		}
 		this.GetComponent<Rigidbody> ().useGravity = false;
 		var moveHash = new Hashtable();
-		moveHash.Add("time",8.0f);
+		moveHash.Add("time",18.0f);
 		moveHash.Add("path", iTweenPath.GetPath("StepUp1"));
 		moveHash.Add("easetype",iTween.EaseType.easeInSine);
-		moveHash.Add("orienttopath",false);
+		//moveHash.Add("orienttopath",false);
 		moveHash.Add ("oncompletetarget", this.gameObject);
 		moveHash.Add ("oncomplete", "AnimatioonComplete");
 		iTween.MoveTo(this.gameObject, moveHash);
+        this.transform.gameObject.AddComponent<LookMove>();
 	}
 
 	void AnimatioonComplete()
