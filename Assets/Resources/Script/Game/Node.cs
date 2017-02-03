@@ -187,7 +187,8 @@ public class Node : MonoBehaviour {
 			newRotation.x = 0f;
 			newRotation.z = 0f;
 			//エウラー角を角度に入れる
-			transform.rotation = Quaternion.Euler (newRotation);
+			//補完をしながら進行方向に向きを変える
+			transform.rotation =Quaternion.Slerp(transform.rotation,Quaternion.Euler(newRotation),Time.deltaTime);
 			//距離がターゲットの近づいたら
 			if (dis < 0.1f) {
 				Next ();
