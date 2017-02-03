@@ -46,6 +46,8 @@ public class Node : MonoBehaviour {
 		//rend =this.GetComponent<LineRenderer>();
 		SearchInit ();
 		prevPlayerNerObject = GoalPosition;
+
+		prevPosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -156,6 +158,8 @@ public class Node : MonoBehaviour {
 	{
 		return isSearchEnd;
 	}
+	public Vector3 prevPosition;
+
 	/// <summary>
 	/// サーチした結果からゴールまでの経路を移動する
 	/// </summary>
@@ -177,11 +181,19 @@ public class Node : MonoBehaviour {
 			//自身のポジション＋（距離の差分　＊　キャラスピード　＊　時間）
 			transform.position = transform.position + (tmp * speed * Time.deltaTime);
 			float dis = Vector3.Distance (transform.position, searchTarget [targetnum].transform.position);
+			//侵攻方向を取得する
+			var newRotation = Quaternion.LookRotation (transform.position-prevPosition).eulerAngles;
+			//x,zは必要ないので初期化
+			newRotation.x = 0f;
+			newRotation.z = 0f;
+			//エウラー角を角度に入れる
+			transform.rotation = Quaternion.Euler (newRotation);
 			//距離がターゲットの近づいたら
 			if (dis < 0.1f) {
 				Next ();
 				return;
 			}
+			prevPosition = transform.position;
 		}
 	}
 

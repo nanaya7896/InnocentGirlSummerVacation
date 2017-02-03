@@ -227,6 +227,8 @@ public class Zombie : EnemyActor {
 		this.transform.Rotate (Vector3.zero);
     }
 
+
+
     /// <summary>
     /// 歩きの更新処理
     /// <comment>プレイヤーを常に追いかけ続けるステート</comment>
@@ -234,17 +236,22 @@ public class Zombie : EnemyActor {
     void WalkUpdate()
     {
 		if(!isStepUp)
-        {
+		{
+
+			//侵攻方向を取得する
+			var newRotation = Quaternion.LookRotation (Camera.main.transform.position - transform.position).eulerAngles;
+			//x,zは必要ないので初期化
+			newRotation.x = 0f;
+			newRotation.z = 0f;
+			//エウラー角を角度に入れる
+			transform.rotation = Quaternion.Euler (newRotation);
 			m_EnemyAI.m_EnemyPosition = this.transform.position;
-			if (0.2f< m_Player.transform.position.y) {
-				m_EnemyAI.transform.LookAt (transform.forward);
-			} else {
-				m_EnemyAI.transform.LookAt (m_Player);
-			}
-			m_EnemyAI.enemyRotate = this.transform.rotation.eulerAngles;
+			//m_EnemyAI.enemyRotate = this.transform.rotation.eulerAngles;
 			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
-			if(m_EnemyAI.GetisSearchNow())
-			transform.position =new Vector3(m_EnemyAI.GetEnemyPosition().x,m_EnemyAI.GetEnemyPosition().y , m_EnemyAI.GetEnemyPosition().z);
+			if (m_EnemyAI.GetisSearchNow ()) {
+				transform.position = new Vector3 (m_EnemyAI.GetEnemyPosition ().x, m_EnemyAI.GetEnemyPosition ().y, m_EnemyAI.GetEnemyPosition ().z);
+			}
+
 
         }
     }
