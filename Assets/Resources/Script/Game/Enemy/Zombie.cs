@@ -238,8 +238,8 @@ public class Zombie : EnemyActor {
 		if(!isStepUp)
 		{
 
-			//侵攻方向を取得する
-			var newRotation = Quaternion.LookRotation (Camera.main.transform.position - transform.position).eulerAngles;
+			//進行方向を取得する
+			var newRotation = Quaternion.LookRotation (m_Player.transform.position - transform.position).eulerAngles;
 			//x,zは必要ないので初期化
 			newRotation.x = 0f;
 			newRotation.z = 0f;

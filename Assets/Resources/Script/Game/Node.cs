@@ -181,7 +181,7 @@ public class Node : MonoBehaviour {
 			//自身のポジション＋（距離の差分　＊　キャラスピード　＊　時間）
 			transform.position = transform.position + (tmp * speed * Time.deltaTime);
 			float dis = Vector3.Distance (transform.position, searchTarget [targetnum].transform.position);
-			//侵攻方向を取得する
+			//進行方向を取得する
 			var newRotation = Quaternion.LookRotation (transform.position-prevPosition).eulerAngles;
 			//x,zは必要ないので初期化
 			newRotation.x = 0f;
