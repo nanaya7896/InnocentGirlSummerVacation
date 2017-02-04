@@ -316,7 +316,7 @@ public class Zombie : EnemyActor {
         //階段で使った動いた方向に向くコンポーネントを削除
         Destroy(GetComponent<LookMove>());
         capsule.enabled = true;
-        transform.Rotate(90f,0f,0fw);
+        transform.Rotate(90f,0f,0f);
     }
 
     /// <summary>

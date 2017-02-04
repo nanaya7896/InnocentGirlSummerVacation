@@ -7,6 +7,8 @@ public class TimeChangeScript : MonoBehaviour {
 
 
 	public bool isTimeStart=false;
+
+    public bool isTimeStop = false;
     [SerializeField]
     private float LimitTime;
     //数字を保存するリスト
@@ -16,6 +18,8 @@ public class TimeChangeScript : MonoBehaviour {
     //時間を描画するためのSpriteRendererコンポーネントを持つGameObject
     [SerializeField]
     List<GameObject> one = new List<GameObject>();
+
+    private PlayerController psc;
 	
     void Start () {
         LimitTime = 90.0f;
@@ -30,16 +34,25 @@ public class TimeChangeScript : MonoBehaviour {
         {
             one.Add(GameObject.Find("/UI/Canvas/" + i));
         }
+
+        psc = GameObject.Find("GameManager/yuki_taiki").GetComponent<PlayerController>();
+        
 	}
 
 
 	
 	// Update is called once per frame
 	void Update () {
+
+       isTimeStop =psc.isInWaterSlider;
+
 		if (isTimeStart) 
         {
-			LimitTime -= Time.deltaTime;
-			changeTimeSprite (LimitTime);
+            if (!isTimeStop)
+            {
+                LimitTime -= Time.deltaTime;
+                changeTimeSprite(LimitTime);
+            }
 		}
 	}
 

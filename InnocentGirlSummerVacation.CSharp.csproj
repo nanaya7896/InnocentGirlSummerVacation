@@ -88,6 +88,7 @@
     <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
     <Compile Include="Assets\Resources\Script\Debug\DebugMode.cs" />
     <Compile Include="Assets\Resources\Script\Game\DissorveTest.cs" />
+    <Compile Include="Assets\Resources\Script\Game\Enemy\AnimationStartTimeRandam.cs" />
     <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyActor.cs" />
     <Compile Include="Assets\Resources\Script\Game\Enemy\Zombie.cs" />
