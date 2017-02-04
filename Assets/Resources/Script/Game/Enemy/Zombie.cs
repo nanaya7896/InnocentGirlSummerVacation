@@ -101,6 +101,7 @@ public class Zombie : EnemyActor {
 
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
 
+    private CapsuleCollider capsule;
     void Awake()
     {
         stateMachine.Add(State.IDEL, IdelEnd, IdelUpdate, IdelEnd);
@@ -155,15 +156,15 @@ public class Zombie : EnemyActor {
         switch (randamResPwanPoint)
         {
             case 0:
-                respwanVector = new Vector3(randamGatePoint, 0.1f, -1.95f);
+                respwanVector = new Vector3(randamGatePoint, 0.5f, -1.95f);
                 break;
 
             case 1:
-                respwanVector = new Vector3(-1.95f, 0.1f, randamGatePoint);
+                respwanVector = new Vector3(-1.95f, 0.5f, randamGatePoint);
                 break;
 
             case 2:
-                respwanVector = new Vector3(randamGatePoint, 0.1f, 1.95f);
+                respwanVector = new Vector3(randamGatePoint, 0.5f, 1.95f);
                 break;
 
         }
@@ -272,9 +273,7 @@ public class Zombie : EnemyActor {
     /// </summary>
     void SliderInit()
     {
-        //階段で使った動いた方向に向くコンポーネントを削除
-         Destroy(GetComponent<LookMove>());
-
+       
         isMove = false;
 		this.GetComponent<Rigidbody> ().useGravity = false;
 		var moveHash = new Hashtable();
@@ -314,7 +313,10 @@ public class Zombie : EnemyActor {
         //スライダー状態を切る
      	isSlider = false;   
 		this.GetComponent<Rigidbody> ().useGravity = true;
-       
+        //階段で使った動いた方向に向くコンポーネントを削除
+        Destroy(GetComponent<LookMove>());
+        capsule.enabled = true;
+        transform.Rotate(90f,0f,0fw);
     }
 
     /// <summary>
@@ -443,7 +445,9 @@ public class Zombie : EnemyActor {
 		moveHash.Add ("oncompletetarget", this.gameObject);
 		moveHash.Add ("oncomplete", "AnimatioonComplete");
 		iTween.MoveTo(this.gameObject, moveHash);
-        this.transform.gameObject.AddComponent<LookMove>();
+       this.transform.gameObject.AddComponent<LookMove>();
+        capsule = GetComponent<CapsuleCollider>();
+        capsule.enabled = false;
 	}
 
 	void AnimatioonComplete()
