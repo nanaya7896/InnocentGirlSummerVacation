@@ -92,13 +92,10 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
 
-		if (isMove) {
+		if (isMove && !isHit) {
 			PlayerMoving ();
 			PlayerRotate ();
 		}
-
-       
-
     }
 
 	void PlayerMoving()
@@ -148,8 +145,6 @@ public class PlayerController : MonoBehaviour {
 		{
 			m_Anim.SetBool ("isWalk", false);
 		}
-
-
 	}
 
 	void PlayerRotate()
@@ -179,7 +174,6 @@ public class PlayerController : MonoBehaviour {
     /// ウォータースライダーに入ったときにitweenを起動させる。
     /// </summary>
     void PlayerSlider() {
-
 
 		AudioManager.Instance.PlaySE ("slider");
         if (this.GetComponent<iTween>() != null)
