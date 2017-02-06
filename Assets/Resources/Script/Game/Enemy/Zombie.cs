@@ -412,7 +412,7 @@ public class Zombie : EnemyActor {
 	private string tagName;
 	void OnCollisionEnter(Collision col)
 	{
-		Debug.Log (col.gameObject.tag);
+		//Debug.Log (col.gameObject.tag);
 		/*if (tagName == col.gameObject.tag) {
 			return;
 		}*/

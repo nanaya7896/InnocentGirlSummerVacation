@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour {
 
     void FirstUpdate()
     {
-        Debug.Log("FirstUpdate");
+        //Debug.Log("FirstUpdate");
         if (m_Time.GetComponent<TimeChangeScript>().isTimeStart)
         {
             //ステートをGameに移行
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour {
     /*ここからGameステート*/
     void GameInit()
     {
-        Debug.Log("GameInit");
+       // Debug.Log("GameInit");
        
 		m_PlayerController.GetComponent<PlayerController>().isMove =true;
 		for (int i = 0; i < EnemyActor.Size; i++) {
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour {
 
     void GameUpdate()
     {
-        Debug.Log("GameUpdate");
+       // Debug.Log("GameUpdate");
         if (m_Time.GetComponent<TimeChangeScript>().GetCurrentLimitTime() <= 0.0f)
         {
             stateMachine.SetState(State.End);
@@ -145,19 +145,19 @@ public class GameManager : MonoBehaviour {
 
     void GameEnd()
     {
-        Debug.Log("GameEnd");
+       // Debug.Log("GameEnd");
     }
     /*ここまで*/
 
     void EndInit()
     {
-        Debug.Log("EndInit");
+        //Debug.Log("EndInit");
         FadeManager.Instance.LoadLevel(SceneManage.SceneName.CLEAR, 1.0f, false);
     }
 
     void GameOverInit()
     {
-        Debug.Log("GameOverInit");
+        //Debug.Log("GameOverInit");
         FadeManager.Instance.LoadLevel(SceneManage.SceneName.GAMEOVER, 5.0f, false);
 		AudioManager.Instance.PlaySE ("ahaha2");
     }

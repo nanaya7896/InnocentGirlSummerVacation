@@ -153,7 +153,7 @@ public class Node : MonoBehaviour {
 
 	public bool GetisNearPlayer()
 	{
-		return Vector3.Distance (transform.position, m_Player.transform.position) < 0.5f;
+		return Vector3.Distance (transform.position, m_Player.transform.position) < 1.0f;
 	}
 
 

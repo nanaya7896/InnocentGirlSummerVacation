@@ -45,8 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BloodUI.cs" />
-     <Compile Include="Assets\FllowPlayer.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\FaceUpdate.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\IdleChanger.cs" />
@@ -54,6 +52,8 @@
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\ImportAsset\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
      <Compile Include="Assets\ImportAsset\p5-MSAFluid-master\src\msafluid\MSAFluidSolver2D.cs" />
+     <Compile Include="Assets\Resources\BloodUI.cs" />
+     <Compile Include="Assets\Resources\RayCast.cs" />
      <Compile Include="Assets\Resources\Script\Clear\ClearSE.cs" />
      <Compile Include="Assets\Resources\Script\Clear\SpriteAutoChange.cs" />
      <Compile Include="Assets\Resources\Script\Common\CreateMasterScript.cs" />
@@ -97,7 +97,8 @@
      <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
      <Compile Include="Assets\Resources\Script\test\animtest.cs" />
      <Compile Include="Assets\Resources\Script\test\test.cs" />
-     <Compile Include="Assets\UVMove.cs" />
+     <Compile Include="Assets\Resources\UVMove.cs" />
+     <Compile Include="Assets\Scene\FllowPlayer.cs" />
      <Compile Include="Assets\iTweenEditor\Examples\StartAndStopTween.cs" />
      <Compile Include="Assets\iTweenEditor\Helper Classes\EventParamMappings.cs" />
      <Compile Include="Assets\iTweenEditor\Helper Classes\Vector3OrTransform.cs" />
@@ -110,6 +111,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\ImportAsset\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
+     <None Include="Assets\shader\Sample.shader" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\shader\Dissolve.shader" />
