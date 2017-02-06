@@ -46,6 +46,19 @@ public class Zombie : EnemyActor {
         }
     }
 
+	ZombieCountScript count=null;
+	ZombieCountScript m_Count
+	{
+		get
+		{
+			if (count == null) 
+			{
+				count = GameObject.Find ("/UI/Canvas/ZombieCountImage").transform.GetComponent<ZombieCountScript> ();
+			}
+			return count;
+		}
+	}
+
     /// <summary>
     /// エネミーと衝突したか
     /// </summary>
@@ -62,6 +75,9 @@ public class Zombie : EnemyActor {
 	[SerializeField]
     private bool isStepUp = false;
 
+	float time=0.0f;
+	bool isFinish=false;
+	bool isCount=false;
 
 	private int targetnum =0;
     /// <summary>
@@ -124,6 +140,20 @@ public class Zombie : EnemyActor {
     void Update () {
         stateMachine.Update();
         //setState();
+		if (isFinish) {
+			isFinish = m_Count.Reset ();
+			if (!isFinish) {
+				isCount = false;
+			}
+		}
+
+
+		if (isCount) {
+			if (Time.timeSinceLevelLoad - time > 3.0f) {
+				m_Count.SetCount ();
+				isFinish = true;
+			}
+		}
 	}
 
     /// <summary>
@@ -359,12 +389,18 @@ public class Zombie : EnemyActor {
 		}
     }
 
+
+
     /// <summary>
     /// 溺れ終わった後の終了処理
     /// </summary>
     void DrownedEnd()
     {
 		reviveTime = 2.0f;
+		m_Count.AddZombieCoumt ();
+
+		time = Time.timeSinceLevelLoad;
+		isCount = true;
         //沈む処理が終了したら生き返る処理
 		Revive();
     }

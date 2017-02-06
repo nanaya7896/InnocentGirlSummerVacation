@@ -32,7 +32,7 @@ public class TimeChangeScript : MonoBehaviour {
         //子オブジェクトの数だけ数字用GameObjectを取得
         for (int i = 1; i < transform.childCount * 10; i = i * 10)
         {
-            one.Add(GameObject.Find("/UI/Canvas/" + i));
+            one.Add(GameObject.Find("/UI/Canvas/TimeUI/" + i));
         }
 
         psc = GameObject.Find("GameManager/yuki_taiki").GetComponent<PlayerController>();

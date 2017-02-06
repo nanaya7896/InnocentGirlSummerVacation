@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     void Awake()
     {
+		Application.targetFrameRate = 60;
+
         stateMachine.Add(State.First, FirstInit, FirstUpdate, FirstEnd);
         stateMachine.Add(State.Game,GameInit,GameUpdate,GameEnd);
         stateMachine.Add(State.End,EndInit,null,null);
@@ -98,7 +100,7 @@ public class GameManager : MonoBehaviour {
         m_Time.GetComponent<TimeChangeScript>().Reset();
 		m_PlayerController.GetComponent<PlayerController>().Reset();
 		//AudioManager.Instance.StopSE();
-        AudioManager.Instance.PlaySE("count");
+       // AudioManager.Instance.PlaySE("count");
 
     }
 
