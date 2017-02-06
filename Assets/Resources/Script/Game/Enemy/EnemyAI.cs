@@ -56,7 +56,18 @@ public  class EnemyAI : MonoBehaviour{
 		}
 	}
 
-  
+	BloodUI bloodUI=null;
+	BloodUI m_BloodUI
+	{
+		get
+		{
+			if (bloodUI == null) 
+			{
+				bloodUI = GameObject.Find ("/UI/Canvas/Blood").transform.GetComponent<BloodUI> ();
+			}
+			return bloodUI;
+		}
+	}
 
     void Start()
     {
@@ -66,7 +77,14 @@ public  class EnemyAI : MonoBehaviour{
 
     void Update()
     {
-        
+		float tmp=Vector3.Distance(transform.position,m_Player.transform.position);
+
+
+		if (tmp < 1.0f) {
+			tmp -= 1.0f;
+			tmp = Mathf.Abs (tmp);
+			m_BloodUI.ChangeAlpha (tmp);
+		}
     }
 
     //Zombieがする行動の一覧

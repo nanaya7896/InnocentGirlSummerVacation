@@ -7,10 +7,11 @@ public class PlayerController : MonoBehaviour {
 	public bool isMove = false;
 	//ゾンビとhitしたか
 	public bool isHit = false;
-
+	//WaterSLider内いいるか
     public bool isInWaterSlider = false;
 
     string bTagName;
+
 
 	//アニメーター用変数
 	bool isWalk=false;
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 Camforward;
 	private Vector3 ido;
 	private Vector3 Animdir = Vector3.zero;
+
+
 
 	public float runspeed = 0.0001f;
 
