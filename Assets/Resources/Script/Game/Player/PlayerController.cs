@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour {
 			ido = v * Camforward * runspeed + h * CamPos.right * runspeed;
 			//Debug.Log(ido);
 		}
-					
+
 		//現在のポジションにidoのトランスフォームの数値を入れる
 		transform.position = new Vector3(
 			transform.position.x + ido.x,
