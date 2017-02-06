@@ -161,7 +161,7 @@ public class Zombie : EnemyActor {
 
 
 		if (isCount) {
-			if (Time.timeSinceLevelLoad - time > 3.0f) {
+			if (Time.timeSinceLevelLoad - time > 10.0f) {
 				m_Count.SetCount ();
 				isFinish = true;
 			}
