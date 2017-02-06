@@ -44,4 +44,9 @@ public class BloodUI : MonoBehaviour {
 		m_BloodUI.color = new Color(1.0f,1.0f,1.0f,val);
 	}
 
+	public void Reset()
+	{
+		m_BloodUI.color =new Color(1.0f,1.0f,1.0f,0.0f);
+	}
+
 }

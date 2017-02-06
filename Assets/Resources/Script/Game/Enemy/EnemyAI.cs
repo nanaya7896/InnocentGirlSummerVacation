@@ -12,11 +12,14 @@ public  class EnemyAI : MonoBehaviour{
 	public GameObject[] targetObj =new GameObject[9];
 	public List<Vector3> dir = new List<Vector3> ();
 	public bool idou =false;
-	float d=9999.0f;
+
 	public GameObject obj;
 	public GameObject secondObj;
 	public bool changetarget=false;
 	RaycastHit hit;
+
+	float d=9999.0f;
+
     public Vector3 m_EnemyPosition
     {
         get
@@ -174,13 +177,21 @@ public  class EnemyAI : MonoBehaviour{
 			//NearTargetPosition ();
 			idou = true;
 		} else {
-			m_EnemyPosition = tmpPosition;
+			transform.position = tmpPosition;
 		}
 		//enemy.transform.LookAt (m_Player);
 	}
 
 	private void AutoMove(float speed)
 	{
+		
+		if (m_Node.GetisNearPlayer ()) 
+		{
+			m_Node.SearchEnd ();
+			ZombieMove (speed);
+			return;
+		}
+
 		if (idou) {
 			m_Node.SearchEnd ();
 			m_Node.SearchInit ();

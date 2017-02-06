@@ -252,9 +252,9 @@ public class Zombie : EnemyActor {
 			m_EnemyAI.m_EnemyPosition = this.transform.position;
 			//m_EnemyAI.enemyRotate = this.transform.rotation.eulerAngles;
 			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
-			if (m_EnemyAI.GetisSearchNow ()) {
+			/*if (m_EnemyAI.GetisSearchNow ()) {
 				transform.position = new Vector3 (m_EnemyAI.GetEnemyPosition ().x, m_EnemyAI.GetEnemyPosition ().y, m_EnemyAI.GetEnemyPosition ().z);
-			}
+			}*/
 
 
         }
@@ -433,7 +433,8 @@ public class Zombie : EnemyActor {
 
 	void enemyStepUpMethod()
 	{
-		if (this.GetComponent<iTween> () != null) {
+		if (this.GetComponent<iTween> () != null) 
+		{
 			return;
 		}
 		this.GetComponent<Rigidbody> ().useGravity = false;
