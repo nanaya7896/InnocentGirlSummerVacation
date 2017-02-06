@@ -59,6 +59,18 @@ public class Zombie : EnemyActor {
 		}
 	}
 
+	CapsuleCollider capsel =null;
+	CapsuleCollider m_Capsel
+	{
+		get
+		{
+			if (capsel == null) {
+				capsel = GetComponent<CapsuleCollider> ();
+			}
+			return capsel;
+		}
+	}
+
     /// <summary>
     /// エネミーと衝突したか
     /// </summary>
@@ -223,7 +235,9 @@ public class Zombie : EnemyActor {
     /// </summary>
     void IdelInit()
     {
+		m_Capsel.enabled = true;
 		this.transform.Rotate (Vector3.zero);
+
     }
 
     /// <summary>
@@ -303,6 +317,7 @@ public class Zombie : EnemyActor {
     /// </summary>
     void SliderInit()
     {
+		
        
         isMove = false;
 		this.GetComponent<Rigidbody> ().useGravity = false;
@@ -462,6 +477,7 @@ public class Zombie : EnemyActor {
 			enemyStepUpMethod();
 			isStepUp = true;
 			tagName = col.gameObject.tag;
+			m_Capsel.enabled = false;
 			break;
 		}
 
