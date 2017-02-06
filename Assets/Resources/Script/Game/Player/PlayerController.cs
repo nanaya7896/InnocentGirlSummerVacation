@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour {
 		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
 		if (clipInfo.clip.name == "agari") {
+
 			this.GetComponent<Rigidbody> ().useGravity = false;
 			float tmp = this.transform.position.y + (0.06f * Time.deltaTime);
 			if (tmp > 0.1f) 
@@ -87,7 +88,10 @@ public class PlayerController : MonoBehaviour {
 				tmp = 0.1f;
 			}
 			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
-		}
+            transform.position += Vector3.forward * (Time.deltaTime*0.1f);
+
+
+        }
         else if (isInWaterSlider)
         {
             this.GetComponent<Rigidbody>().useGravity = false;
@@ -238,12 +242,11 @@ public class PlayerController : MonoBehaviour {
 			dista= Vector3.Distance (transform.position, tmp);
 			return;
 		}
-		//ウォータースライダーの処理が終わったら
-		playerAutoMove = false;
+        this.GetComponent<CapsuleCollider>().enabled = true;
+        //ウォータースライダーの処理が終わったら
+        playerAutoMove = false;
 		sc.SetBool (false);
 		this.gameObject.GetComponent<InPoolMove> ().enabled = true;
-
-      
     }
 
 	//=============================Get関数================================//
@@ -254,7 +257,23 @@ public class PlayerController : MonoBehaviour {
 
 	public bool isDebug=false;
 
-	void OnCollisionEnter(Collision col)
+    void OnCollisionStay(Collision col)
+    {
+        ////Debug.Log (col.gameObject.tag);
+        //string tagName = col.gameObject.tag;
+        //switch (tagName)
+        //{
+        //    case "Water":
+        //        m_Anim.SetBool("isGround", false);
+        //        m_Anim.SetBool("isInWater", true);
+        //        m_Anim.SetBool("isSlider", false);
+        //        //sc.SetBool (false);
+        //        isInWater = true;
+        //        break;
+        //}
+
+    }
+    void OnCollisionEnter(Collision col)
 	{
 		//Debug.Log (col.gameObject.tag);
 		string tagName = col.gameObject.tag;
