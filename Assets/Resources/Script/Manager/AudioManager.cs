@@ -222,17 +222,52 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager> {
 		this.currentSe.Play();
 	}
 
-	/*
+    /*
+ *関数名 :playSEloop
+ *内容	:SEを流すLoopさせる
+ *引数	:setName:SEファイル名
+ *戻り値 :
+*/
+    public void PlaySEloop(string seName)
+    {
+        if (seDict == null)
+        {
+            createSeDict();
+        }
+        //Dictionary内のファイル名を探す
+        if (!this.seDict.ContainsKey(seName))
+        {
+            Debug.LogError(string.Format("SE名[{0}]が見つかりません", seName));
+            return;
+        }
+        //もしオーディオソースが存在し、クリップ名が検索したいSE名と同じだったら
+        //		if((this.currentSe != null) && (this.currentSe.clip == this.seDict[seName]))
+        //		{
+        //			//早期リターン
+        //			return;
+        //		}
+        //現在のSEを止める
+        //this.StopSE ();
+        //現在のオーディオソースに使っていないソースを入れる
+        this.currentSe = this.SubSESource;
+        //クリップ名を読み込んで来たSE名に変更
+        this.currentSe.clip = this.seDict[seName];
+        //SEを鳴らす
+        this.currentSe.Play();
+        this.currentSe.loop = true;
+    }
+    /*
 	 *関数名 :StopSE
 	 *内容	:全リストを検索してSEを止める
 	 *引数	:
 	 *戻り値 :
 	*/
-	public void StopSE()
+    public void StopSE()
 	{
 		//全ての要素を検索しストップする
 		foreach (AudioSource s in this.seSources) {
 			s.Stop ();
+            s.loop = false;
 		}
 	}
 
@@ -274,6 +309,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager> {
 
 	}
 		
+
 	/*
 	 *関数名 :StopBGM
 	 *内容	:BGMを止める

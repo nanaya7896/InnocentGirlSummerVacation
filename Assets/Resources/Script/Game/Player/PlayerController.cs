@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	//アニメーター用変数
 	bool isWalk=false;
 	bool isSlider =false;
+    bool prevIsInWater = false;
 	bool isInWater =false;
 	public switchingCamera sc;
 	[SerializeField]
@@ -99,6 +100,20 @@ public class PlayerController : MonoBehaviour {
 			PlayerMoving ();
 			PlayerRotate ();
 		}
+
+        if (isInWater != prevIsInWater)
+        {
+            if (isInWater)
+            {
+                AudioManager.Instance.PlaySEloop("oyogu");
+            }
+            else
+            {
+                AudioManager.Instance.StopSE();
+            }
+        }
+        prevIsInWater = isInWater;
+        
     }
 
 	void PlayerMoving()
@@ -170,6 +185,9 @@ public class PlayerController : MonoBehaviour {
             {
                 this.transform.rotation = Quaternion.Euler(0, 0, 0);
                 isInWaterSlider = false;
+
+                AudioManager.Instance.StopSE();
+                AudioManager.Instance.PlaySE("suberioti");
             }
         }
     }
@@ -201,8 +219,10 @@ public class PlayerController : MonoBehaviour {
 	void SliderAnimationComplete()
 	{
 		playerAutoMove = true;
-		AudioManager.Instance.StopSE ();
-	}
+		//AudioManager.Instance.StopSE ();
+      
+
+    }
 	void InWaterAction()
 	{
 		this.GetComponent<CapsuleCollider> ().enabled = true;
@@ -222,7 +242,10 @@ public class PlayerController : MonoBehaviour {
 		playerAutoMove = false;
 		sc.SetBool (false);
 		this.gameObject.GetComponent<InPoolMove> ().enabled = true;
-	}
+
+      
+    }
+
 	//=============================Get関数================================//
 	public string GetPlayerPosition()
 	{
