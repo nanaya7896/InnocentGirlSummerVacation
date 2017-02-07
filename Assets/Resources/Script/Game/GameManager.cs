@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour {
         m_Time.GetComponent<TimeChangeScript>().Reset();
 		m_PlayerController.GetComponent<PlayerController>().Reset();
 		//AudioManager.Instance.StopSE();
-       // AudioManager.Instance.PlaySE("count");
+        //AudioManager.Instance.PlaySE("count");
 
     }
 

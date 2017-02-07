@@ -15,6 +15,7 @@
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.Graphs.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.Android.Extensions.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.iOS.Extensions.dll
+/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.WindowsStandalone.Extensions.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.OSXStandalone.Extensions.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
@@ -31,4 +32,3 @@
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll
 /Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll.mdb
-/Users/nanaya/Desktop/InnocentGirlSummerVacation_/Temp/bin/Debug/UnityEditor.WindowsStandalone.Extensions.dll

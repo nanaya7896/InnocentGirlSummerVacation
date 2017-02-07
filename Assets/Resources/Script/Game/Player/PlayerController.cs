@@ -57,6 +57,9 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		rightHandBase = rightHand.position;
+		leftHandBase = leftHand.position;
+
 		if (Camera.main != null)
 		{
 			CamPos = Camera.main.transform;
@@ -78,6 +81,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	AnimatorClipInfo clipInfo;
+	float time;
+	Vector3 newRotate;
+	Vector3 nowRotate;
+	bool isOnce=false;
+	Vector3 pv;
 	// Update is called once per frame
 	void FixedUpdate () {
 
@@ -91,23 +99,36 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
-		clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
+		/*clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
 
-		if (isMove && !isHit) {
+		if (isMove && !isHit && clipInfo.clip.name !="agari") {
 			PlayerMoving ();
 			PlayerRotate ();
-		}
+		}*/
 
 		clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
+
+
 
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
 		if (clipInfo.clip.name == "agari") 
-		{
+		{  
+			if (!isOnce) {
+				pv = pv.normalized;
+				transform.position = new Vector3 (this.transform.position.x + (pv.x *0.05f), 0.05f, this.transform.position.z +(pv.z *0.05f));
+				//m_Rigid.AddForce(pv,ForceMode.Force);
+				isOnce = true;
+			}
+			transform.position = new Vector3 (this.transform.position.x, 0.065f, this.transform.position.z);
+			m_Rigid.useGravity = false;
+			float valAngle = Mathf.Lerp (nowRotate.y, newRotate.y, time/3f);
+			this.transform.eulerAngles = new Vector3 (this.transform.rotation.eulerAngles.x, valAngle, this.transform.rotation.eulerAngles.z);
+			time += Time.deltaTime;
+			/* AddForceいくない
 			//正面ベクトルを取得
 			Vector3 pv =transform.forward *0.2f;
 			Vector3 uv = transform.up *0.1f;
-
-			m_Rigid.useGravity = false;
+			
 			if (transform.position.y <0.1f) 
 			{
 				m_Rigid.AddForce (uv,ForceMode.Force);
@@ -116,21 +137,9 @@ public class PlayerController : MonoBehaviour {
 			{
 				m_Rigid.AddForce (pv, ForceMode.Force);
 			}
+			*/
+			//OnAnimatorIK ();
 		}
-		if (clipInfo.clip.name == "agari") {
-
-			this.GetComponent<Rigidbody> ().useGravity = false;
-			float tmp = this.transform.position.y + (0.06f * Time.deltaTime);
-			if (tmp > 0.1f) 
-			{
-				tmp = 0.1f;
-			}
-			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
-            transform.position += Vector3.forward * (Time.deltaTime*0.1f);
-            
-            return;
-        }
-
         else if (isInWaterSlider)
         {
             this.GetComponent<Rigidbody>().useGravity = false;
@@ -139,7 +148,7 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
 
-		if (isMove && !isHit) {
+		if (isMove && !isHit && clipInfo.clip.name !="agari") {
 			PlayerMoving ();
 			PlayerRotate ();
 		}
@@ -334,14 +343,21 @@ public class PlayerController : MonoBehaviour {
 		switch (tagName) 
 		{
 		case "Ground":
+			time = 0f;
 			m_Anim.SetBool ("isGround", true);
 			m_Anim.SetBool ("isInWater", false);
+			rightHand.position = rightHandBase;
+			leftHand.position = leftHandBase;
+			nowRotate = this.transform.eulerAngles;
+			newRotate = this.transform.eulerAngles - new Vector3 (0f, 45f, 0f);
+			pv=transform.forward;
 			isInWater = false;
 			break;
 		case "Water":
 			m_Anim.SetBool ("isGround", false);
 			m_Anim.SetBool ("isInWater", true);
 			m_Anim.SetBool ("isSlider", false);
+			isOnce = false;
 			//sc.SetBool (false);
 			isInWater = true;
 			break;
@@ -364,5 +380,21 @@ public class PlayerController : MonoBehaviour {
 
         bTagName = tagName;
 
+	}
+
+	float weight=1f;
+	public Transform leftHand;
+	public Transform rightHand;
+	private Vector3 leftHandBase;
+	private Vector3 rightHandBase;
+
+
+	void OnAnimatorIK()
+	{
+		m_Anim.SetIKPositionWeight (AvatarIKGoal.RightHand, weight);
+		m_Anim.SetIKPositionWeight (AvatarIKGoal.LeftHand, weight);
+
+		m_Anim.SetIKPosition (AvatarIKGoal.LeftHand, leftHand.position);
+		m_Anim.SetIKPosition (AvatarIKGoal.RightHand, rightHand.position);
 	}
 }
