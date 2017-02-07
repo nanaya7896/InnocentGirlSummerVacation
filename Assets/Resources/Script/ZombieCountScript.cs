@@ -12,6 +12,15 @@ public class ZombieCountScript : MonoBehaviour {
 	//List<Image> number =new List<Image>();
 	float max_Count=0;
 	public int count;
+
+	[SerializeField,Range(1,10),Header("MaXCountを０に戻すときのスピード")]
+	int time;
+	//数字を保存するスクリプト
+	[SerializeField]
+	List<Sprite> sp = new List<Sprite>();
+
+	float fixTime=0f;
+
 	public float startTime
 	{
 		set
@@ -23,15 +32,27 @@ public class ZombieCountScript : MonoBehaviour {
 			return startTime;
 		}
 	}
-	[SerializeField,Range(1,10),Header("MaXCountを０に戻すときのスピード")]
-	int time;
-	//数字を保存するスクリプト
-	[SerializeField]
-	List<Sprite> sp = new List<Sprite>();
+
+	[SerializeField,Header("初期値は1")]
+	float fill;
+	public float m_Fill
+	{
+		get
+		{
+			return fill;
+		}
+		set
+		{
+			fill = value;
+		}
+	}
+
+
 	// Use this for initialization
 	void Start () {
 		count = 0;
 		max_Count = 0;
+		m_Fill = 1f;
 		//子オブジェクトの数回す
 		for (int i = 0; i < transform.childCount; i++) 
 		{
@@ -42,7 +63,8 @@ public class ZombieCountScript : MonoBehaviour {
 		{
 			sp.Add (spr);
 		}
-	
+
+		num [2].GetComponent<Image> ().fillAmount = m_Fill;
 
 	}
 
@@ -53,8 +75,13 @@ public class ZombieCountScript : MonoBehaviour {
 	/// <param name="num">Number.</param>
 	public void AddZombieCoumt()
 	{
+		isCheckFalled = true;
 		count++;
 		DrawNumber (count);
+		//プログレスバーをこれが呼ばれるたびに1fに固定
+		m_Fill = 1f;
+		fixTime = 0f;
+		num [2].GetComponent<Image> ().fillAmount = m_Fill;
 	}
 		
 	public void SetCount()
@@ -63,19 +90,13 @@ public class ZombieCountScript : MonoBehaviour {
 	}
 
 
-	public bool Reset()
+	public void Reset()
 	{
-		var diff = Time.timeSinceLevelLoad - startTime;
-		var rate = diff / time;
-		if (diff > time) {
-			max_Count = 0;
-			count = 0;
-		}
-		DrawNumber (Mathf.Lerp (max_Count, 0f,rate));
-		if (max_Count == 0) {
-			return false;
-		}
-		return true;
+		Debug.Log ("呼ばれました");
+		//DrawNumber (Mathf.Lerp (max_Count, 0f,rate));
+		DrawNumber(0f);
+		m_Fill = 1f;
+		isCheckFalled = false;
 	}
 
 
@@ -92,11 +113,30 @@ public class ZombieCountScript : MonoBehaviour {
 		}
 	}
 
+
+	bool isCheckFalled=false;
 	// Update is called once per frame
 	void Update ()
 	{
 		
+		num [2].GetComponent<Image> ().fillAmount = Mathf.Lerp(m_Fill,0f,fixTime / 3);	
+		if (isCheckFalled) {
+			fixTime += Time.deltaTime;
+		}
+
+		if ( GetNowFillAmount()<= 0f) {
+			Reset ();
+		}
+
 	}
+
+
+	float GetNowFillAmount()
+	{
+		return num [2].GetComponent<Image> ().fillAmount;
+	}
+
+
 
 
 }

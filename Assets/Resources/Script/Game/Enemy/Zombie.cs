@@ -151,21 +151,6 @@ public class Zombie : EnemyActor {
 	// Update is called once per frame
     void Update () {
         stateMachine.Update();
-        //setState();
-		if (isFinish) {
-			isFinish = m_Count.Reset ();
-			if (!isFinish) {
-				isCount = false;
-			}
-		}
-
-
-		if (isCount) {
-			if (Time.timeSinceLevelLoad - time > 10.0f) {
-				m_Count.SetCount ();
-				isFinish = true;
-			}
-		}
 	}
 
     /// <summary>
