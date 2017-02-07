@@ -68,7 +68,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FllowPlayer.cs" />
     <Compile Include="Assets\ImportAsset\UnityChan\Scripts\CameraController.cs" />
     <Compile Include="Assets\ImportAsset\UnityChan\Scripts\FaceUpdate.cs" />
     <Compile Include="Assets\ImportAsset\UnityChan\Scripts\IdleChanger.cs" />
@@ -76,6 +75,8 @@
     <Compile Include="Assets\ImportAsset\UnityChan\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\ImportAsset\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
     <Compile Include="Assets\ImportAsset\p5-MSAFluid-master\src\msafluid\MSAFluidSolver2D.cs" />
+    <Compile Include="Assets\Resources\BloodUI.cs" />
+    <Compile Include="Assets\Resources\RayCast.cs" />
     <Compile Include="Assets\Resources\Script\Clear\ClearSE.cs" />
     <Compile Include="Assets\Resources\Script\Clear\SpriteAutoChange.cs" />
     <Compile Include="Assets\Resources\Script\Common\CreateMasterScript.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
     <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
     <Compile Include="Assets\Resources\Script\Debug\DebugMode.cs" />
+    <Compile Include="Assets\Resources\Script\Game\Audio\SEPlayList.cs" />
     <Compile Include="Assets\Resources\Script\Game\DissorveTest.cs" />
     <Compile Include="Assets\Resources\Script\Game\Enemy\AnimationStartTimeRandam.cs" />
     <Compile Include="Assets\Resources\Script\Game\Enemy\EnemyAI.cs" />
@@ -119,7 +121,8 @@
     <Compile Include="Assets\Resources\Script\test\NavTes.cs" />
     <Compile Include="Assets\Resources\Script\test\animtest.cs" />
     <Compile Include="Assets\Resources\Script\test\test.cs" />
-    <Compile Include="Assets\UVMove.cs" />
+    <Compile Include="Assets\Resources\UVMove.cs" />
+    <Compile Include="Assets\Scene\FllowPlayer.cs" />
     <Compile Include="Assets\iTweenEditor\Examples\StartAndStopTween.cs" />
     <Compile Include="Assets\iTweenEditor\Helper Classes\EventParamMappings.cs" />
     <Compile Include="Assets\iTweenEditor\Helper Classes\Vector3OrTransform.cs" />
@@ -240,6 +243,7 @@
     <None Include="Assets\iTweenEditor\README.txt" />
     <None Include="Assets\ofxMSAFluid-master\example\bin\data\ofxMSAFluidSettings.xml" />
     <None Include="Assets\shader\Dissolve.shader" />
+    <None Include="Assets\shader\Sample.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

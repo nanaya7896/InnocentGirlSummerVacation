@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	//アニメーター用変数
 	bool isWalk=false;
 	bool isSlider =false;
+    bool prevIsInWater = false;
 	bool isInWater =false;
 	public switchingCamera sc;
 	[SerializeField]
@@ -93,6 +94,7 @@ public class PlayerController : MonoBehaviour {
 
 		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
+<<<<<<< .merge_file_a03076
 		if (clipInfo.clip.name == "agari") 
 		{
 			//正面ベクトルを取得
@@ -106,6 +108,21 @@ public class PlayerController : MonoBehaviour {
 				m_Rigid.AddForce (pv, ForceMode.Force);
 			}
 		}
+=======
+		if (clipInfo.clip.name == "agari") {
+
+			this.GetComponent<Rigidbody> ().useGravity = false;
+			float tmp = this.transform.position.y + (0.06f * Time.deltaTime);
+			if (tmp > 0.1f) 
+			{
+				tmp = 0.1f;
+			}
+			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
+            transform.position += Vector3.forward * (Time.deltaTime*0.1f);
+
+
+        }
+>>>>>>> .merge_file_a02996
         else if (isInWaterSlider)
         {
             this.GetComponent<Rigidbody>().useGravity = false;
@@ -114,6 +131,27 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
 
+<<<<<<< .merge_file_a03076
+=======
+		if (isMove && !isHit) {
+			PlayerMoving ();
+			PlayerRotate ();
+		}
+
+        if (isInWater != prevIsInWater)
+        {
+            if (isInWater)
+            {
+                AudioManager.Instance.PlaySEloop("oyogu");
+            }
+            else
+            {
+                AudioManager.Instance.StopSE();
+            }
+        }
+        prevIsInWater = isInWater;
+        
+>>>>>>> .merge_file_a02996
     }
 
 	void PlayerMoving()
@@ -185,6 +223,9 @@ public class PlayerController : MonoBehaviour {
             {
                 this.transform.rotation = Quaternion.Euler(0, 0, 0);
                 isInWaterSlider = false;
+
+                AudioManager.Instance.StopSE();
+                AudioManager.Instance.PlaySE("suberioti");
             }
         }
     }
@@ -216,8 +257,10 @@ public class PlayerController : MonoBehaviour {
 	void SliderAnimationComplete()
 	{
 		playerAutoMove = true;
-		AudioManager.Instance.StopSE ();
-	}
+		//AudioManager.Instance.StopSE ();
+      
+
+    }
 	void InWaterAction()
 	{
 		this.GetComponent<CapsuleCollider> ().enabled = true;
@@ -233,11 +276,13 @@ public class PlayerController : MonoBehaviour {
 			dista= Vector3.Distance (transform.position, tmp);
 			return;
 		}
-		//ウォータースライダーの処理が終わったら
-		playerAutoMove = false;
+        this.GetComponent<CapsuleCollider>().enabled = true;
+        //ウォータースライダーの処理が終わったら
+        playerAutoMove = false;
 		sc.SetBool (false);
 		this.gameObject.GetComponent<InPoolMove> ().enabled = true;
-	}
+    }
+
 	//=============================Get関数================================//
 	public string GetPlayerPosition()
 	{
@@ -246,7 +291,23 @@ public class PlayerController : MonoBehaviour {
 
 	public bool isDebug=false;
 
-	void OnCollisionEnter(Collision col)
+    void OnCollisionStay(Collision col)
+    {
+        ////Debug.Log (col.gameObject.tag);
+        //string tagName = col.gameObject.tag;
+        //switch (tagName)
+        //{
+        //    case "Water":
+        //        m_Anim.SetBool("isGround", false);
+        //        m_Anim.SetBool("isInWater", true);
+        //        m_Anim.SetBool("isSlider", false);
+        //        //sc.SetBool (false);
+        //        isInWater = true;
+        //        break;
+        //}
+
+    }
+    void OnCollisionEnter(Collision col)
 	{
 		//Debug.Log (col.gameObject.tag);
 		string tagName = col.gameObject.tag;
