@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 	bool isSlider =false;
     bool prevIsInWater = false;
 	bool isInWater =false;
+    [SerializeField]
+    bool IsAgari = false;
 	public switchingCamera sc;
 	[SerializeField]
 	private Transform CamPos;
@@ -112,6 +114,7 @@ public class PlayerController : MonoBehaviour {
 		if (clipInfo.clip.name == "agari") {
 
 			this.GetComponent<Rigidbody> ().useGravity = false;
+            this.GetComponent<CapsuleCollider>().enabled = false;
 			float tmp = this.transform.position.y + (0.06f * Time.deltaTime);
 			if (tmp > 0.1f) 
 			{
@@ -119,17 +122,32 @@ public class PlayerController : MonoBehaviour {
 			}
 			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
             transform.position += transform.forward * (Time.deltaTime*0.1f);
+            IsAgari = true;
             return;
         }
-
         else if (isInWaterSlider)
         {
             this.GetComponent<Rigidbody>().useGravity = false;
+
         }
         else {
 			this.GetComponent<Rigidbody> ().useGravity = true;
-		}
+            this.GetComponent<CapsuleCollider>().enabled = true;
+            
+        }
 
+        //あがり中かどうか
+        if (IsAgari)
+        {
+            isMove = true;
+            IsAgari = false;
+        }
+        else if (clipInfo.clip.name == "Idel")
+        {
+            isMove = true;
+        }
+
+        //移動関連
 		if (isMove && !isHit) {
 			PlayerMoving ();
 			PlayerRotate ();
@@ -194,6 +212,7 @@ public class PlayerController : MonoBehaviour {
         if (prevPos != transform.position)
 		{
 			m_Anim.SetBool ("isWalk", true);
+           
 		} 
 		else 
 		{
@@ -325,7 +344,13 @@ public class PlayerController : MonoBehaviour {
 		case "Ground":
 			m_Anim.SetBool ("isGround", true);
 			m_Anim.SetBool ("isInWater", false);
-			isInWater = false;
+                if (isInWater &&!IsAgari)
+                {
+                    isMove = false;
+                    this.GetComponent<Rigidbody>().useGravity = false;
+                    this.GetComponent<CapsuleCollider>().enabled = false;
+                }
+                isInWater = false;
 			break;
 		case "Water":
 			m_Anim.SetBool ("isGround", false);
