@@ -24,10 +24,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 ido;
 	private Vector3 Animdir = Vector3.zero;
 
-
-
 	public float runspeed = 0.0001f;
-
 
 	Animator anim=null;
 	Animator m_Anim
@@ -39,6 +36,18 @@ public class PlayerController : MonoBehaviour {
 				anim = this.GetComponent<Animator> ();
 			}
 			return anim;
+		}
+	}
+
+	Rigidbody rigid=null;
+	Rigidbody m_Rigid
+	{
+		get
+		{
+			if (rigid == null) {
+				rigid = GetComponent<Rigidbody> ();
+			}
+			return rigid;
 		}
 	}
 
@@ -76,16 +85,26 @@ public class PlayerController : MonoBehaviour {
 		if (!sc.GetisStart()) {
 			dista = 9999.9f;
 		}
+
+		if (isMove && !isHit) {
+			PlayerMoving ();
+			PlayerRotate ();
+		}
+
 		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
-		if (clipInfo.clip.name == "agari") {
-			this.GetComponent<Rigidbody> ().useGravity = false;
-			float tmp = this.transform.position.y + (0.06f * Time.deltaTime);
-			if (tmp > 0.1f) 
-			{
-				tmp = 0.1f;
+		if (clipInfo.clip.name == "agari") 
+		{
+			//正面ベクトルを取得
+			Vector3 pv =transform.forward *0.3f;
+			Vector3 uv = transform.up *0.15f;
+
+			m_Rigid.useGravity = false;
+			if (transform.position.y <0.1f) {
+				m_Rigid.AddForce (uv,ForceMode.Force);
+			} else {
+				m_Rigid.AddForce (pv, ForceMode.Force);
 			}
-			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
 		}
         else if (isInWaterSlider)
         {
@@ -95,10 +114,6 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
 
-		if (isMove && !isHit) {
-			PlayerMoving ();
-			PlayerRotate ();
-		}
     }
 
 	void PlayerMoving()

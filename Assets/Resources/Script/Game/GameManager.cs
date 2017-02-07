@@ -173,10 +173,6 @@ public class GameManager : MonoBehaviour {
      //デバッグ必要なものを適宜追加していく   
         if(debugMode)
         {
-           // GUI.Box(new Rect(0,0,300,500),"Box");
-            //プレイヤーのポジション
-           // GUI.Label(new Rect(20,20,100,120),"PlayerPosition");
-		//	GUI.Label(new Rect(130,20,200,120),m_PlayerController.GetComponent<PlayerController>().GetPlayerPosition(),style);
 
 
 

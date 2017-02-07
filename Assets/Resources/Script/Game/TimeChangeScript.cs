@@ -56,23 +56,24 @@ public class TimeChangeScript : MonoBehaviour {
 		}
 	}
 
+
+
     /// <summary>
     /// 時間用スプライトを変更するところ
     /// </summary>
     /// <param name="time">Time.</param>
     void changeTimeSprite(float time)
     {
-      
-        for (int i = 0; i < GetCurrentLimitTime().ToString().Length;i++)
-        {
-            time /=Mathf.Pow(10, i);
-            //現在の時間が10秒以下になったら
-            if (GetCurrentLimitTime() < 10.0f)
-            {
-                one[1].GetComponent<Image>().sprite = sp[0];
-            }
-                one[i].GetComponent<Image>().sprite = sp[(int)time%10];
-        }
+		if (!DebugModeOnGUI.isDebug) {
+			for (int i = 0; i < GetCurrentLimitTime ().ToString ().Length; i++) {
+				time /= Mathf.Pow (10, i);
+				//現在の時間が10秒以下になったら
+				if (GetCurrentLimitTime () < 10.0f) {
+					one [1].GetComponent<Image> ().sprite = sp [0];
+				}
+				one [i].GetComponent<Image> ().sprite = sp [(int)time % 10];
+			}
+		}
     }
 
     /// <summary>
