@@ -47,6 +47,17 @@ public class ZombieCountScript : MonoBehaviour {
 		}
 	}
 
+	Animator anim=null;
+	Animator m_Anim
+	{
+		get
+		{
+			if (anim == null) {
+				anim = GameObject.Find("UI").transform.GetComponent<Animator> ();
+			}
+			return anim;
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -66,6 +77,7 @@ public class ZombieCountScript : MonoBehaviour {
 
 		num [2].GetComponent<Image> ().fillAmount = m_Fill;
 
+
 	}
 
 
@@ -77,6 +89,7 @@ public class ZombieCountScript : MonoBehaviour {
 	{
 		isCheckFalled = true;
 		count++;
+		m_Anim.SetTrigger ("Play");
 		DrawNumber (count);
 		//プログレスバーをこれが呼ばれるたびに1fに固定
 		m_Fill = 1f;
@@ -92,7 +105,7 @@ public class ZombieCountScript : MonoBehaviour {
 
 	public void Reset()
 	{
-		Debug.Log ("呼ばれました");
+		//Debug.Log ("呼ばれました");
 		//DrawNumber (Mathf.Lerp (max_Count, 0f,rate));
 		DrawNumber(0f);
 		m_Fill = 1f;
