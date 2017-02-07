@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
-		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
+		clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
 
 		if (isMove && !isHit) {
 			PlayerMoving ();
@@ -183,7 +183,8 @@ public class PlayerController : MonoBehaviour {
 			transform.position.x + ido.x,
 			transform.position.y + ido.y,
 			transform.position.z + ido.z);
-<<<<<<< HEAD
+
+
 
         /*if (isInWater) {
 			//現在のポジションにidoのトランスフォームの数値を入れる
@@ -198,8 +199,6 @@ public class PlayerController : MonoBehaviour {
 				transform.position.y + ido.y,
 				transform.position.z + ido.z);
 		}*/
-=======
->>>>>>> Ikehara
 
         if (prevPos != transform.position)
 		{
@@ -285,12 +284,9 @@ public class PlayerController : MonoBehaviour {
 			dista= Vector3.Distance (transform.position, tmp);
 			return;
 		}
-<<<<<<< HEAD
 
         this.GetComponent<CapsuleCollider>().enabled = true;
 
-=======
->>>>>>> Ikehara
 		//ウォータースライダーの処理が終わったら
 		playerAutoMove = false;
 
