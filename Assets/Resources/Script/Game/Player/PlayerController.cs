@@ -90,16 +90,16 @@ public class PlayerController : MonoBehaviour {
 			dista = 9999.9f;
 		}
 
-<<<<<<< HEAD
+
 		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
-=======
+
 		if (isMove && !isHit) {
 			PlayerMoving ();
 			PlayerRotate ();
 		}
 
 		clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
->>>>>>> 8dc0f2fcd719a1b9a2c01f6ed16bec7804951845
+
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
 		if (clipInfo.clip.name == "agari") 
 		{
@@ -280,15 +280,12 @@ public class PlayerController : MonoBehaviour {
 			dista= Vector3.Distance (transform.position, tmp);
 			return;
 		}
-<<<<<<< HEAD
+
         this.GetComponent<CapsuleCollider>().enabled = true;
-        //ウォータースライダーの処理が終わったら
-        playerAutoMove = false;
-=======
 
 		//ウォータースライダーの処理が終わったら
 		playerAutoMove = false;
->>>>>>> 8dc0f2fcd719a1b9a2c01f6ed16bec7804951845
+
 		sc.SetBool (false);
 		this.gameObject.GetComponent<InPoolMove> ().enabled = true;
     }
