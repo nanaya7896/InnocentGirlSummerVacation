@@ -277,13 +277,15 @@ public class Zombie : EnemyActor {
 			//transform.rotation = Quaternion.Euler (newRotation);
 			//補完しながら進行方向を向くように調整
 			transform.rotation =Quaternion.Slerp(transform.rotation,Quaternion.Euler(newRotation),Time.deltaTime);
-
 			m_EnemyAI.m_EnemyPosition = this.transform.position;
 			//m_EnemyAI.enemyRotate = this.transform.rotation.eulerAngles;
 			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
-			/*if (m_EnemyAI.GetisSearchNow ()) {
+			/*
+			if (m_EnemyAI.GetisSearchNow ()) 
+			{
 				transform.position = new Vector3 (m_EnemyAI.GetEnemyPosition ().x, m_EnemyAI.GetEnemyPosition ().y, m_EnemyAI.GetEnemyPosition ().z);
-			}*/
+			}
+			*/
 
 
         }

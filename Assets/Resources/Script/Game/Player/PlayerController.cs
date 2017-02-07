@@ -101,9 +101,12 @@ public class PlayerController : MonoBehaviour {
 			Vector3 uv = transform.up *0.1f;
 
 			m_Rigid.useGravity = false;
-			if (transform.position.y <0.1f) {
+			if (transform.position.y <0.1f) 
+			{
 				m_Rigid.AddForce (uv,ForceMode.Force);
-			} else {
+			} 
+			else
+			{
 				m_Rigid.AddForce (pv, ForceMode.Force);
 			}
 		}
@@ -125,7 +128,6 @@ public class PlayerController : MonoBehaviour {
 		float h = ControllerManager.Instance.GetLeftHorizontal();//横
 		float v = ControllerManager.Instance.GetLeftVertical();//縦
 
-
         //カメラのTransformが取得されてれば実行
         if (CamPos != null)
 		{
@@ -135,26 +137,11 @@ public class PlayerController : MonoBehaviour {
 			ido = v * Camforward * runspeed + h * CamPos.right * runspeed;
 			//Debug.Log(ido);
 		}
-
 		//現在のポジションにidoのトランスフォームの数値を入れる
 		transform.position = new Vector3(
 			transform.position.x + ido.x,
 			transform.position.y + ido.y,
 			transform.position.z + ido.z);
-		
-		/*if (isInWater) {
-			//現在のポジションにidoのトランスフォームの数値を入れる
-			transform.position = new Vector3(
-				transform.position.x + ido.x,
-				transform.position.y + ido.y,
-				transform.position.z + ido.z);
-		} else {
-			//現在のポジションにidoのトランスフォームの数値を入れる
-			transform.position = new Vector3(
-				transform.position.x + ido.x,
-				transform.position.y + ido.y,
-				transform.position.z + ido.z);
-		}*/
 
 		if (prevPos != transform.position)
 		{
@@ -234,7 +221,6 @@ public class PlayerController : MonoBehaviour {
 			dista= Vector3.Distance (transform.position, tmp);
 			return;
 		}
-
 		//ウォータースライダーの処理が終わったら
 		playerAutoMove = false;
 		sc.SetBool (false);
