@@ -160,36 +160,9 @@ public  class EnemyAI : MonoBehaviour{
 		AutoMove (speed);
     }
 
-	/// <summary>
-	/// ゾンビのプレイヤーを追いかけるところ
-	/// </summary>
-	/// <param name="speed">Speed.</param>
-	private void ZombieMove(float speed)
-	{
-		//プレイヤーの座標を代入
-		Vector3 playerPos = m_Player.transform.position;
-		Vector3 direction = playerPos - m_EnemyPosition;
-		//単位化(距離要素を取り除く)
-		direction = direction.normalized;
-		Vector3 tmpPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
-
-		//m_EnemyPosition= new Vector3(m_EnemyPosition.x,0.1f,m_EnemyPosition.z);
-		//Debug.Log (tmpPosition.y < 0.08f);
-		if (tmpPosition.y < 0.081f)
-		{
-			//NearTargetPosition ();
-			idou = true;
-		} 
-		else
-		{
-			transform.position = tmpPosition;
-		}
-		//enemy.transform.LookAt (m_Player);
-	}
-
 	private void AutoMove(float speed)
 	{
-		
+
 		if (m_Node.GetisNearPlayer ()) 
 		{
 			m_Node.SearchEnd ();
@@ -205,46 +178,43 @@ public  class EnemyAI : MonoBehaviour{
 		if (m_Node.GetisSearch ()) 
 		{
 			ZombieMove (speed);
-		} else 
+		} 
+		else 
 		{
 			m_Node.SearchUpdate (speed);
 		}
 	}
 
+	/// <summary>
+	/// ゾンビのプレイヤーを追いかけるところ
+	/// </summary>
+	/// <param name="speed">Speed.</param>
+	private void ZombieMove(float speed)
+	{
+		//プレイヤーの座標を代入
+		Vector3 playerPos = m_Player.transform.position;
+		Vector3 direction = playerPos - m_EnemyPosition;
+		//単位化(距離要素を取り除く)
+		direction = direction.normalized;
+		Vector3 tmpPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
+
+		if (tmpPosition.y < 0.081f)
+		{
+			idou = true;
+		} 
+		else
+		{
+			transform.position = tmpPosition;
+		}
+		//enemy.transform.LookAt (m_Player);
+	}
+
+
+
 	public bool GetisSearchNow()
 	{
 		return m_Node.GetisSearch ();
 	}
-
-
-	/*private void NearTargetPosition()
-	{
-		for (int i = 0; i < 8; i++) 
-		{
-			Vector3 tmp = enemyPosition - targetObj [i].transform.position;
-			tmp = tmp.normalized;
-			float di = Vector3.Distance(enemyPosition, targetObj[i].transform.position);
-			if (di < d) {
-				d = di;
-				obj = targetObj [i];
-			}
-		}
-
-		d = 9999.0f;
-
-		for (int i = 0; i < 8; i++) 
-		{
-			Vector3 tmp = (obj.transform.position - targetObj [i].transform.position).normalized;
-			float di = Vector3.Distance(obj.transform.position, targetObj[i].transform.position);
-			if (targetObj [i] == obj) {
-				continue;
-			}
-			if (di < d) {
-				d = di;
-				secondObj = targetObj [i];
-			}
-		}
-	}*/
 
     private void ZombieSlider()
     {

@@ -35,8 +35,10 @@ public class Node : MonoBehaviour {
 	[SerializeField]
 	bool isSearchEnd=false;
 
+
 	// Use this for initialization
 	void Start () {
+		
 		for(int j=0;j<9;j++)
 		{
 			target[j] = GameObject.Find ("Target_"+j);
@@ -108,7 +110,7 @@ public class Node : MonoBehaviour {
 	public void assessmenttest()
 	{
 		int tmp=searchTarget.Count;
-		if (searchTarget.Count == 1)
+		if (tmp == 1)
 		{
 			tmp = 0;
 		}
@@ -117,13 +119,14 @@ public class Node : MonoBehaviour {
 			tmp = tmp - 1;
 		}
 
-		if (searchTarget [tmp].ToString() == GoalPosition.ToString())
+		if (searchTarget [tmp].gameObject.ToString() == GoalPosition.ToString())
 		{
 			return;
 		}
-
 		FindGetTargetObject ();
+
 		assessmenttest ();
+
 	}
 
 	/// <summary>
@@ -137,35 +140,34 @@ public class Node : MonoBehaviour {
 		//終点に近いオブジェクト
 		int tmp_B = 0;
 
+
+
 		if (searchTarget.Count == 1) 
 		{
-			tmp_A =IntFromString (searchTarget [0].gameObject.name, 7, 1);
+			tmp_A = IntFromString (searchTarget [0].gameObject.name, 7, 1);
 			tmp_B = IntFromString (GoalPosition.gameObject.name, 7, 1);
-			if ( tmp_A<tmp_B ) 
-			{
-				searchTarget.Add (target [tmp_A + 1]);
-			} 
-			else if (tmp_A >tmp_B) 
-			{
-				searchTarget.Add (target [tmp_A - 1]);
-			}
+				if (tmp_A < tmp_B) {
+					searchTarget.Add (target [tmp_A + 1]);
+				} else if (tmp_A > tmp_B) {
+					searchTarget.Add (target [tmp_A - 1]);
+				}
+			
 		} 
 		else
 		{
 			tmp_A =IntFromString (searchTarget [searchTarget.Count - 1].ToString(), 7, 1);
 			tmp_B =IntFromString (GoalPosition.gameObject.name,7, 1);
-			//始点が８番目のオブジェクトなら
-			if (tmp_A == 8) {
-				if (tmp_B <= 2 || tmp_B == 6 || tmp_B == 7) {
-					searchTarget.Add (target [0]);
-				} else {
-					searchTarget.Add (target [4]);
-				}
-			} else {
+
+			if (SwitchTargetingObject (IntFromString (searchTarget [0].ToString(), 7, 1), tmp_B))
+			{
+
 				//始点より終点のオブジェクト番号の方が大きければ
-				if (tmp_A < tmp_B) {
+				if (tmp_A < tmp_B) 
+				{
 					searchTarget.Add (target [tmp_A + 1]);
-				} else if (tmp_A > tmp_B) {
+				} 
+				else if (tmp_A > tmp_B)
+				{
 					searchTarget.Add (target [tmp_A - 1]);
 				}
 			}
@@ -177,9 +179,104 @@ public class Node : MonoBehaviour {
 	/// </summary>
 	/// <param name="startPosition">Start position.</param>
 	/// <param name="GoalPosition">Goal position.</param>
-	private void SwitchTargetingObject(int startPosition,int GoalPosition)
+	private bool SwitchTargetingObject(int startPosition,int GoalPosition)
 	{
 		
+		switch (GoalPosition)
+		{
+		case 0:
+			{
+				if (startPosition == 5) {
+					searchTarget.RemoveAt (1);
+					searchTarget.Add (target [4]);
+					searchTarget.Add (target [8]);
+					searchTarget.Add (target [0]);
+					return false;
+				}
+				if (startPosition == 4) {
+					searchTarget.RemoveAt (1);
+					searchTarget.Add (target [8]);
+					searchTarget.Add (target [0]);
+					return false;
+				}
+			}
+			break;
+		case 1:
+			{
+				if (startPosition == 5) {
+					searchTarget.RemoveAt (1);
+					searchTarget.Add (target [4]);
+				} else {
+					searchTarget.RemoveAt (1);
+				}
+				searchTarget.Add (target [8]);
+				searchTarget.Add (target [0]);
+				searchTarget.Add (target [1]);
+				return false;
+			}
+			break;
+		case 2:
+			{
+				Debug.Log ("今まで通りでおk");
+				return true;
+			}
+		case 3:
+			{
+				if (startPosition == 7) {
+					searchTarget.RemoveAt (1);
+					searchTarget.Add (target [0]);
+					searchTarget.Add (target [8]);
+					searchTarget.Add (target [4]);
+					searchTarget.Add (target [3]);
+					return false;
+
+				}
+			}
+			break;
+		case 4:
+			{
+				if (startPosition == 0) {
+					searchTarget.RemoveAt (1);
+					searchTarget.Add (target [8]);
+					searchTarget.Add (target [4]);
+					return false;
+				}
+			}
+			break;
+		case 5:
+			
+			break;
+
+		case 6:
+			Debug.Log ("今まで通り");
+			return true;
+		case 7:
+			{
+				if (startPosition == 3) {
+					searchTarget.RemoveAt (1);
+					searchTarget.Add (target [4]);
+				} else {
+					searchTarget.RemoveAt (1);
+				}
+				searchTarget.Add (target [8]);
+				searchTarget.Add (target [0]);
+				searchTarget.Add (target [7]);
+				return false;
+			}
+			break;
+		case 8:
+			{
+				searchTarget.RemoveAt (1);
+				searchTarget.Add (target [8]);
+				return false;
+			}
+			break;
+		default:
+			
+			break;
+		}
+
+		return true;
 	}
 
 	public bool GetisNearPlayer()
@@ -208,6 +305,7 @@ public class Node : MonoBehaviour {
 				//プレイヤーが近いオブジェクトを保存しておく
 				prevPlayerNerObject = playerNearObject;
 				isSearchEnd = true;
+				searchTarget.Clear ();
 				return;
 			}
 

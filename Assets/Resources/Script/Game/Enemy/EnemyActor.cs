@@ -71,7 +71,7 @@ public class EnemyActor : MonoBehaviour{
 		//Enemyの生存フラグ
 		enemy[num].isAlive = true;
 		//Enemyの移動速度
-		enemy[num].speed = 0.1f;
+		enemy[num].speed = 1f;
 		//Eenmyの名前
 		enemy[num].name = "Zombie_" + num;
 		//Enemyの親
