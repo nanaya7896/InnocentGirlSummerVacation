@@ -44,9 +44,9 @@ public class DebugModeOnGUI : MonoBehaviour {
 			GUI.Label (new Rect (10,100, 200, 100), "FPS : "+Application.targetFrameRate,DetailStyle);
 			GUI.Label (new Rect (10, 150, 200, 100), "現在のシーンネーム : " + SceneManager.GetActiveScene ().name,DetailStyle);
 			GUI.Label (new Rect (10, 200, 200, 100), "ゾンビの数 : "+ EnemyActor.Size,DetailStyle);
-			GUI.Label (new Rect (10, 250, 200, 100), "Playerの座標 : " + m_Player.transform.position);
-			GUI.Label (new Rect (10, 300, 200, 100), "Playerの向き : " + m_Player.transform.rotation.eulerAngles);
-
+			GUI.Label (new Rect (10, 250, 200, 100), "Playerの座標 : " + m_Player.transform.position,DetailStyle);
+			GUI.Label (new Rect (10, 300, 200, 100), "Playerの向き : " + m_Player.transform.rotation.eulerAngles,DetailStyle);
+			GUI.Label (new Rect (10, 350, 200, 100), "現在再生中のアニメーション : " + m_Player.GetAnimationName (),DetailStyle);
 
 
 			//GUI.Label (new Rect (10, 50, 200, 100, "UnityVersion : "+Application.unityVersion,DetailStyle));

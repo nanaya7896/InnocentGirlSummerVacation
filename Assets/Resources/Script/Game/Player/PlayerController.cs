@@ -73,7 +73,8 @@ public class PlayerController : MonoBehaviour {
 		isHit = false;
 		playerAutoMove = false;
 	}
-	
+
+	AnimatorClipInfo clipInfo;
 	// Update is called once per frame
 	void FixedUpdate () {
 
@@ -91,13 +92,13 @@ public class PlayerController : MonoBehaviour {
 			PlayerRotate ();
 		}
 
-		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
+		clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
 		if (clipInfo.clip.name == "agari") 
 		{
 			//正面ベクトルを取得
-			Vector3 pv =transform.forward *0.3f;
-			Vector3 uv = transform.up *0.15f;
+			Vector3 pv =transform.forward *0.2f;
+			Vector3 uv = transform.up *0.1f;
 
 			m_Rigid.useGravity = false;
 			if (transform.position.y <0.1f) {
@@ -233,6 +234,7 @@ public class PlayerController : MonoBehaviour {
 			dista= Vector3.Distance (transform.position, tmp);
 			return;
 		}
+
 		//ウォータースライダーの処理が終わったら
 		playerAutoMove = false;
 		sc.SetBool (false);
@@ -242,6 +244,15 @@ public class PlayerController : MonoBehaviour {
 	public string GetPlayerPosition()
 	{
 		return this.transform.position.ToString();
+	}
+
+	/// <summary>
+	/// 現在再生中のアニメーションの名前を取得する
+	/// </summary>
+	/// <returns>The animation name.</returns>
+	public string GetAnimationName()
+	{
+		return clipInfo.clip.name;
 	}
 
 	public bool isDebug=false;
