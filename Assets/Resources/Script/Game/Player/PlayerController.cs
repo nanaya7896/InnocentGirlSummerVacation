@@ -90,14 +90,6 @@ public class PlayerController : MonoBehaviour {
 			dista = 9999.9f;
 		}
 
-
-		clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
-
-		if (isMove && !isHit) {
-			PlayerMoving ();
-			PlayerRotate ();
-		}
-
 		clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
 
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
@@ -126,8 +118,7 @@ public class PlayerController : MonoBehaviour {
 				tmp = 0.1f;
 			}
 			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
-            transform.position += Vector3.forward * (Time.deltaTime*0.1f);
-            
+            transform.position += transform.forward * (Time.deltaTime*0.1f);
             return;
         }
 
@@ -213,9 +204,9 @@ public class PlayerController : MonoBehaviour {
 
 	void PlayerRotate()
 	{
-		float r = ControllerManager.Instance.GetRightHorizontal();
-		//Debug.Log (r);
-		this.transform.Rotate (0.0f, r, 0.0f);
+		//float r = ControllerManager.Instance.GetRightHorizontal();
+		////Debug.Log (r);
+		//this.transform.Rotate (0.0f, r, 0.0f);
 	}
 
     /// <summary>
@@ -229,7 +220,7 @@ public class PlayerController : MonoBehaviour {
             //ウォータースライダーのitweenが終わっているなら
             if (this.GetComponent<iTween>() == null)
             {
-                this.transform.rotation = Quaternion.Euler(0, 0, 0);
+                //this.transform.rotation = Quaternion.Euler(0, 0, 0);
                 isInWaterSlider = false;
 
                 AudioManager.Instance.StopSE();
@@ -265,8 +256,6 @@ public class PlayerController : MonoBehaviour {
 	void SliderAnimationComplete()
 	{
 		playerAutoMove = true;
-		//AudioManager.Instance.StopSE ();
-      
 
     }
 	void InWaterAction()
