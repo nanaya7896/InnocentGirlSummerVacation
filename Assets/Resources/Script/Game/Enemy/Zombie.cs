@@ -59,6 +59,18 @@ public class Zombie : EnemyActor {
 		}
 	}
 
+	CapsuleCollider capsel =null;
+	CapsuleCollider m_Capsel
+	{
+		get
+		{
+			if (capsel == null) {
+				capsel = GetComponent<CapsuleCollider> ();
+			}
+			return capsel;
+		}
+	}
+
     /// <summary>
     /// エネミーと衝突したか
     /// </summary>
@@ -139,21 +151,6 @@ public class Zombie : EnemyActor {
 	// Update is called once per frame
     void Update () {
         stateMachine.Update();
-        //setState();
-		if (isFinish) {
-			isFinish = m_Count.Reset ();
-			if (!isFinish) {
-				isCount = false;
-			}
-		}
-
-
-		if (isCount) {
-			if (Time.timeSinceLevelLoad - time > 3.0f) {
-				m_Count.SetCount ();
-				isFinish = true;
-			}
-		}
 	}
 
     /// <summary>
@@ -223,7 +220,9 @@ public class Zombie : EnemyActor {
     /// </summary>
     void IdelInit()
     {
+		m_Capsel.enabled = true;
 		this.transform.Rotate (Vector3.zero);
+
     }
 
     /// <summary>
@@ -303,6 +302,7 @@ public class Zombie : EnemyActor {
     /// </summary>
     void SliderInit()
     {
+		
        
         isMove = false;
 		this.GetComponent<Rigidbody> ().useGravity = false;
@@ -462,6 +462,7 @@ public class Zombie : EnemyActor {
 			enemyStepUpMethod();
 			isStepUp = true;
 			tagName = col.gameObject.tag;
+			m_Capsel.enabled = false;
 			break;
 		}
 
