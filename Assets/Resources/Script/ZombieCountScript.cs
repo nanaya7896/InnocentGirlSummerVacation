@@ -109,6 +109,8 @@ public class ZombieCountScript : MonoBehaviour {
 		//DrawNumber (Mathf.Lerp (max_Count, 0f,rate));
 		DrawNumber(0f);
 		m_Fill = 1f;
+		count = 0;
+		max_Count = 0;
 		isCheckFalled = false;
 	}
 

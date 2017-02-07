@@ -37,9 +37,9 @@ public class InPoolMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(anim.GetBool("isInWater"))
-            PoolMove();
-        
+		if (anim.GetBool ("isInWater")) {
+			PoolMove ();
+		}
 
     }
 

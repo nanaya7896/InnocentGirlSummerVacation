@@ -86,6 +86,7 @@
 -define:UNITY_EDITOR_OSX
 -define:UNITY_TEAM_LICENSE
 -define:CROSS_PLATFORM_INPUT
+'Assets/DebugModeOnGUI.cs'
 'Assets/ImportAsset/UnityChan/Scripts/CameraController.cs'
 'Assets/ImportAsset/UnityChan/Scripts/FaceUpdate.cs'
 'Assets/ImportAsset/UnityChan/Scripts/IdleChanger.cs'
