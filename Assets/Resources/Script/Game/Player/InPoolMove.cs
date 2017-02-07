@@ -19,8 +19,10 @@ public class InPoolMove : MonoBehaviour
 
     void PoolMove()
     {
+        Vector3 rotate = transform.eulerAngles;
         transform.RotateAround(new Vector3(PoolGameObject.position.x, this.transform.position.y, PoolGameObject.position.z), -transform.up, 45 * Time.deltaTime* m_moveSpeed);
 
+        transform.eulerAngles = rotate;
     }
     // Use this for initialization
     void Start()
@@ -35,7 +37,7 @@ public class InPoolMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 		if (anim.GetBool ("isInWater")) {
 			PoolMove ();

@@ -11,7 +11,7 @@ public class LookMove : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         Vector3 distance = transform.position - prev;
         distance.y = 0.0f;
 

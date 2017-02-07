@@ -27,7 +27,10 @@ public class PlayerController : MonoBehaviour {
 
 	public float runspeed = 0.0001f;
 
-	Animator anim=null;
+    private Vector3 prev;
+    private Vector3 prevrotation;
+
+    Animator anim=null;
 	Animator m_Anim
 	{
 		get
@@ -51,7 +54,6 @@ public class PlayerController : MonoBehaviour {
 			return rigid;
 		}
 	}
-
 
 	// Use this for initialization
 	void Start () {
@@ -87,14 +89,8 @@ public class PlayerController : MonoBehaviour {
 			dista = 9999.9f;
 		}
 
-		if (isMove && !isHit) {
-			PlayerMoving ();
-			PlayerRotate ();
-		}
-
 		AnimatorClipInfo clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
-<<<<<<< .merge_file_a03076
 		if (clipInfo.clip.name == "agari") 
 		{
 			//正面ベクトルを取得
@@ -108,7 +104,6 @@ public class PlayerController : MonoBehaviour {
 				m_Rigid.AddForce (pv, ForceMode.Force);
 			}
 		}
-=======
 		if (clipInfo.clip.name == "agari") {
 
 			this.GetComponent<Rigidbody> ().useGravity = false;
@@ -119,10 +114,10 @@ public class PlayerController : MonoBehaviour {
 			}
 			transform.position = new Vector3 (this.transform.position.x, tmp, this.transform.position.z);
             transform.position += Vector3.forward * (Time.deltaTime*0.1f);
-
-
+            
+            return;
         }
->>>>>>> .merge_file_a02996
+
         else if (isInWaterSlider)
         {
             this.GetComponent<Rigidbody>().useGravity = false;
@@ -131,13 +126,12 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().useGravity = true;
 		}
 
-<<<<<<< .merge_file_a03076
-=======
 		if (isMove && !isHit) {
 			PlayerMoving ();
 			PlayerRotate ();
 		}
 
+        //泳ぐときのSEを鳴らすかどうか
         if (isInWater != prevIsInWater)
         {
             if (isInWater)
@@ -149,9 +143,9 @@ public class PlayerController : MonoBehaviour {
                 AudioManager.Instance.StopSE();
             }
         }
+
         prevIsInWater = isInWater;
-        
->>>>>>> .merge_file_a02996
+        prev = transform.position;
     }
 
 	void PlayerMoving()
@@ -161,7 +155,6 @@ public class PlayerController : MonoBehaviour {
 		//キーボード数値取得。プレイヤーの方向として扱う
 		float h = ControllerManager.Instance.GetLeftHorizontal();//横
 		float v = ControllerManager.Instance.GetLeftVertical();//縦
-
 
         //カメラのTransformが取得されてれば実行
         if (CamPos != null)
@@ -178,8 +171,8 @@ public class PlayerController : MonoBehaviour {
 			transform.position.x + ido.x,
 			transform.position.y + ido.y,
 			transform.position.z + ido.z);
-		
-		/*if (isInWater) {
+
+        /*if (isInWater) {
 			//現在のポジションにidoのトランスフォームの数値を入れる
 			transform.position = new Vector3(
 				transform.position.x + ido.x,
@@ -193,7 +186,7 @@ public class PlayerController : MonoBehaviour {
 				transform.position.z + ido.z);
 		}*/
 
-		if (prevPos != transform.position)
+        if (prevPos != transform.position)
 		{
 			m_Anim.SetBool ("isWalk", true);
 		} 
@@ -201,7 +194,8 @@ public class PlayerController : MonoBehaviour {
 		{
 			m_Anim.SetBool ("isWalk", false);
 		}
-	}
+
+    }
 
 	void PlayerRotate()
 	{
