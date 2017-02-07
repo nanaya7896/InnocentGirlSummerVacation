@@ -30,7 +30,7 @@ public class Node : MonoBehaviour {
 	//各々の距離を算出
 	public List<float> l_distance = new List<float> ();
 	//線引く
-	//LineRenderer  rend;
+	LineRenderer  rend;
 	int targetnum=0;
 	[SerializeField]
 	bool isSearchEnd=false;
@@ -43,7 +43,9 @@ public class Node : MonoBehaviour {
 		}
 		assessment ();
 		//searchTarget.Add (null);*/
-		//rend =this.GetComponent<LineRenderer>();
+		if (DebugModeOnGUI.isDebug) {
+			rend = this.GetComponent<LineRenderer> ();
+		}
 		SearchInit ();
 		prevPlayerNerObject = GoalPosition;
 
@@ -58,6 +60,7 @@ public class Node : MonoBehaviour {
 			return;
 		}:*/
 		//SearchUpdate ();
+
 		if (!CompareNearPlayerObject ()) {
 			SearchEnd ();
 			SearchInit ();
@@ -82,6 +85,7 @@ public class Node : MonoBehaviour {
 	/// </summary>
 	public void SearchInit()
 	{
+		//スタックを初期化する
 		searchTarget.Clear ();
 		//始点
 		startPosition = NearisTarget(this.transform.position);
@@ -91,6 +95,10 @@ public class Node : MonoBehaviour {
 		GoalPosition = NearisTarget (m_Player.transform.position);
 		assessmenttest ();
 
+		rend.SetVertexCount (searchTarget.Count);
+		for (int i = 0; i < searchTarget.Count; i++) {
+			rend.SetPosition (i, searchTarget [i].transform.position);
+		}
 	}
 
 
@@ -100,15 +108,20 @@ public class Node : MonoBehaviour {
 	public void assessmenttest()
 	{
 		int tmp=searchTarget.Count;
-		if (searchTarget.Count == 1) {
+		if (searchTarget.Count == 1)
+		{
 			tmp = 0;
-		} else {
+		}
+		else
+		{
 			tmp = tmp - 1;
 		}
+
 		if (searchTarget [tmp].ToString() == GoalPosition.ToString())
 		{
 			return;
 		}
+
 		FindGetTargetObject ();
 		assessmenttest ();
 	}
@@ -119,8 +132,11 @@ public class Node : MonoBehaviour {
 	public void FindGetTargetObject()
 	{
 
+		//始点い近いオブジェクト
 		int tmp_A=0;
+		//終点に近いオブジェクト
 		int tmp_B = 0;
+
 		if (searchTarget.Count == 1) 
 		{
 			tmp_A =IntFromString (searchTarget [0].gameObject.name, 7, 1);
@@ -137,19 +153,34 @@ public class Node : MonoBehaviour {
 		else
 		{
 			tmp_A =IntFromString (searchTarget [searchTarget.Count - 1].ToString(), 7, 1);
-			tmp_B =IntFromString (GoalPosition.gameObject.name, 7, 1);
-			if (tmp_A < tmp_B)
-			{
-						searchTarget.Add (target [tmp_A +1]);
-			} 
-			else if (tmp_A > tmp_B) 
-			{
-						searchTarget.Add (target [tmp_A - 1]);
+			tmp_B =IntFromString (GoalPosition.gameObject.name,7, 1);
+			//始点が８番目のオブジェクトなら
+			if (tmp_A == 8) {
+				if (tmp_B <= 2 || tmp_B == 6 || tmp_B == 7) {
+					searchTarget.Add (target [0]);
+				} else {
+					searchTarget.Add (target [4]);
+				}
+			} else {
+				//始点より終点のオブジェクト番号の方が大きければ
+				if (tmp_A < tmp_B) {
+					searchTarget.Add (target [tmp_A + 1]);
+				} else if (tmp_A > tmp_B) {
+					searchTarget.Add (target [tmp_A - 1]);
+				}
 			}
 		}
 	}
 
-
+	/// <summary>
+	/// Switchs the targeting object.
+	/// </summary>
+	/// <param name="startPosition">Start position.</param>
+	/// <param name="GoalPosition">Goal position.</param>
+	private void SwitchTargetingObject(int startPosition,int GoalPosition)
+	{
+		
+	}
 
 	public bool GetisNearPlayer()
 	{
@@ -194,11 +225,14 @@ public class Node : MonoBehaviour {
 			//エウラー角を角度に入れる
 			//補完をしながら進行方向に向きを変える
 			transform.rotation =Quaternion.Slerp(transform.rotation,Quaternion.Euler(newRotation),Time.deltaTime);
+
 			//距離がターゲットの近づいたら
-			if (dis < 0.1f) {
+			if (dis < 0.1f)
+			{
 				Next ();
 				return;
 			}
+
 			prevPosition = transform.position;
 		}
 	}
@@ -234,17 +268,11 @@ public class Node : MonoBehaviour {
 	void Next()
 	{
 		targetnum++;
-		if (targetnum > 8) {
+		if (targetnum > 8) 
+		{
 			isSearchEnd = true;
 		}
 	}
-
-	void Move ()
-	{
-		
-	}
-
-
 
 	/// <summary>
 	/// プレイヤーが一番近いターゲットを探索
@@ -252,6 +280,7 @@ public class Node : MonoBehaviour {
 	GameObject NearisTarget(Vector3 position)
 	{
 		float nearDistance=9999.0f;
+	
 		for(int i=0;i<9;i++)
 		{
 			float tmp = Vector3.Distance (position, target [i].transform.position);
@@ -271,7 +300,8 @@ public class Node : MonoBehaviour {
 	/// </summary>
 	public void assessment()
 	{
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 8; i++)
+		{
 			l_distance.Add (ReturnDistance (target [i].transform.position, target [i + 1].transform.position));
 		}
 		//例外的に9番は追加する

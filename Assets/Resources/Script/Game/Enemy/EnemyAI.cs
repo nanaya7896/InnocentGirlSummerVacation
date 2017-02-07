@@ -52,7 +52,8 @@ public  class EnemyAI : MonoBehaviour{
 	{
 		get
 		{
-			if (nodes == null) {
+			if (nodes == null) 
+			{
 				nodes = this.GetComponent<Node> ();
 			}
 			return nodes;
@@ -83,7 +84,8 @@ public  class EnemyAI : MonoBehaviour{
 		float tmp=Vector3.Distance(transform.position,m_Player.transform.position);
 
 
-		if (tmp < 1.0f) {
+		if (tmp < 1.0f)
+		{
 			tmp -= 1.0f;
 			tmp = Mathf.Abs (tmp);
 			m_BloodUI.ChangeAlpha (tmp);
@@ -173,10 +175,13 @@ public  class EnemyAI : MonoBehaviour{
 
 		//m_EnemyPosition= new Vector3(m_EnemyPosition.x,0.1f,m_EnemyPosition.z);
 		//Debug.Log (tmpPosition.y < 0.08f);
-		if (tmpPosition.y < 0.08f) {
+		if (tmpPosition.y < 0.081f)
+		{
 			//NearTargetPosition ();
 			idou = true;
-		} else {
+		} 
+		else
+		{
 			transform.position = tmpPosition;
 		}
 		//enemy.transform.LookAt (m_Player);
@@ -210,7 +215,9 @@ public  class EnemyAI : MonoBehaviour{
 	{
 		return m_Node.GetisSearch ();
 	}
-	private void NearTargetPosition()
+
+
+	/*private void NearTargetPosition()
 	{
 		for (int i = 0; i < 8; i++) 
 		{
@@ -237,7 +244,8 @@ public  class EnemyAI : MonoBehaviour{
 				secondObj = targetObj [i];
 			}
 		}
-	}
+	}*/
+
     private void ZombieSlider()
     {
         
