@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (isInWater)
             {
-                AudioManager.Instance.PlaySEloop("oyogu");
+                
             }
             else
             {
@@ -340,7 +340,8 @@ public class PlayerController : MonoBehaviour {
 			break;
 		case "SliderWater":
                 //応急処置
-			if (this.transform.position.y < 0.5f) {
+			if (this.transform.position.y < 0.5f)
+			{
 				break;
 			}
 			this.GetComponent<CapsuleCollider> ().enabled = false;
@@ -349,7 +350,8 @@ public class PlayerController : MonoBehaviour {
 			sc.SetBool (true);
 			break;
 		case "Enemy":
-			if (!DebugModeOnGUI.isDebug) {
+			if (!DebugModeOnGUI.isDebug)
+			{
 				isHit = true;
 			}
 			break;

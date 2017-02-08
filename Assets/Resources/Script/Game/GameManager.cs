@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     void Awake()
     {
-		Application.targetFrameRate = 60;
+		//Application.targetFrameRate = 60;
 
         stateMachine.Add(State.First, FirstInit, FirstUpdate, FirstEnd);
         stateMachine.Add(State.Game,GameInit,GameUpdate,GameEnd);

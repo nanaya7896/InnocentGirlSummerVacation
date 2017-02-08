@@ -33,7 +33,7 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	//移動速度
 	public float runspeed = 1.0f;
-
+	float dista =9999f;
 	//
 
 
@@ -118,7 +118,16 @@ public class PlayerControllerInState : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		//Debug.Log ();	
+		//Debug.Log ();
+		if (Camera.main != null)
+		{
+			CamPos = Camera.main.transform;
+		}
+		else
+		{
+			Debug.LogWarning(
+				"Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.");
+		}
 	}
 	
 	// Update is called once per frame
@@ -132,11 +141,15 @@ public class PlayerControllerInState : MonoBehaviour {
 		playerStateMachine.Update ();
 	}
 
+
 	/// <summary>
 	/// ゲーム再開時にリセットするものを記述
 	/// </summary>
-	void Reset()
+	public void Reset()
 	{
+		isMove = false;
+		isHit = false;
+		playerAutoMove = false;
 		//待機ステートに変更
 		playerStateMachine.SetState (PLAYERSTATE.IDEL);	
 	}
@@ -270,7 +283,7 @@ public class PlayerControllerInState : MonoBehaviour {
 		playerAutoMove = true;
 		//playerStateMachine.SetState (PLAYERSTATE.WATERIDEL);
 	}
-	float dista =9999f;
+
 	void InWaterAction()
 	{
 		this.GetComponent<CapsuleCollider> ().enabled = true;
@@ -294,7 +307,7 @@ public class PlayerControllerInState : MonoBehaviour {
 		sc.SetBool (false);
 		this.gameObject.GetComponent<InPoolMove> ().enabled = true;
 
-
+		dista = 9999.9f;
 		playerStateMachine.SetState (PLAYERSTATE.WATERIDEL);
 	}
 
@@ -306,7 +319,7 @@ public class PlayerControllerInState : MonoBehaviour {
 			if (!isOnce) 
 			{
 				pv = pv.normalized;
-				transform.position = new Vector3 (this.transform.position.x + (pv.x * 0.05f), 0.05f, this.transform.position.z + (pv.z * 0.05f));
+				transform.position = new Vector3 (this.transform.position.x + (pv.x * 0.05f), 0.065f, this.transform.position.z + (pv.z * 0.05f));
 				isOnce = true;
 			}
 			transform.position = new Vector3 (this.transform.position.x, 0.065f, this.transform.position.z);
@@ -342,6 +355,7 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	void IdelInit()
 	{
+		AudioManager.Instance.StopSE();
 		ChangeAnimationClip (PLAYERSTATE.IDEL);
 	}
 
@@ -391,19 +405,27 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	void WaterIdelInit()
 	{
+		AudioManager.Instance.PlaySEloop("oyogu");
 		sc.SetBool (false);
 		ChangeAnimationClip (PLAYERSTATE.WATERIDEL);
 	}
 
 	void WaterIdelUpdate()
 	{
-		if (Input.GetKey (KeyCode.W)) {
+		if (Input.GetKey (KeyCode.W)) 
+		{
 			playerStateMachine.SetState (PLAYERSTATE.SWIM);
-		} else if (Input.GetKey (KeyCode.A)) {
+		} 
+		else if (Input.GetKey (KeyCode.A))
+		{
 			playerStateMachine.SetState (PLAYERSTATE.SWIM);
-		} else if (Input.GetKey (KeyCode.S)) {
+		}
+		else if (Input.GetKey (KeyCode.S)) 
+		{
 			playerStateMachine.SetState (PLAYERSTATE.SWIM);
-		} else if (Input.GetKey (KeyCode.D)) {
+		} 
+		else if (Input.GetKey (KeyCode.D))
+		{
 			playerStateMachine.SetState (PLAYERSTATE.SWIM);
 		}
 	}
@@ -421,7 +443,8 @@ public class PlayerControllerInState : MonoBehaviour {
 	void SwimUpdate()
 	{
 		PlayerMoving (PLAYERSTATE.WATERIDEL);
-		if (hitGround) {
+		if (hitGround) 
+		{
 			playerStateMachine.SetState (PLAYERSTATE.CLIMP);
 		}
 
@@ -511,12 +534,10 @@ public class PlayerControllerInState : MonoBehaviour {
 			hitGround = false;
 			break;
 		case "SliderWater":
-			
 			//応急処置
 			if (this.transform.position.y < 0.5f) {
 				break;
 			}
-
 			isSlider = true;
 			this.GetComponent<CapsuleCollider> ().enabled = false;
 			m_Rigid.useGravity = false;
@@ -529,5 +550,5 @@ public class PlayerControllerInState : MonoBehaviour {
 			}
 			break;
 		}
-}
+	}
 }
