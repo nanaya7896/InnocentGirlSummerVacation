@@ -1,0 +1,89 @@
+Initialize engine version: 5.4.3f1 (01f4c123905a)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 555M (ID=0x124d)
+    Vendor:   NVIDIA
+    VRAM:     1999 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.234 seconds
+Platform assembly: C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\mausya\Documents\InnocentGirlSummerVacation\IGSV_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 59Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.840158 ms
+ハイスコアロード完了
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1890 -> priority: 1 
+  Thread -> id: 1750 -> priority: 1 
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.324214 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 468.
+Total: 0.292492 ms (FindLiveObjects: 0.017260 ms CreateObjectMapping: 0.055979 ms MarkObjects: 0.209923 ms  DeleteObjects: 0.007930 ms)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Scene Loaded
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+UnloadTime: 5.386627 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 409.
+Total: 0.276632 ms (FindLiveObjects: 0.019126 ms CreateObjectMapping: 0.018193 ms MarkObjects: 0.192196 ms  DeleteObjects: 0.046649 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.288760 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 470.
+Total: 0.268701 ms (FindLiveObjects: 0.015860 ms CreateObjectMapping: 0.017726 ms MarkObjects: 0.227183 ms  DeleteObjects: 0.007463 ms)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0.05340659
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0.05472527
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0.3273323
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Scene Loaded
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+UnloadTime: 0.737063 ms
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 1754.
+Total: 1.058945 ms (FindLiveObjects: 0.107294 ms CreateObjectMapping: 0.081636 ms MarkObjects: 0.561194 ms  DeleteObjects: 0.308353 ms)
+
+ハイスコアセーブ完了
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+

@@ -23,7 +23,7 @@ public class SceneChange : MonoBehaviour {
 
 
     public Text loadingText;
-    public Image loadingBar;
+  //  public Image loadingBar;
   
 	/// <summary>
 	/// 非同期ローディング用の処理
@@ -39,14 +39,14 @@ public class SceneChange : MonoBehaviour {
         {
             Debug.Log(async.progress);
             loadingText.text = (async.progress * 100).ToString("F0") + "%";
-            loadingBar.fillAmount = async.progress;
+          //  loadingBar.fillAmount = async.progress;
             yield return new WaitForEndOfFrame();
         }
 
         Debug.Log("Scene Loaded");
 
         loadingText.text = "100%";
-        loadingBar.fillAmount = 1;
+       // loadingBar.fillAmount = 1;
 
         yield return new WaitForSeconds(1.0f);
 
