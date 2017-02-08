@@ -97,9 +97,11 @@ public class Node : MonoBehaviour {
 		GoalPosition = NearisTarget (m_Player.transform.position);
 		assessmenttest ();
 
-		rend.SetVertexCount (searchTarget.Count);
-		for (int i = 0; i < searchTarget.Count; i++) {
-			rend.SetPosition (i, searchTarget [i].transform.position);
+		if (DebugModeOnGUI.isDebug) {
+			rend.SetVertexCount (searchTarget.Count);
+			for (int i = 0; i < searchTarget.Count; i++) {
+				rend.SetPosition (i, searchTarget [i].transform.position);
+			}
 		}
 	}
 
@@ -118,6 +120,11 @@ public class Node : MonoBehaviour {
 		{
 			tmp = tmp - 1;
 		}
+
+		/*
+		if (searchTarget == null) {
+			SearchInit ();
+		}*/
 
 		if (searchTarget [tmp].gameObject.ToString() == GoalPosition.ToString())
 		{

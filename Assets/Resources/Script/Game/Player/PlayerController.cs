@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour {
 	//WaterSLider内いいるか
     public bool isInWaterSlider = false;
 
-    string bTagName;
 
 	//アニメーター用変数
 	bool isWalk=false;
@@ -148,7 +147,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (isInWater)
             {
-                AudioManager.Instance.PlaySEloop("oyogu");
+                
             }
             else
             {
@@ -179,10 +178,10 @@ public class PlayerController : MonoBehaviour {
 		}
 			
 			//現在のポジションにidoのトランスフォームの数値を入れる
-			transform.position = new Vector3 (
-				transform.position.x + ido.x,
-				transform.position.y + ido.y,
-				transform.position.z + ido.z);
+		transform.position = new Vector3 (
+			transform.position.x + ido.x,
+			transform.position.y + ido.y,
+			transform.position.z + ido.z);
 
         if (prevPos != transform.position)
 		{
@@ -221,6 +220,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
     }
+
     /// <summary>
     /// ウォータースライダーに入ったときにitweenを起動させる。
     /// </summary>
@@ -250,6 +250,8 @@ public class PlayerController : MonoBehaviour {
 	{
 		playerAutoMove = true;
     }
+
+
 	void InWaterAction()
 	{
 		this.GetComponent<CapsuleCollider> ().enabled = true;
@@ -293,10 +295,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		return clipInfo.clip.name;
 	}
-
-
-
-
+		
 	/// <summary>
 	/// アニメーションの再生時間を返します
 	/// </summary>
@@ -305,7 +304,6 @@ public class PlayerController : MonoBehaviour {
 	{
 		AnimatorStateInfo animState =  m_Anim.GetCurrentAnimatorStateInfo(0);
 		m_Anim.Update (0);
-
 		return animState.normalizedTime;
 	}
 
@@ -337,7 +335,8 @@ public class PlayerController : MonoBehaviour {
 			break;
 		case "SliderWater":
                 //応急処置
-			if (this.transform.position.y < 0.5f) {
+			if (this.transform.position.y < 0.5f)
+			{
 				break;
 			}
 			this.GetComponent<CapsuleCollider> ().enabled = false;
@@ -346,14 +345,11 @@ public class PlayerController : MonoBehaviour {
 			sc.SetBool (true);
 			break;
 		case "Enemy":
-			if (!DebugModeOnGUI.isDebug) {
+			if (!DebugModeOnGUI.isDebug)
+			{
 				isHit = true;
 			}
 			break;
 		}
-
-        bTagName = tagName;
-
 	}
-
 }

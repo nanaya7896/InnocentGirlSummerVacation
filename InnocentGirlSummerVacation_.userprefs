@@ -1,19 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Text/作業リスト.txt">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Script/Game/Node.cs">
     <Files>
-      <File FileName="Assets/Resources/Script/Game/Enemy/Zombie.cs" Line="284" Column="4" />
-      <File FileName="Assets/Resources/Script/Game/Enemy/EnemyActor.cs" Line="15" Column="29" />
-      <File FileName="Assets/Resources/Script/ZombieCountScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/GameManager.cs" Line="103" Column="11" />
-      <File FileName="Assets/Resources/Script/Game/Player/PlayerController.cs" Line="124" Column="10" />
+      <File FileName="Assets/Resources/Script/Game/Enemy/Zombie.cs" Line="402" Column="54" />
+      <File FileName="Assets/Resources/Script/Game/Enemy/EnemyActor.cs" Line="74" Column="24" />
+      <File FileName="Assets/Resources/Script/Game/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Script/Game/Player/PlayerController.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Script/Game/Player/InPoolMove.cs" Line="1" Column="1" />
-      <File FileName="Assets/DebugModeOnGUI.cs" Line="20" Column="4" />
-      <File FileName="Assets/Resources/Script/Game/Enemy/EnemyAI.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Game/Node.cs" Line="269" Column="31" />
-      <File FileName="Assets/Resources/Script/Game/Player/PlayerMove.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Script/Manager/ScoreManager.cs" Line="68" Column="1" />
-      <File FileName="Assets/Text/作業リスト.txt" Line="401" Column="1" />
+      <File FileName="Assets/DebugModeOnGUI.cs" Line="10" Column="35" />
+      <File FileName="Assets/Resources/Script/Game/Enemy/EnemyAI.cs" Line="208" Column="4" />
+      <File FileName="Assets/Resources/Script/Game/Node.cs" Line="124" Column="1" />
+      <File FileName="Assets/Resources/Script/Manager/ScoreManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Text/作業リスト.txt" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Script/Animation/PlayerControllerInState.cs" Line="316" Column="69" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -7,19 +7,19 @@ public class DebugModeOnGUI : MonoBehaviour {
 
 
 
-	public static bool isDebug=true;
+	public static bool isDebug=false;
 	[Header("デバッグで表記される文字の詳細設定")]
 	public GUIStyle DetailStyle;
 
 
 
-	PlayerController player=null;
-	PlayerController m_Player
+	PlayerControllerInState player=null;
+	PlayerControllerInState m_Player
 	{
 		get
 		{
 			if (player == null) {
-				player = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ();
+				player = GameObject.FindWithTag ("Player").GetComponent<PlayerControllerInState> ();
 			}
 			return player;
 		}

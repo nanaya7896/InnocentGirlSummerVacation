@@ -124,15 +124,13 @@ public class Zombie : EnemyActor {
         SERACH
     }
 
-    [SerializeField]
-    State testState=State.IDEL;
-
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
 
     private CapsuleCollider capsule;
+
     void Awake()
     {
-        stateMachine.Add(State.IDEL, IdelEnd, IdelUpdate, IdelEnd);
+        stateMachine.Add(State.IDEL, IdelInit, IdelUpdate, IdelEnd);
         stateMachine.Add(State.WALK, WalkInit, WalkUpdate, WalkEnd);
         stateMachine.Add(State.SLIDER, SliderInit, SliderUpdate, SliderEnd);
         stateMachine.Add(State.DROWNED, DrownedInit, DrownedUpdate, DrownedEnd);
@@ -206,11 +204,6 @@ public class Zombie : EnemyActor {
 
 
         return false;
-    }
-
-    private void setState()
-    {
-        stateMachine.SetState(testState);
     }
 
 
@@ -358,6 +351,7 @@ public class Zombie : EnemyActor {
     {
 		rangeValue = Random.Range (-0.001f, 0.001f);
 		m_Anim.SetBool ("Death", true);
+		GetComponent<Rigidbody> ().isKinematic = false;
     }
 	float rangeValue=0.0f;
 	float drownedTime = 1.0f;
@@ -405,6 +399,7 @@ public class Zombie : EnemyActor {
 		isCount = true;
         //沈む処理が終了したら生き返る処理
 		Revive();
+		this.GetComponent<Rigidbody> ().isKinematic = true;
     }
 
     /// <summary>
