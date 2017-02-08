@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour {
 	//WaterSLider内いいるか
     public bool isInWaterSlider = false;
 
-    string bTagName;
 
 	//アニメーター用変数
 	bool isWalk=false;
@@ -179,10 +178,10 @@ public class PlayerController : MonoBehaviour {
 		}
 			
 			//現在のポジションにidoのトランスフォームの数値を入れる
-			transform.position = new Vector3 (
-				transform.position.x + ido.x,
-				transform.position.y + ido.y,
-				transform.position.z + ido.z);
+		transform.position = new Vector3 (
+			transform.position.x + ido.x,
+			transform.position.y + ido.y,
+			transform.position.z + ido.z);
 
         if (prevPos != transform.position)
 		{
@@ -296,10 +295,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		return clipInfo.clip.name;
 	}
-
-
-
-
+		
 	/// <summary>
 	/// アニメーションの再生時間を返します
 	/// </summary>
@@ -308,7 +304,6 @@ public class PlayerController : MonoBehaviour {
 	{
 		AnimatorStateInfo animState =  m_Anim.GetCurrentAnimatorStateInfo(0);
 		m_Anim.Update (0);
-
 		return animState.normalizedTime;
 	}
 
@@ -356,9 +351,5 @@ public class PlayerController : MonoBehaviour {
 			}
 			break;
 		}
-
-        bTagName = tagName;
-
 	}
-
 }

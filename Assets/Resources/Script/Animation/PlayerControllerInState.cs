@@ -15,18 +15,15 @@ public class PlayerControllerInState : MonoBehaviour {
 	public bool isMove = false;
 	//ゾンビとhitしたか
 	public bool isHit = false;
-	//WaterSLider内いいるか
-	//public bool isInWaterSlider = false;
+	//WaterSLider内いいる
 	//一度しか実行しないようにする
 	bool isOnce=false;
-
-
-	//アニメーター用変数
-	bool isWalk=false;
 	bool isSlider =false;
-	bool prevIsInWater = false;
 	bool isInWater =false;
 	bool hitGround=false;
+	//スライダー終わりに少し動かす時間を儲けている
+	bool playerAutoMove=false;
+	//スライダー時のカメラのきりかえ
 	public switchingCamera sc;
 	[SerializeField]
 	private Transform CamPos;
@@ -50,7 +47,6 @@ public class PlayerControllerInState : MonoBehaviour {
 	//モデルの中心軸
 	Vector3 ModelCenter = new Vector3(0f,0.5f,0f);
 	private Vector3 prev;
-	private Vector3 prevrotation;
 	//移動時い使用する
 	private Vector3 Camforward;
 	//移動する際の移動値を格納
@@ -129,14 +125,11 @@ public class PlayerControllerInState : MonoBehaviour {
 				"Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.");
 		}
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
-		if (Input.GetKeyDown (KeyCode.G))
-		{
-			playerStateMachine.SetState (st);
-		}
 		//ステートマシーンの更新
 		playerStateMachine.Update ();
 	}
@@ -156,8 +149,6 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	void PlayerMoving(PLAYERSTATE nextState)
 	{
-		
-
 		Vector3 prevPos = this.transform.position;
 		//キーボード数値取得。プレイヤーの方向として扱う
 		float h = ControllerManager.Instance.GetLeftHorizontal();//横
@@ -276,7 +267,7 @@ public class PlayerControllerInState : MonoBehaviour {
 		}
 	}
 
-	bool playerAutoMove=false;
+
 
 	void SliderAnimationComplete()
 	{
@@ -528,7 +519,6 @@ public class PlayerControllerInState : MonoBehaviour {
 			//モデルの中心軸を変更
 			SetCenterOfMass (ModelCenter);
 			isOnce = false;
-			//sc.SetBool (false);
 			isInWater = true;
 			isSlider = false;
 			hitGround = false;
