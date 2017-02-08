@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour {
 
     string bTagName;
 
-	public bool isDebug=false;
-
 	//アニメーター用変数
 	bool isWalk=false;
 	bool isSlider =false;
@@ -23,22 +21,31 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField]
 	private Transform CamPos;
 	private Vector3 Camforward;
+	//移動する際の移動値を格納
 	private Vector3 ido;
-	private Vector3 Animdir = Vector3.zero;
-
+	//移動速度
 	public float runspeed = 0.0001f;
 
+	//
     private Vector3 prev;
     private Vector3 prevrotation;
-
+	//アニメーションクリップの情報を保存（名前とか）
 	AnimatorClipInfo clipInfo;
+	//アニメーション再生時間を格納
 	float time;
+	//更新前の回転軸
 	Vector3 newRotate;
+	//更新後の回転軸
 	Vector3 nowRotate;
+	//一度しか実行しないようにする
 	bool isOnce=false;
+	//向いている方向のベクトルを格納する
 	Vector3 pv;
 
+	//モデルの中心軸
+	Vector3 ModelCenter = new Vector3(0f,0.5f,0f);
 
+	//Component : Animator
     Animator anim=null;
 	Animator m_Anim
 	{
@@ -52,6 +59,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	//Component : RigidBody
 	Rigidbody rigid=null;
 	Rigidbody m_Rigid
 	{
@@ -92,6 +100,7 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate () {
 
         IsPlayerOutSlider();
+
 		if (playerAutoMove) {
 			InWaterAction ();
 			return;
@@ -153,7 +162,7 @@ public class PlayerController : MonoBehaviour {
 
 	void PlayerMoving()
 	{
-
+		
 		Vector3 prevPos = this.transform.position;
 		//キーボード数値取得。プレイヤーの方向として扱う
 		float h = ControllerManager.Instance.GetLeftHorizontal();//横
@@ -168,11 +177,12 @@ public class PlayerController : MonoBehaviour {
 			ido = v * Camforward * runspeed + h * CamPos.right * runspeed;
 			//Debug.Log(ido);
 		}
-		//現在のポジションにidoのトランスフォームの数値を入れる
-		transform.position = new Vector3(
-			transform.position.x + ido.x,
-			transform.position.y + ido.y,
-			transform.position.z + ido.z);
+			
+			//現在のポジションにidoのトランスフォームの数値を入れる
+			transform.position = new Vector3 (
+				transform.position.x + ido.x,
+				transform.position.y + ido.y,
+				transform.position.z + ido.z);
 
         if (prevPos != transform.position)
 		{
@@ -239,15 +249,11 @@ public class PlayerController : MonoBehaviour {
 	void SliderAnimationComplete()
 	{
 		playerAutoMove = true;
-		//AudioManager.Instance.StopSE ();
-      
-
     }
 	void InWaterAction()
 	{
 		this.GetComponent<CapsuleCollider> ().enabled = true;
-		if (dista > 1.5f) 
-		{
+		if (dista > 1.5f) {
 			this.gameObject.GetComponent<InPoolMove> ().enabled = false;
 			float x = -0.9770367f - transform.position.x;
 			float y = 0.02354169f - transform.position.y;
@@ -255,18 +261,23 @@ public class PlayerController : MonoBehaviour {
 			Vector3 tmp = new Vector3 (x, y, z);
 			tmp = tmp.normalized;
 			transform.position = transform.position + (tmp * 0.1f * Time.deltaTime);
-			dista= Vector3.Distance (transform.position, tmp);
+			dista = Vector3.Distance (transform.position, tmp);
 			return;
 		}
 
-        this.GetComponent<CapsuleCollider>().enabled = true;
+		this.GetComponent<CapsuleCollider> ().enabled = true;
 
 		//ウォータースライダーの処理が終わったら
 		playerAutoMove = false;
 
 		sc.SetBool (false);
 		this.gameObject.GetComponent<InPoolMove> ().enabled = true;
-    }
+	}
+
+	private void SetCenterOfMass(Vector3 center)
+	{
+		m_Rigid.centerOfMass = center;
+	}
 
 	//=============================Get関数================================//
 	public string GetPlayerPosition()
@@ -305,6 +316,7 @@ public class PlayerController : MonoBehaviour {
 		switch (tagName) 
 		{
 		case "Ground":
+			SetCenterOfMass (Vector3.zero);
 			time = 0f;
 			m_Anim.SetBool ("isGround", true);
 			m_Anim.SetBool ("isInWater", false);
@@ -314,6 +326,8 @@ public class PlayerController : MonoBehaviour {
 			isInWater = false;
 			break;
 		case "Water":
+			//モデルの中心軸を変更
+			SetCenterOfMass(ModelCenter);
 			m_Anim.SetBool ("isGround", false);
 			m_Anim.SetBool ("isInWater", true);
 			m_Anim.SetBool ("isSlider", false);
@@ -332,7 +346,7 @@ public class PlayerController : MonoBehaviour {
 			sc.SetBool (true);
 			break;
 		case "Enemy":
-			if (!isDebug) {
+			if (!DebugModeOnGUI.isDebug) {
 				isHit = true;
 			}
 			break;
