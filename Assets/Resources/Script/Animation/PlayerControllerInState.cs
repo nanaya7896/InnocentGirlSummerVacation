@@ -347,14 +347,16 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	void IdelUpdate()
 	{
-		if (Input.GetKey (KeyCode.W)) {
-			playerStateMachine.SetState (PLAYERSTATE.WALK);
-		} else if (Input.GetKey (KeyCode.A)) {
-			playerStateMachine.SetState (PLAYERSTATE.WALK);
-		} else if (Input.GetKey (KeyCode.S)) {
-			playerStateMachine.SetState (PLAYERSTATE.WALK);
-		} else if (Input.GetKey (KeyCode.D)) {
-			playerStateMachine.SetState (PLAYERSTATE.WALK);
+		if (isMove) {
+			if (Input.GetKey (KeyCode.W)) {
+				playerStateMachine.SetState (PLAYERSTATE.WALK);
+			} else if (Input.GetKey (KeyCode.A)) {
+				playerStateMachine.SetState (PLAYERSTATE.WALK);
+			} else if (Input.GetKey (KeyCode.S)) {
+				playerStateMachine.SetState (PLAYERSTATE.WALK);
+			} else if (Input.GetKey (KeyCode.D)) {
+				playerStateMachine.SetState (PLAYERSTATE.WALK);
+			}
 		}
 	}
 
@@ -454,7 +456,7 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	void ClimpEnd()
 	{
-		m_Rigid.useGravity = true;
+		m_Rigid.useGravity = true;	
 	}
 
 	void SliderInit()
