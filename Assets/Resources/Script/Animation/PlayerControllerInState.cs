@@ -310,10 +310,10 @@ public class PlayerControllerInState : MonoBehaviour {
 			if (!isOnce) 
 			{
 				pv = pv.normalized;
-				transform.position = new Vector3 (this.transform.position.x + (pv.x * 0.05f), 0.065f, this.transform.position.z + (pv.z * 0.05f));
+				transform.position = new Vector3 (this.transform.position.x + (pv.x * 0.05f), 0.075f, this.transform.position.z + (pv.z * 0.05f));
 				isOnce = true;
 			}
-			transform.position = new Vector3 (this.transform.position.x, 0.065f, this.transform.position.z);
+			transform.position = new Vector3 (this.transform.position.x, 0.075f, this.transform.position.z);
 			m_Rigid.useGravity = false;
 			float valAngle = Mathf.Lerp (nowRotate.y, newRotate.y, time / 3f);
 			this.transform.eulerAngles = new Vector3 (this.transform.rotation.eulerAngles.x, valAngle, this.transform.rotation.eulerAngles.z);
