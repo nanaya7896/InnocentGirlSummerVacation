@@ -163,18 +163,21 @@ public  class EnemyAI : MonoBehaviour{
 	private void AutoMove(float speed)
 	{
 
-		if (m_Node.GetisNearPlayer ()) 
+
+		if (idou)
+		{
+			m_Node.SearchEnd ();
+			m_Node.SearchInit ();
+			idou = false;
+		}
+		else if (m_Node.GetisNearPlayer ()) 
 		{
 			m_Node.SearchEnd ();
 			ZombieMove (speed);
 			return;
 		}
 
-		if (idou) {
-			m_Node.SearchEnd ();
-			m_Node.SearchInit ();
-			idou = false;
-		}	
+
 		if (m_Node.GetisSearch ()) 
 		{
 			ZombieMove (speed);
@@ -191,6 +194,7 @@ public  class EnemyAI : MonoBehaviour{
 	/// <param name="speed">Speed.</param>
 	private void ZombieMove(float speed)
 	{
+		Vector3 prevPos = this.transform.position;
 		//プレイヤーの座標を代入
 		Vector3 playerPos = m_Player.transform.position;
 		Vector3 direction = playerPos - m_EnemyPosition;
@@ -198,9 +202,11 @@ public  class EnemyAI : MonoBehaviour{
 		direction = direction.normalized;
 		Vector3 tmpPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
 
+
 		if (tmpPosition.y < 0.081f)
 		{
 			idou = true;
+			transform.position -=direction;
 		} 
 		else
 		{

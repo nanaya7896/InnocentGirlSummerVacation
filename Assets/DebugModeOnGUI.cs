@@ -7,7 +7,7 @@ public class DebugModeOnGUI : MonoBehaviour {
 
 
 
-	public static bool isDebug=true;
+	public static bool isDebug=false;
 	[Header("デバッグで表記される文字の詳細設定")]
 	public GUIStyle DetailStyle;
 
