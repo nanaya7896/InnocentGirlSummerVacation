@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour {
         //初期化
         ScoreManager.Instance.Reset();
         m_Time.GetComponent<TimeChangeScript>().Reset();
-		m_PlayerController.GetComponent<PlayerController>().Reset();
+		//m_PlayerController.GetComponent<PlayerControllerInState>().Reset();
 		//AudioManager.Instance.StopSE();
         //AudioManager.Instance.PlaySE("count");
 
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour {
     {
        // Debug.Log("GameInit");
        
-		m_PlayerController.GetComponent<PlayerController>().isMove =true;
+		m_PlayerController.GetComponent<PlayerControllerInState>().isMove =true;
 		for (int i = 0; i < EnemyActor.Size; i++) {
 			m_EnemyTool.GetComponent<EnemyActor> ().ChangeMove (i,true);
 		}
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour {
         {
             stateMachine.SetState(State.End);
         }
-		if(m_PlayerController.GetComponent<PlayerController>().isHit==true)
+		if(m_PlayerController.GetComponent<PlayerControllerInState>().isHit==true)
         {
             stateMachine.SetState(State.GameOver);
         }

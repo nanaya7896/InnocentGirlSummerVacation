@@ -124,15 +124,13 @@ public class Zombie : EnemyActor {
         SERACH
     }
 
-    [SerializeField]
-    State testState=State.IDEL;
-
     private readonly StateMachine<State> stateMachine = new StateMachine<State>();
 
     private CapsuleCollider capsule;
+
     void Awake()
     {
-        stateMachine.Add(State.IDEL, IdelEnd, IdelUpdate, IdelEnd);
+        stateMachine.Add(State.IDEL, IdelInit, IdelUpdate, IdelEnd);
         stateMachine.Add(State.WALK, WalkInit, WalkUpdate, WalkEnd);
         stateMachine.Add(State.SLIDER, SliderInit, SliderUpdate, SliderEnd);
         stateMachine.Add(State.DROWNED, DrownedInit, DrownedUpdate, DrownedEnd);
@@ -206,11 +204,6 @@ public class Zombie : EnemyActor {
 
 
         return false;
-    }
-
-    private void setState()
-    {
-        stateMachine.SetState(testState);
     }
 
 

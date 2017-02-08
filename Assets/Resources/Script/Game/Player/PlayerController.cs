@@ -221,6 +221,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
     }
+
     /// <summary>
     /// ウォータースライダーに入ったときにitweenを起動させる。
     /// </summary>
@@ -250,6 +251,8 @@ public class PlayerController : MonoBehaviour {
 	{
 		playerAutoMove = true;
     }
+
+
 	void InWaterAction()
 	{
 		this.GetComponent<CapsuleCollider> ().enabled = true;

@@ -13,13 +13,13 @@ public class DebugModeOnGUI : MonoBehaviour {
 
 
 
-	PlayerController player=null;
-	PlayerController m_Player
+	PlayerControllerInState player=null;
+	PlayerControllerInState m_Player
 	{
 		get
 		{
 			if (player == null) {
-				player = GameObject.FindWithTag ("Player").GetComponent<PlayerController> ();
+				player = GameObject.FindWithTag ("Player").GetComponent<PlayerControllerInState> ();
 			}
 			return player;
 		}
