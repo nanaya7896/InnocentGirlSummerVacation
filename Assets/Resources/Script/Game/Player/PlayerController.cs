@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 
     string bTagName;
 
+	public bool isDebug=false;
 
 	//アニメーター用変数
 	bool isWalk=false;
@@ -29,6 +30,14 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 prev;
     private Vector3 prevrotation;
+
+	AnimatorClipInfo clipInfo;
+	float time;
+	Vector3 newRotate;
+	Vector3 nowRotate;
+	bool isOnce=false;
+	Vector3 pv;
+
 
     Animator anim=null;
 	Animator m_Anim
@@ -57,8 +66,6 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rightHandBase = rightHand.position;
-		leftHandBase = leftHand.position;
 
 		if (Camera.main != null)
 		{
@@ -80,12 +87,7 @@ public class PlayerController : MonoBehaviour {
 		playerAutoMove = false;
 	}
 
-	AnimatorClipInfo clipInfo;
-	float time;
-	Vector3 newRotate;
-	Vector3 nowRotate;
-	bool isOnce=false;
-	Vector3 pv;
+
 	// Update is called once per frame
 	void FixedUpdate () {
 
@@ -98,47 +100,26 @@ public class PlayerController : MonoBehaviour {
 			dista = 9999.9f;
 		}
 
-
-		/*clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
-
-		if (isMove && !isHit && clipInfo.clip.name !="agari") {
-			PlayerMoving ();
-			PlayerRotate ();
-		}*/
-
 		clipInfo = m_Anim.GetCurrentAnimatorClipInfo (0)[0];
-
-
 
 		//Debug.Log ("アニメーションクリップ名 : " + clipInfo.clip.name);
 		if (clipInfo.clip.name == "agari") 
 		{  
-			if (!isOnce) {
-				pv = pv.normalized;
-				transform.position = new Vector3 (this.transform.position.x + (pv.x *0.05f), 0.05f, this.transform.position.z +(pv.z *0.05f));
-				//m_Rigid.AddForce(pv,ForceMode.Force);
-				isOnce = true;
-			}
-			transform.position = new Vector3 (this.transform.position.x, 0.065f, this.transform.position.z);
-			m_Rigid.useGravity = false;
-			float valAngle = Mathf.Lerp (nowRotate.y, newRotate.y, time/3f);
-			this.transform.eulerAngles = new Vector3 (this.transform.rotation.eulerAngles.x, valAngle, this.transform.rotation.eulerAngles.z);
-			time += Time.deltaTime;
-			/* AddForceいくない
-			//正面ベクトルを取得
-			Vector3 pv =transform.forward *0.2f;
-			Vector3 uv = transform.up *0.1f;
-			
-			if (transform.position.y <0.1f) 
+			//アニメーションが登り始めまで到達したら
+			if (GetAnimationTime () > 0.4f) 
 			{
-				m_Rigid.AddForce (uv,ForceMode.Force);
-			} 
-			else
-			{
-				m_Rigid.AddForce (pv, ForceMode.Force);
+				if (!isOnce) 
+				{
+					pv = pv.normalized;
+					transform.position = new Vector3 (this.transform.position.x + (pv.x * 0.05f), 0.05f, this.transform.position.z + (pv.z * 0.05f));
+					isOnce = true;
+				}
+				transform.position = new Vector3 (this.transform.position.x, 0.065f, this.transform.position.z);
+				m_Rigid.useGravity = false;
+				float valAngle = Mathf.Lerp (nowRotate.y, newRotate.y, time / 3f);
+				this.transform.eulerAngles = new Vector3 (this.transform.rotation.eulerAngles.x, valAngle, this.transform.rotation.eulerAngles.z);
+				time += Time.deltaTime;
 			}
-			*/
-			//OnAnimatorIK ();
 		}
         else if (isInWaterSlider)
         {
@@ -192,22 +173,6 @@ public class PlayerController : MonoBehaviour {
 			transform.position.x + ido.x,
 			transform.position.y + ido.y,
 			transform.position.z + ido.z);
-
-
-
-        /*if (isInWater) {
-			//現在のポジションにidoのトランスフォームの数値を入れる
-			transform.position = new Vector3(
-				transform.position.x + ido.x,
-				transform.position.y + ido.y,
-				transform.position.z + ido.z);
-		} else {
-			//現在のポジションにidoのトランスフォームの数値を入れる
-			transform.position = new Vector3(
-				transform.position.x + ido.x,
-				transform.position.y + ido.y,
-				transform.position.z + ido.z);
-		}*/
 
         if (prevPos != transform.position)
 		{
@@ -318,24 +283,21 @@ public class PlayerController : MonoBehaviour {
 		return clipInfo.clip.name;
 	}
 
-	public bool isDebug=false;
 
-    void OnCollisionStay(Collision col)
-    {
-        ////Debug.Log (col.gameObject.tag);
-        //string tagName = col.gameObject.tag;
-        //switch (tagName)
-        //{
-        //    case "Water":
-        //        m_Anim.SetBool("isGround", false);
-        //        m_Anim.SetBool("isInWater", true);
-        //        m_Anim.SetBool("isSlider", false);
-        //        //sc.SetBool (false);
-        //        isInWater = true;
-        //        break;
-        //}
 
-    }
+
+	/// <summary>
+	/// アニメーションの再生時間を返します
+	/// </summary>
+	/// <returns>The animation time.</returns>
+	public float GetAnimationTime()
+	{
+		AnimatorStateInfo animState =  m_Anim.GetCurrentAnimatorStateInfo(0);
+		m_Anim.Update (0);
+
+		return animState.normalizedTime;
+	}
+
     void OnCollisionEnter(Collision col)
 	{
 		//Debug.Log (col.gameObject.tag);
@@ -346,8 +308,6 @@ public class PlayerController : MonoBehaviour {
 			time = 0f;
 			m_Anim.SetBool ("isGround", true);
 			m_Anim.SetBool ("isInWater", false);
-			rightHand.position = rightHandBase;
-			leftHand.position = leftHandBase;
 			nowRotate = this.transform.eulerAngles;
 			newRotate = this.transform.eulerAngles - new Vector3 (0f, 45f, 0f);
 			pv=transform.forward;
@@ -382,19 +342,4 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	float weight=1f;
-	public Transform leftHand;
-	public Transform rightHand;
-	private Vector3 leftHandBase;
-	private Vector3 rightHandBase;
-
-
-	void OnAnimatorIK()
-	{
-		m_Anim.SetIKPositionWeight (AvatarIKGoal.RightHand, weight);
-		m_Anim.SetIKPositionWeight (AvatarIKGoal.LeftHand, weight);
-
-		m_Anim.SetIKPosition (AvatarIKGoal.LeftHand, leftHand.position);
-		m_Anim.SetIKPosition (AvatarIKGoal.RightHand, rightHand.position);
-	}
 }

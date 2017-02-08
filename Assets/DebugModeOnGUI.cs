@@ -47,7 +47,7 @@ public class DebugModeOnGUI : MonoBehaviour {
 			GUI.Label (new Rect (10, 250, 200, 100), "Playerの座標 : " + m_Player.transform.position,DetailStyle);
 			GUI.Label (new Rect (10, 300, 200, 100), "Playerの向き : " + m_Player.transform.rotation.eulerAngles,DetailStyle);
 			GUI.Label (new Rect (10, 350, 200, 100), "現在再生中のアニメーション : " + m_Player.GetAnimationName (),DetailStyle);
-
+			GUI.Label (new Rect (10, 400, 200, 100), "現在再生中のアニメーション時間 : " + m_Player.GetAnimationTime (), DetailStyle);
 
 			//GUI.Label (new Rect (10, 50, 200, 100, "UnityVersion : "+Application.unityVersion,DetailStyle));
 
