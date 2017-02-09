@@ -162,9 +162,9 @@ public  class EnemyAI : MonoBehaviour{
 
 	private void AutoMove(float speed)
 	{
+		ZombieMove (speed);
 
-
-		if (idou)
+		/*if (idou)
 		{
 			m_Node.SearchEnd ();
 			m_Node.SearchInit ();
@@ -185,7 +185,7 @@ public  class EnemyAI : MonoBehaviour{
 		else 
 		{
 			m_Node.SearchUpdate (speed);
-		}
+		}*/
 	}
 
 	/// <summary>
