@@ -33,7 +33,7 @@ public class PlayerControllerInState : MonoBehaviour {
 	float dista =9999f;
 	//
 
-
+	private GameObject targetWater;
 	//アニメーション再生時間を格納
 	float time;
 	//更新前の回転軸
@@ -125,6 +125,11 @@ public class PlayerControllerInState : MonoBehaviour {
 			Debug.LogWarning(
 				"Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.");
 		}
+
+
+		if (targetWater == null) {
+			targetWater = GameObject.FindWithTag ("target");
+		}
 	}
 
 
@@ -176,6 +181,11 @@ public class PlayerControllerInState : MonoBehaviour {
 			playerStateMachine.SetState (nextState);
 		} 
 
+	}
+
+	public void PlayAnimation()
+	{
+		m_Anim.SetTrigger("AnimationPlay");
 	}
 
 	//====================ここからSet関数==============================//
@@ -278,6 +288,9 @@ public class PlayerControllerInState : MonoBehaviour {
 	void SliderAnimationComplete()
 	{
 		playerAutoMove = true;
+		m_Rigid.useGravity = true;
+		ChangeAnimationClip (PLAYERSTATE.SWIM);
+		//this.transform.position = new Vector3 (transform.position.x, 0.0282f, transform.position.z);
 		//playerStateMachine.SetState (PLAYERSTATE.WATERIDEL);
 	}
 
@@ -286,12 +299,12 @@ public class PlayerControllerInState : MonoBehaviour {
 		this.GetComponent<CapsuleCollider> ().enabled = true;
 		if (dista > 1.5f) {
 			this.gameObject.GetComponent<InPoolMove> ().enabled = false;
-			float x = -0.9770367f - transform.position.x;
-			float y = 0.02354169f - transform.position.y;
-			float z = -0.3872362f - transform.position.z;
+			float x = targetWater.transform.position.x - transform.position.x;
+			float y = 0.0282f;
+			float z = targetWater.transform.position.z - transform.position.z;
 			Vector3 tmp = new Vector3 (x, y, z);
 			tmp = tmp.normalized;
-			transform.position = transform.position + (tmp * 0.1f * Time.deltaTime);
+			transform.position = transform.position + (tmp * 0.2f * Time.deltaTime);
 			dista = Vector3.Distance (transform.position, tmp);
 			return;
 		}
@@ -402,6 +415,8 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	void WaterIdelInit()
 	{
+		this.transform.position = new Vector3 (transform.position.x, -0.0298f, transform.position.z);
+
 		AudioManager.Instance.PlaySEloop("oyogu");
 		sc.SetBool (false);
 		ChangeAnimationClip (PLAYERSTATE.WATERIDEL);
@@ -409,6 +424,7 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	void WaterIdelUpdate()
 	{
+		
 		if (Input.GetKey (KeyCode.W)) 
 		{
 			playerStateMachine.SetState (PLAYERSTATE.SWIM);
@@ -434,11 +450,13 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	void SwimInit()
 	{
+		this.transform.position = new Vector3 (transform.position.x, 0.0282f, transform.position.z);
 		ChangeAnimationClip (PLAYERSTATE.SWIM);
 	}
 
 	void SwimUpdate()
 	{
+		
 		PlayerMoving (PLAYERSTATE.WATERIDEL);
 		if (hitGround) 
 		{
