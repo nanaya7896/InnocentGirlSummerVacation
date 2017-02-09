@@ -12,7 +12,7 @@ public class EnemyActor : MonoBehaviour{
     /// </summary>
     public int ID;
 
-    public static int Size=30;
+    public static int Size=0;
     /// <summary>
     /// Enemyの移動速度
     /// </summary>

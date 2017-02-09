@@ -50,6 +50,7 @@ public class PlayerControllerInState : MonoBehaviour {
 	//移動時い使用する
 	private Vector3 Camforward;
 	//移動する際の移動値を格納
+	[SerializeField]
 	private Vector3 ido;
 
 
@@ -226,6 +227,11 @@ public class PlayerControllerInState : MonoBehaviour {
 		return state.ToString ();
 	}
 
+	public Vector3 GetMoveValue()
+	{
+		return ido;
+	}
+
 	/// <summary>
 	/// ウォータースライダーに入ったときにitweenを起動させる。
 	/// </summary>
@@ -313,7 +319,7 @@ public class PlayerControllerInState : MonoBehaviour {
 				transform.position = new Vector3 (this.transform.position.x + (pv.x * 0.05f), 0.075f, this.transform.position.z + (pv.z * 0.05f));
 				isOnce = true;
 			}
-			transform.position = new Vector3 (this.transform.position.x, 0.075f, this.transform.position.z);
+			transform.position = new Vector3 (this.transform.position.x,this.transform.position.y, this.transform.position.z);
 			m_Rigid.useGravity = false;
 			float valAngle = Mathf.Lerp (nowRotate.y, newRotate.y, time / 3f);
 			this.transform.eulerAngles = new Vector3 (this.transform.rotation.eulerAngles.x, valAngle, this.transform.rotation.eulerAngles.z);

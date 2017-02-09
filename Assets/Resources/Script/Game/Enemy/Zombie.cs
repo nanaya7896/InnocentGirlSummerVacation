@@ -136,8 +136,6 @@ public class Zombie : EnemyActor {
         stateMachine.Add(State.DROWNED, DrownedInit, DrownedUpdate, DrownedEnd);
         stateMachine.Add(State.SERACH, SearchInit, SearchUpdate, SearchEnd);
         stateMachine.SetState(State.IDEL);
-
-
     }
 
     // Use this for initialization
