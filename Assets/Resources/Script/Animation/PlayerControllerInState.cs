@@ -183,6 +183,11 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	}
 
+	public void PlayAnimation()
+	{
+		m_Anim.SetTrigger("AnimationPlay");
+	}
+
 	//====================ここからSet関数==============================//
 
 	/// <summary>

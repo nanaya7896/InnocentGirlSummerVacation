@@ -33,6 +33,18 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+	Transform UI =null;
+	Transform m_UI
+	{
+		get
+		{
+			if (UI == null) {
+				UI = GameObject.Find ("/UI").transform;
+			}
+			return UI;
+		}
+	}
+
     Transform Time = null;
     Transform m_Time
     {
@@ -99,16 +111,25 @@ public class GameManager : MonoBehaviour {
         ScoreManager.Instance.Reset();
         m_Time.GetComponent<TimeChangeScript>().Reset();
 		//m_PlayerController.GetComponent<PlayerControllerInState>().Reset();
-		//AudioManager.Instance.StopSE();
-        //AudioManager.Instance.PlaySE("count");
+		AudioManager.Instance.StopSE();
+
+       
 
     }
-
+	bool isOnce=false;
     void FirstUpdate()
     {
+
+		if (!isOnce) {
+			m_UI.GetComponent<Animator> ().SetTrigger ("AnimationPlay");
+			AudioManager.Instance.PlaySE("count");
+			isOnce = true;
+		}
         //Debug.Log("FirstUpdate");
         if (m_Time.GetComponent<TimeChangeScript>().isTimeStart)
         {
+			isOnce = false;
+
             //ステートをGameに移行
             stateMachine.SetState(State.Game);
         }   
@@ -117,6 +138,7 @@ public class GameManager : MonoBehaviour {
 
     void FirstEnd()
     {
+		
         //Debug.Log("FirstEnd");
     }
 
