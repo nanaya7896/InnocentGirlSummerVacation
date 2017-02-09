@@ -95,14 +95,13 @@ public class FllowPlayer : MonoBehaviour
 				//moveValue = Mathf.Abs (moveValue);
 			}
 			//Debug.Log (moveValue);
-			Vector3 smooth = new Vector3 (hit.point.x + m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().x, this.transform.position.y +(moveValue*Time.deltaTime), hit.point.z + m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().z);
+			Vector3 smooth = new Vector3 (hit.point.x + (m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().x*Time.deltaTime), this.transform.position.y +(moveValue*Time.deltaTime), hit.point.z + (m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().z*Time.deltaTime));
 			this.transform.position =Vector3.SmoothDamp (transform.position, smooth, ref velo, speed);
 			//transform.LookAt (target.transform);
 		} 
 		else 
 		{
 			//target.transform.position = targetFromCamera;
-
 			this.transform.position = tmp;
 		}
 		hitPosition = m_Player.transform.position;

@@ -18,7 +18,7 @@ public class PlayerControllerInState : MonoBehaviour {
 	//WaterSLider内いいる
 	//一度しか実行しないようにする
 	bool isOnce=false;
-	bool isSlider =false;
+	public bool isSlider =false;
 	bool isInWater =false;
 	bool hitGround=false;
 	//スライダー終わりに少し動かす時間を儲けている
