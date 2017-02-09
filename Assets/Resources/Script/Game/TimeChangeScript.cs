@@ -19,7 +19,7 @@ public class TimeChangeScript : MonoBehaviour {
     [SerializeField]
     List<GameObject> one = new List<GameObject>();
 
-    private PlayerController psc;
+	private PlayerControllerInState psc;
 	
     void Start () {
         LimitTime = 90.0f;
@@ -35,7 +35,7 @@ public class TimeChangeScript : MonoBehaviour {
             one.Add(GameObject.Find("/UI/Canvas/TimeUI/" + i));
         }
 
-        psc = GameObject.Find("GameManager/yuki_taiki").GetComponent<PlayerController>();
+		psc = GameObject.Find("/GameManager/yuki_taiki").GetComponent<PlayerControllerInState>();
         
 	}
 
@@ -44,7 +44,7 @@ public class TimeChangeScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-       isTimeStop =psc.isInWaterSlider;
+		isTimeStop =psc.isSlider;
 
 		if (isTimeStart) 
         {

@@ -8,7 +8,7 @@ public class FllowPlayer : MonoBehaviour
 {
 
     private Vector3 velocity = Vector3.zero;
-
+	private Vector3 velo =Vector3.zero;
     [SerializeField, Header("目的地までの到達時間")]
     float speed;
 
@@ -43,53 +43,108 @@ public class FllowPlayer : MonoBehaviour
 	RaycastHit hit;
 	public GameObject target;
 
-
+	public Vector3 startCameraPos;
     // Use this for initialization
     void Start()
     {
-		
+		startCameraPos = transform.position;
         offset = transform.position - m_Player.position;
     }
 	[SerializeField]
 	Vector3 targetFromCamera;
-	bool isHit=false;
+	float val;
+	Vector3 hitPosition;
+	float moveValue;
     // Update is called once per frame
-    void LateUpdate()
+    void LateUpdate ()
 	{
-		//nextLook =tra
-		
-			//回転を更新する
-			rotateCamera += ControllerManager.Instance.GetRightHorizontal () * Time.deltaTime * rotateSpeed;
 
-			//回転したカメラのプレイヤーを中心として位置取りの計算をcos sinを使う
-			Vector3 targetpos = m_Player.position + new Vector3 (Mathf.Sin (rotateCamera) * offset.z,
-				                   offset.y,
-				                   Mathf.Cos (rotateCamera) * offset.z);
-		Vector3 tmp = Vector3.SmoothDamp (transform.position, targetpos, ref velocity, speed);
-			//回転及び座標をカメラに更新する
-			transform.eulerAngles = new Vector3 (10, rotateCamera * Mathf.Rad2Deg, 0);
-			
 
-			targetFromCamera= target.transform.position + (transform.position - target.transform.position);
-		//target.transform.position = targetFromCamera;
+		Vector3 tmp;
+		//回転を更新する
+		rotateCamera += ControllerManager.Instance.GetRightHorizontal () * Time.deltaTime * rotateSpeed;
+		//回転したカメラのプレイヤーを中心として位置取りの計算をcos sinを使う
+		Vector3 targetpos = m_Player.position + new Vector3 (Mathf.Sin (rotateCamera) * offset.z,
+			offset.y,
+			Mathf.Cos (rotateCamera) * offset.z);
+		tmp = Vector3.SmoothDamp (transform.position, targetpos, ref velocity, speed);
+		//回転及び座標をカメラに更新する
+		transform.eulerAngles = new Vector3 (10, rotateCamera * Mathf.Rad2Deg, 0);
+		targetFromCamera = target.transform.position + (transform.position - target.transform.position);
+
 		if (Physics.Linecast (m_Player.transform.position, targetFromCamera, out hit, layer)) 
 		{
-			Debug.Log ("壁にあたったよ");
-			isHit = true;
-			//transform.position = Vector3.Lerp ( this.transform.position, target.transform.position,Time.deltaTime * 3f);
 
-			transform.position =Vector3.SmoothDamp(this.transform.position,target.transform.position,ref velocity,speed);
-		}
-		if (isHit) 
-		{
-			transform.LookAt (target.transform);
-			if (Vector3.Distance (m_Player.transform.position, this.transform.position) > 0.45f) {
-				isHit = false;
+			//プレイヤーと壁との距離
+			float playerToWall =Vector3.Distance(m_Player.transform.position,hit.transform.position);
+			float cameraToPlayer = Vector3.Distance (m_Player.transform.position, transform.position);
+			float cos = GetCos (cameraToPlayer, playerToWall);
+
+			//transform.eulerAngles = new Vector3 (cos,transform.eulerAngles.y,0f);
+			//isHit = true;
+			if (m_Player.transform.position == hitPosition)
+			{
+				moveValue = 0f;
+				//Debug.Log ("一緒だよ");
+			} 
+			else
+			{
+				float y = getCoordinate (cos, playerToWall);
+				//Debug.Log (y);
+				moveValue = y;
+				//moveValue = Mathf.Abs (moveValue);
 			}
-		} else 
+			//Debug.Log (moveValue);
+			Vector3 smooth = new Vector3 (hit.point.x + (m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().x*Time.deltaTime), this.transform.position.y +(moveValue*Time.deltaTime), hit.point.z + (m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().z*Time.deltaTime));
+			this.transform.position =Vector3.SmoothDamp (transform.position, smooth, ref velo, speed);
+			//transform.LookAt (target.transform);
+		} 
+		else 
 		{
-			transform.position = tmp;
+			//target.transform.position = targetFromCamera;
+			this.transform.position = tmp;
 		}
-
+		hitPosition = m_Player.transform.position;
 	}
+
+
+	public float getCoordinate(float radian,float radius)
+	{
+		float y = Mathf.Sin (radian) * radius;
+
+		return y;
+	}
+
+	///-0.4f
+
+	/// <summary>
+	/// Gets the player to wall.
+	/// </summary>
+	/// <returns>The player to wall.</returns>
+	/// <param name="playerPosition">Player position.</param>
+	/// <param name="wallHitPosition">Wall hit position.</param>
+	public Vector3 GetPlayerToWall(Vector3 playerPosition , Vector3 wallHitPosition)
+	{
+		Vector3 distance = wallHitPosition - playerPosition;
+
+		return distance;
+	}
+
+	/// <summary>
+	/// Cosの角度を取得する
+	/// </summary>
+	/// <returns>The cos.</returns>
+	/// <param name="oblique_line">Oblique line.</param>
+	/// <param name="Base">Base.</param>
+	public float GetCos(float oblique_line,float Base)
+	{
+		float cos = Base / oblique_line;
+		cos = Mathf.Cos (cos);
+
+		cos *= Mathf.Rad2Deg;
+		Debug.Log (cos);
+		return cos;
+	}
+
+
 }
