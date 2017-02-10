@@ -78,6 +78,7 @@
      <Compile Include="Assets\Resources\Script\Game\Player\CameraMove.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\InPoolMove.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\LookMove.cs" />
+     <Compile Include="Assets\Resources\Script\Game\Player\NamiRayCast.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\PlayerController.cs" />
      <Compile Include="Assets\Resources\Script\Game\Player\PlayerMove.cs" />
      <Compile Include="Assets\Resources\Script\Game\Score.cs" />

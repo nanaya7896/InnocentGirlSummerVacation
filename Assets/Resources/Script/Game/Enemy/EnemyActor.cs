@@ -12,7 +12,7 @@ public class EnemyActor : MonoBehaviour{
     /// </summary>
     public int ID;
 
-    public static int Size=1;
+    public static int Size=30;
     /// <summary>
     /// Enemyの移動速度
     /// </summary>
@@ -71,7 +71,7 @@ public class EnemyActor : MonoBehaviour{
 		//Enemyの生存フラグ
 		enemy[num].isAlive = true;
 		//Enemyの移動速度
-		enemy[num].speed = 0.5f;
+		enemy[num].speed = 0.25f;
 		//Eenmyの名前
 		enemy[num].name = "Zombie_" + num;
 		//Enemyの親
