@@ -26,7 +26,6 @@ public class FllowPlayer : MonoBehaviour
         }
     }
 
-
     [Header("カメラとプレイヤーの相対距離"), SerializeField]
     public Vector3 offset;
 
@@ -67,42 +66,41 @@ public class FllowPlayer : MonoBehaviour
 		Vector3 targetpos = m_Player.position + new Vector3 (Mathf.Sin (rotateCamera) * offset.z,
 			offset.y,
 			Mathf.Cos (rotateCamera) * offset.z);
+		
 		tmp = Vector3.SmoothDamp (transform.position, targetpos, ref velocity, speed);
-		//回転及び座標をカメラに更新する
-		transform.eulerAngles = new Vector3 (10, rotateCamera * Mathf.Rad2Deg, 0);
 		targetFromCamera = target.transform.position + (transform.position - target.transform.position);
 
 		if (Physics.Linecast (m_Player.transform.position, targetFromCamera, out hit, layer)) 
 		{
-
 			//プレイヤーと壁との距離
 			float playerToWall =Vector3.Distance(m_Player.transform.position,hit.transform.position);
 			float cameraToPlayer = Vector3.Distance (m_Player.transform.position, transform.position);
 			float cos = GetCos (cameraToPlayer, playerToWall);
 
-			//transform.eulerAngles = new Vector3 (cos,transform.eulerAngles.y,0f);
-			//isHit = true;
 			if (m_Player.transform.position == hitPosition)
 			{
 				moveValue = 0f;
-				//Debug.Log ("一緒だよ");
 			} 
 			else
 			{
 				float y = getCoordinate (cos, playerToWall);
-				//Debug.Log (y);
 				moveValue = y;
 				//moveValue = Mathf.Abs (moveValue);
 			}
-			//Debug.Log (moveValue);
-			Vector3 smooth = new Vector3 (hit.point.x + (m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().x*Time.deltaTime), this.transform.position.y +(moveValue*Time.deltaTime), hit.point.z + (m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().z*Time.deltaTime));
-			this.transform.position =Vector3.SmoothDamp (transform.position, smooth, ref velo, speed);
-			//transform.LookAt (target.transform);
+			Vector3 smooth = new Vector3 (hit.point.x + (m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().x*Time.deltaTime), this.transform.position.y + (moveValue*0.5f*Time.deltaTime), hit.point.z + (m_Player.GetComponent<PlayerControllerInState> ().GetMoveValue ().z*Time.deltaTime));
+			//this.transform.position =Vector3.SmoothDamp (transform.position, smooth, ref velo, speed);
+			transform.LookAt (m_Player);
+
+			if (cameraToPlayer > 0.4f) 
+			{
+				this.transform.position = tmp;
+			}
 		} 
 		else 
 		{
-			//target.transform.position = targetFromCamera;
 			this.transform.position = tmp;
+			//回転及び座標をカメラに更新する
+			transform.eulerAngles = new Vector3 (10, rotateCamera * Mathf.Rad2Deg, 0);
 		}
 		hitPosition = m_Player.transform.position;
 	}
@@ -114,8 +112,6 @@ public class FllowPlayer : MonoBehaviour
 
 		return y;
 	}
-
-	///-0.4f
 
 	/// <summary>
 	/// Gets the player to wall.

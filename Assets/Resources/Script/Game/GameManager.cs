@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour {
         ScoreManager.Instance.Reset();
         m_Time.GetComponent<TimeChangeScript>().Reset();
 		//m_PlayerController.GetComponent<PlayerControllerInState>().Reset();
-		AudioManager.Instance.StopSE();
+		//AudioManager.Instance.StopSE();
 
        
 
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour {
 	bool isOnce=false;
     void FirstUpdate()
     {
-
+		
 		if (!isOnce) {
 			m_UI.GetComponent<Animator> ().SetTrigger ("AnimationPlay");
 			AudioManager.Instance.PlaySE("count");

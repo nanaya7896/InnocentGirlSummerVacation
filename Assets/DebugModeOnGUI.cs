@@ -7,7 +7,7 @@ public class DebugModeOnGUI : MonoBehaviour {
 
 
 
-	public static bool isDebug=false;
+	public static bool isDebug=true;
 	[Header("デバッグで表記される文字の詳細設定")]
 	public GUIStyle DetailStyle;
 
@@ -51,7 +51,7 @@ public class DebugModeOnGUI : MonoBehaviour {
 			GUI.Label (new Rect (10, 350, 200, 100), "現在再生中のアニメーション : " + m_Player.GetAnimationName (),DetailStyle);
 			GUI.Label (new Rect (10, 400, 200, 100), "現在再生中のアニメーション時間 : " + m_Player.GetAnimationTime (), DetailStyle);
 			GUI.Label (new Rect (10, 450, 200, 100), "カメラの座標 : "+MainCamera.transform.position,DetailStyle);
-			//GUI.Label (new Rect (10, 50, 200, 100, "UnityVersion : "+Application.unityVersion,DetailStyle));
+			GUI.Label (new Rect (10, 500, 200, 100), "カメラの角度 : "+MainCamera.transform.eulerAngles,DetailStyle);
 
 		}
 	}
