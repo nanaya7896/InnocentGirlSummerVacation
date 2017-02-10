@@ -7,6 +7,7 @@ public class TimeChangeScript : MonoBehaviour {
 
 
 	public bool isTimeStart=false;
+    bool prev;
 
     public bool isTimeStop = false;
     [SerializeField]
@@ -46,8 +47,9 @@ public class TimeChangeScript : MonoBehaviour {
 
 		isTimeStop =psc.isSlider;
 
-		if (isTimeStart) 
+		if (isTimeStart||prev) 
         {
+            prev = true;
             if (!isTimeStop)
             {
                 LimitTime -= Time.deltaTime;
