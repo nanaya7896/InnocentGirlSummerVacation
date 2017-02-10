@@ -237,6 +237,10 @@ public class PlayerControllerInState : MonoBehaviour {
 		return state.ToString ();
 	}
 
+    public string GetNowEnum()
+    {
+        return playerStateMachine.GetCurrentStateName();
+    }
 	public Vector3 GetMoveValue()
 	{
 		return ido;
