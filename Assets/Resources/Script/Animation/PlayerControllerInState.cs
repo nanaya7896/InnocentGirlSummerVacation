@@ -325,6 +325,9 @@ public class PlayerControllerInState : MonoBehaviour {
 		playerStateMachine.SetState (PLAYERSTATE.WATERIDEL);
 	}
 
+	/// <summary>
+	/// Players the climp action.
+	/// </summary>
 	void PlayerClimpAction()
 	{
 		//アニメーションが登り始めまで到達したら
@@ -333,7 +336,7 @@ public class PlayerControllerInState : MonoBehaviour {
 			if (!isOnce) 
 			{
 				pv = pv.normalized;
-				transform.position = new Vector3 (this.transform.position.x + (pv.x * 0.05f), 0.075f, this.transform.position.z + (pv.z * 0.05f));
+				transform.position = new Vector3 (this.transform.position.x + (pv.x * 0.05f), this.transform.position.y + hit.textureCoord.y, this.transform.position.z + (pv.z * 0.05f));
 				isOnce = true;
 			}
 			transform.position = new Vector3 (this.transform.position.x,this.transform.position.y, this.transform.position.z);
@@ -457,10 +460,13 @@ public class PlayerControllerInState : MonoBehaviour {
 		this.transform.position = new Vector3 (transform.position.x, 0.0282f, transform.position.z);
 		ChangeAnimationClip (PLAYERSTATE.SWIM);
 	}
-
+	RaycastHit hit;
 	void SwimUpdate()
 	{
-		
+		Physics.Raycast(transform.position,transform.forward*10f,out hit,Mathf.Infinity);
+		Debug.Log (hit.textureCoord2);
+		Debug.DrawRay (transform.position, transform.forward*10f);
+
 		PlayerMoving (PLAYERSTATE.WATERIDEL);
 		if (hitGround) 
 		{
@@ -481,13 +487,15 @@ public class PlayerControllerInState : MonoBehaviour {
 		nowRotate = this.transform.eulerAngles;
 		newRotate = this.transform.eulerAngles - new Vector3 (0f, 45f, 0f);
 		pv=transform.forward;
+
+
 	}
 
 	void ClimpUpdate()
 	{
 		PlayerClimpAction ();
 
-		if (GetAnimationTime() >1f)
+		if (GetAnimationTime() >0.8f)
 		{
 			playerStateMachine.SetState (PLAYERSTATE.IDEL);
 			return;

@@ -17,9 +17,6 @@ public  class EnemyAI : MonoBehaviour{
 	RaycastHit hit;
 
 	public Vector3 startPosition;
-
-	float d=9999.0f;
-
     [SerializeField]
     Transform player;
     Transform m_Player
