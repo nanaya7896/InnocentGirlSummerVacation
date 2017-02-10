@@ -169,6 +169,7 @@ public class Zombie : EnemyActor {
     public void Revive()
     {
 		ScoreManager.Instance.AddScore (1);
+
 		m_Anim.SetBool ("Death", false);
         //生成位置
         int randamResPwanPoint = Random.Range(0, 3); //ランダムで3つの門からでる位置を決める。
@@ -193,7 +194,11 @@ public class Zombie : EnemyActor {
         }
         this.transform.position = respwanVector;
         this.transform.Rotate (new Vector3(0.0f,0.0f,0.0f));
+		Reset ();
         isMove = true;
+
+		stateMachine.SetState (State.IDEL);
+
     }
 
 
@@ -211,9 +216,9 @@ public class Zombie : EnemyActor {
     /// </summary>
     void IdelInit()
     {
-		m_Capsel.enabled = true;
+		
 		this.transform.Rotate (Vector3.zero);
-
+		this.GetComponent<Rigidbody> ().useGravity = true;
     }
 
     /// <summary>
@@ -242,10 +247,13 @@ public class Zombie : EnemyActor {
     /// </summary>
     void WalkInit()
     {
+		
 		targetnum = 0;
 		isStepUp = false;
 		isSlider = false;
-		this.transform.Rotate (Vector3.zero);
+		//this.transform.Rotate (Vector3.zero);
+
+		this.GetComponent<Rigidbody> ().isKinematic = false;
     }
 
 
@@ -308,16 +316,23 @@ public class Zombie : EnemyActor {
 		moveHash.Add ("oncomplete", "SliderAnimationComplete");
 		iTween.MoveTo(this.gameObject, moveHash);
 		isSlider = true;
+		startAngle = transform.eulerAngles;
         //向きを強制的に寝かせる
-        transform.Rotate(-90.0f, 0.0f, 0.0f);
+       // transform.Rotate(-90.0f, 0.0f, 0.0f);
     }
 
+	float ti =0f;
+	Vector3 startAngle=Vector3.zero;
     /// <summary>
     /// スライダーですべるときの更新処理
     /// <comment>スライダーを滑り終わるまで呼ばれ続ける</comment>
     /// </summary>
     void SliderUpdate()
     {
+		if (transform.eulerAngles.x != -90.0f) {
+			transform.eulerAngles = Vector3.Lerp (startAngle, new Vector3 (-90.0f, transform.eulerAngles.y, transform.eulerAngles.z), ti / 3f);
+			ti += Time.deltaTime;
+		}
         //スライダーが終了したら
 		if(!isSlider)
         {
@@ -340,6 +355,7 @@ public class Zombie : EnemyActor {
         Destroy(GetComponent<LookMove>());
         capsule.enabled = true;
         transform.Rotate(90f,0f,0f);
+		startAngle = Vector3.zero;
     }
 
     /// <summary>
@@ -347,42 +363,70 @@ public class Zombie : EnemyActor {
     /// </summary>
     void DrownedInit()
     {
-		rangeValue = Random.Range (-0.001f, 0.001f);
+		rangeValue = Random.Range (-0.3f, 0.3f);
 		m_Anim.SetBool ("Death", true);
 		GetComponent<Rigidbody> ().isKinematic = false;
+		targetPosition = new Vector3 (transform.position.x + rangeValue, -0.4f, transform.position.z + rangeValue);
+		startPosition = this.transform.position;
+
+		StartCoroutine ("DrownedCall");
     }
+
+	Vector3 targetPosition;
 	float rangeValue=0.0f;
-	float drownedTime = 1.0f;
-	bool isRevive = false;
+	[SerializeField]
+	float drownedTime = 4.0f;
+	[SerializeField]
 	float reviveTime =2.0f;
-    /// <summary>
+	bool isRevive = false;
+	float DrowTime=0f;
+	Vector3 startPosition;
+    
+	/// <summary>
     /// 溺れ続ける処理
     /// <comment>ゾンビが溺れて沈むまで繰り返す</comment>
     /// </summary>
     void DrownedUpdate()
     {
-		
-		if (!isRevive) 
-		{
-			if (drownedTime < 0.0f) 
-			{
-				//float pos = transform.position.y;
-				//pos = pos - (1.0f * Time.deltaTime);
-				transform.position = new Vector3 (transform.position.x+rangeValue, transform.position.y-(0.05f), transform.position.z+rangeValue);
-				if (transform.position.y < -2.0f) {
-					isRevive = true;
-					drownedTime = 1.0f;
-				}
-			}
-			drownedTime -= Time.deltaTime;  
-		} else {
-			if (reviveTime < 0.0f) {
-				stateMachine.SetState (State.IDEL);
-			}
-			reviveTime -= Time.deltaTime;
-		}
+				
     }
 
+	/// <summary>
+	/// 溺れ、暴れる処理から沈んでいく処理を入れる
+	/// </summary>
+	/// <returns>The call.</returns>
+	IEnumerator DrownedCall()
+	{
+		while (DrowTime <= drownedTime)
+		{
+			Vector3 drownedPosition = Vector3.Lerp (startPosition,targetPosition, DrowTime / 5f);
+			DrowTime += Time.deltaTime;
+			this.transform.position = drownedPosition;
+			//Debug.Log (drownedPosition);
+			yield return 0;
+		}
+
+		DrowTime = 0f;
+		startPosition = this.transform.position;
+		float downedValue = -0.4f;
+		Vector3 targetDownPosition = new Vector3 (transform.position.x, downedValue, transform.position.z);
+		while (DrowTime <= drownedTime) 
+		{
+			this.transform.position = Vector3.Lerp (startPosition, targetDownPosition, DrowTime / 5f);
+			DrowTime += Time.deltaTime;
+
+			yield return 0;
+		}
+
+		//yield return new WaitForSeconds (1f);
+		Debug.Log("コンプリート");
+		m_Capsel.enabled = true;
+		//StopCoroutine ("DrownedCall");
+		//Reset ();
+		//沈む処理が終了したら生き返る処理
+		m_Count.AddZombieCoumt ();
+		Revive();
+	}
 
 
     /// <summary>
@@ -390,14 +434,18 @@ public class Zombie : EnemyActor {
     /// </summary>
     void DrownedEnd()
     {
-		reviveTime = 2.0f;
-		m_Count.AddZombieCoumt ();
+		Debug.Log ("入った");
+		//reviveTime = 2.0f;
+
 
 		time = Time.timeSinceLevelLoad;
 		isCount = true;
+
         //沈む処理が終了したら生き返る処理
-		Revive();
+		//Revive();
+
 		this.GetComponent<Rigidbody> ().isKinematic = true;
+
     }
 
     /// <summary>
@@ -423,22 +471,6 @@ public class Zombie : EnemyActor {
     {
         
     }
-
-	/*
-	private void StepUpMove()
-	{
-		Vector3 position =targetObj[targetnum].transform.position- this.transform.position;
-		position = position.normalized;
-
-		transform.position = (transform.position + (position * speed * Time.deltaTime));
-
-		float dista = Vector3.Distance (transform.position, targetObj[targetnum].transform.position);
-		//Debug.Log (dista);
-		if (dista < 0.1f) 
-		{
-			targetnum++;
-		}
-	}*/
 
 	private string tagName;
 	void OnCollisionEnter(Collision col)
@@ -471,7 +503,7 @@ public class Zombie : EnemyActor {
 		}
 		this.GetComponent<Rigidbody> ().useGravity = false;
 		var moveHash = new Hashtable();
-		moveHash.Add("time",18.0f);
+		moveHash.Add("time",8.0f);
 		moveHash.Add("path", iTweenPath.GetPath("StepUp1"));
 		moveHash.Add("easetype",iTween.EaseType.easeInSine);
 		//moveHash.Add("orienttopath",false);

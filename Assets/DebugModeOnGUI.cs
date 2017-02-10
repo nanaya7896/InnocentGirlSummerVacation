@@ -7,7 +7,7 @@ public class DebugModeOnGUI : MonoBehaviour {
 
 
 
-	public static bool isDebug=true;
+	public static bool isDebug=false;
 	[Header("デバッグで表記される文字の詳細設定")]
 	public GUIStyle DetailStyle;
 
@@ -48,8 +48,8 @@ public class DebugModeOnGUI : MonoBehaviour {
 			GUI.Label (new Rect (10, 200, 200, 100), "ゾンビの数 : "+ EnemyActor.Size,DetailStyle);
 			GUI.Label (new Rect (10, 250, 200, 100), "Playerの座標 : " + m_Player.transform.position,DetailStyle);
 			GUI.Label (new Rect (10, 300, 200, 100), "Playerの向き : " + m_Player.transform.rotation.eulerAngles,DetailStyle);
-			GUI.Label (new Rect (10, 350, 200, 100), "現在再生中のアニメーション : " + m_Player.GetAnimationName (),DetailStyle);
-			GUI.Label (new Rect (10, 400, 200, 100), "現在再生中のアニメーション時間 : " + m_Player.GetAnimationTime (), DetailStyle);
+			//GUI.Label (new Rect (10, 350, 200, 100), "現在再生中のアニメーション : " + m_Player.GetAnimationName (),DetailStyle);
+			//GUI.Label (new Rect (10, 400, 200, 100), "現在再生中のアニメーション時間 : " + m_Player.GetAnimationTime (), DetailStyle);
 			GUI.Label (new Rect (10, 450, 200, 100), "カメラの座標 : "+MainCamera.transform.position,DetailStyle);
 			GUI.Label (new Rect (10, 500, 200, 100), "カメラの角度 : "+MainCamera.transform.eulerAngles,DetailStyle);
 
