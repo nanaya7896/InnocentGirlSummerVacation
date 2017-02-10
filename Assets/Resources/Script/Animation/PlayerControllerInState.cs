@@ -568,6 +568,9 @@ public class PlayerControllerInState : MonoBehaviour {
 				isHit = true;
 			}
 			break;
+		case "NoMove":
+			Debug.Log ("入った");
+			break;
 		}
 	}
 }
