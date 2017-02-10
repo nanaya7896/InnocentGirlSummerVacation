@@ -11,7 +11,7 @@ public class FllowPlayer : MonoBehaviour
 	private Vector3 velo =Vector3.zero;
     [SerializeField, Header("目的地までの到達時間")]
     float speed;
-
+	float startSpeed;
     [SerializeField, Header("ゆきちゃん")]
     Transform player = null;
     Transform m_Player
@@ -46,6 +46,7 @@ public class FllowPlayer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		startSpeed = speed;
 		startCameraPos = transform.position;
         offset = transform.position - m_Player.position;
     }
@@ -57,8 +58,6 @@ public class FllowPlayer : MonoBehaviour
     // Update is called once per frame
     void LateUpdate ()
 	{
-
-
 		Vector3 tmp;
 		//回転を更新する
 		rotateCamera += ControllerManager.Instance.GetRightHorizontal () * Time.deltaTime * rotateSpeed;
@@ -69,7 +68,7 @@ public class FllowPlayer : MonoBehaviour
 		
 		tmp = Vector3.SmoothDamp (transform.position, targetpos, ref velocity, speed);
 		targetFromCamera = target.transform.position + (transform.position - target.transform.position);
-
+		//speed = startSpeed;
 		if (Physics.Linecast (m_Player.transform.position, targetFromCamera, out hit, layer)) 
 		{
 			//プレイヤーと壁との距離
@@ -94,10 +93,12 @@ public class FllowPlayer : MonoBehaviour
 			if (cameraToPlayer > 0.4f) 
 			{
 				this.transform.position = tmp;
+				speed = 1f;
 			}
 		} 
 		else 
 		{
+			speed = startSpeed;
 			this.transform.position = tmp;
 			//回転及び座標をカメラに更新する
 			transform.eulerAngles = new Vector3 (10, rotateCamera * Mathf.Rad2Deg, 0);
