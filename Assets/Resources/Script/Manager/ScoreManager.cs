@@ -65,7 +65,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
             m_HighScore[i] = PlayerPrefs.GetInt("Rank"+i.ToString(),0);
            
         }
-        Debug.Log("ハイスコアロード完了");
+        //Debug.Log("ハイスコアロード完了");
     }
 
     public void OnApplicationQuit()
@@ -75,7 +75,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager> {
           
         }
 
-        Debug.Log("ハイスコアセーブ完了");
+        //Debug.Log("ハイスコアセーブ完了");
     }
     /*
 	 *関数名	:ScoreManager

@@ -7,7 +7,7 @@ public class DebugModeOnGUI : MonoBehaviour {
 
 
 
-	public static bool isDebug=false;
+	public static bool isDebug=true;
 	[Header("デバッグで表記される文字の詳細設定")]
 	public GUIStyle DetailStyle;
 
@@ -22,6 +22,30 @@ public class DebugModeOnGUI : MonoBehaviour {
 				player = GameObject.FindWithTag ("Player").GetComponent<PlayerControllerInState> ();
 			}
 			return player;
+		}
+	}
+
+	Zombie zombie =null;
+	Zombie m_Zombie
+	{
+		get
+		{
+			if (zombie == null) {
+				zombie = GameObject.FindWithTag ("Enemy").GetComponent<Zombie> ();
+			}
+			return zombie;
+		}
+		
+	}
+	EnemyAI ai =null;
+	EnemyAI m_AI
+	{
+		get
+		{
+			if (ai == null) {
+				ai = GameObject.FindWithTag ("Enemy").GetComponent<EnemyAI> ();
+			}
+			return ai;
 		}
 	}
 
@@ -52,7 +76,11 @@ public class DebugModeOnGUI : MonoBehaviour {
 			//GUI.Label (new Rect (10, 400, 200, 100), "現在再生中のアニメーション時間 : " + m_Player.GetAnimationTime (), DetailStyle);
 			GUI.Label (new Rect (10, 450, 200, 100), "カメラの座標 : "+MainCamera.transform.position,DetailStyle);
 			GUI.Label (new Rect (10, 500, 200, 100), "カメラの角度 : "+MainCamera.transform.eulerAngles,DetailStyle);
-
+			GUI.Label (new Rect (10, 550, 200, 100), "ゾンビの座標 : " + m_Zombie.transform.position, DetailStyle);
+			GUI.Label (new Rect (10, 600, 200, 100), "ゾンビがヒットしたオブジェクト : " + m_Zombie.GetHitTag (), DetailStyle);
+			GUI.Label (new Rect (10, 650, 200, 100), "ゾンビの移動値 X : " + m_AI.GetMoveValue().x, DetailStyle);
+			GUI.Label (new Rect (10, 700, 200, 100), "ゾンビの移動値 Y : " + m_AI.GetMoveValue().y, DetailStyle);
+			GUI.Label (new Rect (10, 750, 200, 100), "ゾンビの移動値 Z : " + m_AI.GetMoveValue().z, DetailStyle);
 		}
 	}
 }

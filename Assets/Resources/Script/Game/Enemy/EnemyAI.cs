@@ -6,8 +6,6 @@ using System.Collections.Generic;
 /// </summary>
 public  class EnemyAI : MonoBehaviour{
 
-
-    public  Vector3 enemyPosition;
 	public LayerMask mask;
 	public GameObject[] targetObj =new GameObject[9];
 	public List<Vector3> dir = new List<Vector3> ();
@@ -18,21 +16,7 @@ public  class EnemyAI : MonoBehaviour{
 	public bool changetarget=false;
 	RaycastHit hit;
 
-	float d=9999.0f;
-
-    public Vector3 m_EnemyPosition
-    {
-        get
-        {
-            return enemyPosition;
-        }
-        set
-        {
-            enemyPosition = value;
-        }
-    }
-    public  Vector3 enemyRotate;
-
+	public Vector3 startPosition;
     [SerializeField]
     Transform player;
     Transform m_Player
@@ -73,12 +57,12 @@ public  class EnemyAI : MonoBehaviour{
 		}
 	}
 
-	private float ZombieAutoSpeed = 10f;
-
     void Start()
     {
 		//m_Node.assessment ();
 		//m_Node.SearchInit ();
+
+		startPosition = this.transform.position;
     }
 
     void Update()
@@ -117,14 +101,14 @@ public  class EnemyAI : MonoBehaviour{
     /// <param name="enemyRotate">Enemy rotate.</param>
     /// <param name="speed">Speed.</param>
     /// <param name="enemy">Enemy.</param>
-    public void ZombieAIExcute(ZombieAI aiName, Vector3 enemyPosition, Vector3 enemyRotate, float speed,GameObject enemy)
+    public void ZombieAIExcute(ZombieAI aiName, float speed)
     {
         switch(aiName)
         {
             case ZombieAI.IDEL:
                 break;
             case ZombieAI.WALK:
-                ZombieWalk(speed,enemy);
+                ZombieWalk(speed);
                 break;
             case ZombieAI.SLIDER:
                 ZombieSlider();
@@ -140,24 +124,12 @@ public  class EnemyAI : MonoBehaviour{
 
     }
 
-    public  Vector3 GetEnemyPosition()
-    {
-        return enemyPosition;
-    }
-
-    public  Vector3 GetEnemyRotate()
-    {
-        return enemyRotate;
-    }
-
-
 
     /// <summary>
     /// ゾンビが歩く処理
     /// </summary>
     /// <param name="speed">Speed.</param>
-    /// <param name="enemy">Enemy.</param>
-    private  void ZombieWalk(float speed,GameObject enemy)
+    private  void ZombieWalk(float speed)
     {
 		AutoMove (speed);
     }
@@ -192,60 +164,37 @@ public  class EnemyAI : MonoBehaviour{
 
 	[SerializeField]
 	Vector3 targetPosition;
-	float ti;
-	Vector3 startPos;
+	Vector3 tmpPosition = Vector3.zero;
+	Vector3 direction = Vector3.zero;
+	public Vector3 MoveValue;
 	/// <summary>
 	/// ゾンビのプレイヤーを追いかけるところ
 	/// </summary>
 	/// <param name="speed">Speed.</param>
 	private void ZombieMove(float speed)
 	{
-		Vector3 tmpPosition = Vector3.zero;
-		Vector3 direction=Vector3.zero;
-
-		Vector3 prevPos = this.transform.position;
 		//プレイヤーの座標を代入
 		Vector3 playerPos = m_Player.transform.position;
-		direction = playerPos - m_EnemyPosition;
+
+		direction = playerPos - transform.position;
 		//単位化(距離要素を取り除く)
 		direction = direction.normalized;
-		tmpPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
+		//移動値をFPSを考慮して計算
+		MoveValue = direction * speed * Time.deltaTime;
+		//実際に移動した後の値を一時変数に保管
+		tmpPosition = (transform.position + MoveValue);
+
+		//Y軸の高さが地面の高さ以上のとき
+		if (tmpPosition.y > 0.101f) {
+			//正常な移動なのでそのまま代入して早期リターン
+			transform.position = tmpPosition;
+			return;
+		}
+		//一回の移動量が少ないので少し増やしておく
+		tmpPosition -= (MoveValue *2);
+		//移動する前より少し後ろに逃す
 		transform.position = tmpPosition;
 
-
-		/*
-		if (!idou) 
-		{
-			
-	
-
-			if (tmpPosition.y < 0.1f)
-			{
-				
-				idou = true;
-
-				targetPosition = tmpPosition -(direction * speed * Time.deltaTime);
-				//targetPosition = new Vector3 (targetPosition.x, , targetPosition.z);
-			} 
-			else
-			{
-				transform.position = tmpPosition;
-				startPos = this.transform.position;
-			}
-		} 
-		else 
-		{
-			Vector3 tmp = Vector3.Lerp(startPos,targetPosition,ti /ZombieAutoSpeed);
-			ti += Time.deltaTime;
-			this.transform.position = tmp;
-			if (Vector3.Distance (transform.position, targetPosition) <0.15f) 
-			{
-				idou = false;
-			}
-		}
-*/
-
-		//enemy.transform.LookAt (m_Player);
 	}
 
 
@@ -253,6 +202,11 @@ public  class EnemyAI : MonoBehaviour{
 	public bool GetisSearchNow()
 	{
 		return m_Node.GetisSearch ();
+	}
+
+	public Vector3 GetMoveValue()
+	{
+		return MoveValue;
 	}
 
     private void ZombieSlider()
@@ -264,4 +218,5 @@ public  class EnemyAI : MonoBehaviour{
     {
         
     }
+
 }

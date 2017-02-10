@@ -272,21 +272,11 @@ public class Zombie : EnemyActor {
 			//x,zは必要ないので初期化
 			newRotation.x = 0f;
 			newRotation.z = 0f;
-			//エウラー角を角度に入れる
-			//transform.rotation = Quaternion.Euler (newRotation);
 			//補完しながら進行方向を向くように調整
 			transform.rotation =Quaternion.Slerp(transform.rotation,Quaternion.Euler(newRotation),Time.deltaTime);
-			m_EnemyAI.m_EnemyPosition = this.transform.position;
+			//m_EnemyAI.m_EnemyPosition = this.transform.position;
 			//m_EnemyAI.enemyRotate = this.transform.rotation.eulerAngles;
-			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, transform.position, transform.rotation.eulerAngles, speed, this.gameObject);
-			/*
-			if (m_EnemyAI.GetisSearchNow ()) 
-			{
-				transform.position = new Vector3 (m_EnemyAI.GetEnemyPosition ().x, m_EnemyAI.GetEnemyPosition ().y, m_EnemyAI.GetEnemyPosition ().z);
-			}
-			*/
-
-
+			m_EnemyAI.ZombieAIExcute(EnemyAI.ZombieAI.WALK, speed);
         }
     }
 
@@ -472,6 +462,11 @@ public class Zombie : EnemyActor {
         
     }
 
+	public string GetHitTag()
+	{
+		return tagName;
+	}
+
 	private string tagName;
 	void OnCollisionEnter(Collision col)
 	{
@@ -491,8 +486,11 @@ public class Zombie : EnemyActor {
 			tagName = col.gameObject.tag;
 			m_Capsel.enabled = false;
 			break;
+		case "NoMove":
+			Debug.Log ("入った");
+			break;
 		}
-
+		tagName = col.gameObject.tag;
 	}
 
 	void enemyStepUpMethod()
