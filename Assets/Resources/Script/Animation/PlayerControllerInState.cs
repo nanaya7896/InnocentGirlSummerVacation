@@ -494,6 +494,7 @@ public class PlayerControllerInState : MonoBehaviour {
 
 	void ClimpEnd()
 	{
+		AudioManager.Instance.PlaySE ("agaru");
 		m_Rigid.useGravity = true;	
 	}
 

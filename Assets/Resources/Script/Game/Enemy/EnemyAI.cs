@@ -73,6 +73,8 @@ public  class EnemyAI : MonoBehaviour{
 		}
 	}
 
+	private float ZombieAutoSpeed = 10f;
+
     void Start()
     {
 		//m_Node.assessment ();
@@ -188,30 +190,61 @@ public  class EnemyAI : MonoBehaviour{
 		}*/
 	}
 
+	[SerializeField]
+	Vector3 targetPosition;
+	float ti;
+	Vector3 startPos;
 	/// <summary>
 	/// ゾンビのプレイヤーを追いかけるところ
 	/// </summary>
 	/// <param name="speed">Speed.</param>
 	private void ZombieMove(float speed)
 	{
+		Vector3 tmpPosition = Vector3.zero;
+		Vector3 direction=Vector3.zero;
+
 		Vector3 prevPos = this.transform.position;
 		//プレイヤーの座標を代入
 		Vector3 playerPos = m_Player.transform.position;
-		Vector3 direction = playerPos - m_EnemyPosition;
+		direction = playerPos - m_EnemyPosition;
 		//単位化(距離要素を取り除く)
 		direction = direction.normalized;
-		Vector3 tmpPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
+		tmpPosition = (m_EnemyPosition + (direction * speed * Time.deltaTime));
+		transform.position = tmpPosition;
 
 
-		if (tmpPosition.y < 0.081f)
+		/*
+		if (!idou) 
 		{
-			idou = true;
-			transform.position -=direction;
+			
+	
+
+			if (tmpPosition.y < 0.1f)
+			{
+				
+				idou = true;
+
+				targetPosition = tmpPosition -(direction * speed * Time.deltaTime);
+				//targetPosition = new Vector3 (targetPosition.x, , targetPosition.z);
+			} 
+			else
+			{
+				transform.position = tmpPosition;
+				startPos = this.transform.position;
+			}
 		} 
-		else
+		else 
 		{
-			transform.position = tmpPosition;
+			Vector3 tmp = Vector3.Lerp(startPos,targetPosition,ti /ZombieAutoSpeed);
+			ti += Time.deltaTime;
+			this.transform.position = tmp;
+			if (Vector3.Distance (transform.position, targetPosition) <0.15f) 
+			{
+				idou = false;
+			}
 		}
+*/
+
 		//enemy.transform.LookAt (m_Player);
 	}
 
