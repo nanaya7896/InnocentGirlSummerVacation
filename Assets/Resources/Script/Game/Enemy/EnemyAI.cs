@@ -176,22 +176,26 @@ public  class EnemyAI : MonoBehaviour{
 	/// <param name="speed">Speed.</param>
 	private void ZombieMove(float speed)
 	{
-
-
 		//プレイヤーの座標を代入
 		Vector3 playerPos = m_Player.transform.position;
+
 		direction = playerPos - transform.position;
 		//単位化(距離要素を取り除く)
 		direction = direction.normalized;
+		//移動値をFPSを考慮して計算
 		MoveValue = direction * speed * Time.deltaTime;
+		//実際に移動した後の値を一時変数に保管
 		tmpPosition = (transform.position + MoveValue);
 
-
+		//Y軸の高さが地面の高さ以上のとき
 		if (tmpPosition.y > 0.101f) {
+			//正常な移動なのでそのまま代入して早期リターン
 			transform.position = tmpPosition;
 			return;
 		}
+		//一回の移動量が少ないので少し増やしておく
 		tmpPosition -= (MoveValue *2);
+		//移動する前より少し後ろに逃す
 		transform.position = tmpPosition;
 
 	}
