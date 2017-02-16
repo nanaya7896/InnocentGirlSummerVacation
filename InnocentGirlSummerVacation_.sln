@@ -1,13 +1,13 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{57AA8E07-F5C4-B7E2-4FE7-34A997201AC9}") = "InnocentGirlSummerVacation_", "Assembly-CSharp-firstpass.csproj", "{A758656A-F75C-4ACF-0D00-2E9C4DAA6F45}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation_", "Assembly-CSharp-firstpass.csproj", "{A758656A-F75C-4ACF-0D00-2E9C4DAA6F45}"
 EndProject
-Project("{57AA8E07-F5C4-B7E2-4FE7-34A997201AC9}") = "InnocentGirlSummerVacation_", "Assembly-CSharp.csproj", "{D1544316-BCD4-0F70-2CBD-F19FA3D3CCA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation_", "Assembly-CSharp.csproj", "{D1544316-BCD4-0F70-2CBD-F19FA3D3CCA5}"
 EndProject
-Project("{57AA8E07-F5C4-B7E2-4FE7-34A997201AC9}") = "InnocentGirlSummerVacation_", "Assembly-CSharp-Editor-firstpass.csproj", "{F77F8F85-E382-7E80-C91F-05025E8DD025}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation_", "Assembly-CSharp-Editor-firstpass.csproj", "{F77F8F85-E382-7E80-C91F-05025E8DD025}"
 EndProject
-Project("{57AA8E07-F5C4-B7E2-4FE7-34A997201AC9}") = "InnocentGirlSummerVacation_", "Assembly-CSharp-Editor.csproj", "{87C65081-20D0-C32B-B3F5-597F240FE2B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnocentGirlSummerVacation_", "Assembly-CSharp-Editor.csproj", "{87C65081-20D0-C32B-B3F5-597F240FE2B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

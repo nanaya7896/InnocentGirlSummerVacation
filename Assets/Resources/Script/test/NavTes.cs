@@ -14,7 +14,7 @@ public class NavTes : MonoBehaviour {
 	void Update () {
         if(Input.GetKeyDown(KeyCode.A))
         {
-            GetComponent<NavMeshAgent>().SetDestination(target.transform.position);
+            GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(target.transform.position);
         }
      //   Debug.Log(GetComponent<NavMeshAgent>().gameObject);
 	}
